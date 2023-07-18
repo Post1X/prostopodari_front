@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { ColorsUI } from "./styles/ColorUI"
-import { TMargin } from "../settings/types/UITypes"
+import { ColorsUI } from "../styles/ColorUI"
+import { TMargin } from "../../settings/types/UITypes"
 
 type TColor = "tiffany" | "red" | "green" | "transparent"
 

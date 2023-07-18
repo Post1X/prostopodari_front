@@ -1,8 +1,7 @@
-import { Ag, TextUI } from "../../template/TextUI"
 import {
   CenterContainer,
   CenterContainerFlex,
-} from "../../template/ui/CenterContainer"
+} from "../../template/containers/CenterContainer"
 import { AuthGiftImage } from "./ui/AuthGiftImage"
 import {
   AuthEllipseBottom,
@@ -15,23 +14,41 @@ import { AuthImage, AuthLogo } from "./ui/AuthContainers"
 import { LogoSVG } from "../../template/svg/LogoSVG"
 import { AuthForm } from "./ui/AuthForm"
 import { ColorsUI } from "../../template/styles/ColorUI"
-import { RowContainer } from "../../template/ui/RowContainer"
+import { RowContainer } from "../../template/containers/RowContainer"
 import { AuthGiftSVG } from "./ui/AuthGiftSVG"
-import { css } from "styled-components"
 import { StyleProp } from "../../settings/types/BaseTypes"
 import { InputUnderline } from "../../components/InputUnderline"
-import { ButtonUI } from "../../template/ButtonUI"
+import { ButtonUI } from "../../template/ui/ButtonUI"
 import { useAppDispatch, useAppSelector } from "../../settings/redux/hooks"
-import { changeForm, selectAuthForm } from "../../modules/auth/AuthSlice"
+import {
+  changeForm,
+  login,
+  selectAuthValues,
+} from "../../modules/auth/AuthSlice"
 import {
   AuthFormKeys,
   AuthFormValidation,
 } from "../../modules/auth/form/AuthForm"
+import { Ag, TextUI } from "../../template/ui/TextUI"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const AuthPage = () => {
-  const authForm = useAppSelector(selectAuthForm)
+  const { authForm, isAuthLoad, authUser } = useAppSelector(selectAuthValues)
 
   const dispatch = useAppDispatch()
+
+  const navigation = useNavigate()
+
+  const handleLogin = () => {
+    dispatch(login(authForm))
+  }
+
+  useEffect(() => {
+    if (authUser?.token) {
+      navigation("/")
+    }
+  }, [authUser])
 
   return (
     <CenterContainerFlex>
@@ -90,7 +107,11 @@ export const AuthPage = () => {
               />
 
               <ButtonUI
-                disabled={!AuthFormValidation.isValidForm(authForm)}
+                onClick={handleLogin}
+                disabled={
+                  // !AuthFormValidation.isValidForm(authForm) ||
+                  isAuthLoad === "load"
+                }
                 type={"button"}
               >
                 {"Войти"}
