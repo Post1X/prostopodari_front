@@ -3,12 +3,13 @@ import { AuthService } from "./service/AuthService"
 import { TAuthDTO, TAuthState } from "./types/AuthTypes"
 import { AppThunk, RootState } from "../../settings/redux/store"
 import { AuthFormKeys, AuthFormProps, MockAuthForm } from "./form/AuthForm"
+import { KeyLocalStorage } from "../../settings/types/KeyLocalStorage"
 
 const authService = new AuthService()
 
 const initialState: TAuthState = {
   authForm: MockAuthForm,
-  isAuthLoad: "idle",
+  isAuthLoad: "completed",
   authUser: null,
 }
 
@@ -16,6 +17,14 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    initAuth: (state) => {
+      const authUser = authService.getToken()
+
+      if (authUser) {
+        state.authUser = authUser
+      }
+    },
+
     changeForm: (state, action: PayloadAction<AuthFormProps>) => {
       state.authForm = {
         ...state.authForm,
@@ -26,11 +35,13 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.isAuthLoad = "idle"
+        state.isAuthLoad = "load"
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.isAuthLoad = "loading"
+        state.isAuthLoad = "completed"
         state.authUser = action.payload
+
+        localStorage.setItem(KeyLocalStorage.token, action.payload.token!)
       })
       .addCase(login.rejected, (state) => {
         state.isAuthLoad = "failed"
@@ -48,9 +59,9 @@ export const login = createAsyncThunk("auth/login", async (dto: TAuthDTO) => {
 
 // ACTIONS
 
-export const { changeForm } = authSlice.actions
+export const { changeForm, initAuth } = authSlice.actions
 
 export const selectToken = (state: RootState) => state.authSlice.authUser?.token
-export const selectAuthForm = (state: RootState) => state.authSlice.authForm
+export const selectAuthValues = (state: RootState) => state.authSlice
 
 export default authSlice.reducer

@@ -3,8 +3,8 @@ import AbstractApiRepository from "../../../settings/abstrcations/repositories/A
 
 export class ApiService extends AbstractApiRepository {
   login = async (dto: TAuthDTO) => {
-    return this.apiClient.get({
-      url: "login",
+    return this.apiClient.post({
+      url: "/users/login/admin",
       data: dto,
     })
   }

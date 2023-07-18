@@ -4,7 +4,7 @@ import { AuthUser } from "../models/AuthUser"
 
 export type TAuthState = {
   authForm: TAuthtForm
-  isAuthLoad: "idle" | "loading" | "failed"
+  isAuthLoad: "completed" | "load" | "failed"
   authUser: Nullable<AuthUser>
 }
 

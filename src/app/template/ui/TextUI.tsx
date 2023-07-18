@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { ColorsUI } from "./styles/ColorUI"
+import { ColorsUI } from "../styles/ColorUI"
 
 export enum Ag {
   "700_16" = "700_16",

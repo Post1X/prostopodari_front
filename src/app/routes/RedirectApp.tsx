@@ -17,5 +17,5 @@ export const RedirectApp = ({ element }: RedirectPage) => {
     }
   }, [])
 
-  return element
+  return <>{element}</>
 }
