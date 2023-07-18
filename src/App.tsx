@@ -3,6 +3,8 @@ import { RouterApp } from "./app/routes/RouterApp"
 import { useAppDispatch } from "./app/settings/redux/hooks"
 import { useEffect, useState } from "react"
 import { initAuth } from "./app/modules/auth/AuthSlice"
+import { CenterContainerFlex } from "./app/template/containers/CenterContainer"
+import { LoaderUI } from "./app/template/ui/LoaderUI"
 
 export const App = () => {
   const dispatch = useAppDispatch()
@@ -14,11 +16,15 @@ export const App = () => {
 
     setTimeout(() => {
       setLoad(false)
-    }, 500)
+    }, 0)
   }, [])
 
   if (load) {
-    return <></>
+    return (
+      <CenterContainerFlex>
+        <LoaderUI size={30} />
+      </CenterContainerFlex>
+    )
   }
 
   return (

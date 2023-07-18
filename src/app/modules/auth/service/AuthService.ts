@@ -18,11 +18,15 @@ export class AuthService extends AbstractServiceRepository {
     return this.create<AuthUser>(AuthUser, data)
   }
 
-  getToken = () => {
+  getLocalStorageToken = () => {
     const token = localStorage.getItem(KeyLocalStorage.token)
 
     if (token) {
       return this.create<AuthUser>(AuthUser, { token })
     }
+  }
+
+  logout = () => {
+    localStorage.clear()
   }
 }

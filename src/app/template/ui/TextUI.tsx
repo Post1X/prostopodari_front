@@ -17,6 +17,7 @@ type TTextUI = {
   ag: Ag
   text: string
   color?: string
+  isNoSelect?: boolean
 }
 
 type TStyledP = {
@@ -29,7 +30,12 @@ export const TextUI = (props: TTextUI) => {
   const size = props.ag.substring(4)
 
   return (
-    <P size={size} weight={weight}>
+    <P
+      style={props.isNoSelect ? { userSelect: "none" } : undefined}
+      size={size}
+      weight={weight}
+      color={props.color}
+    >
       {props.text}
     </P>
   )

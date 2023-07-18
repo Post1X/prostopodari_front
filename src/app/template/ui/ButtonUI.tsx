@@ -1,10 +1,10 @@
 import styled from "styled-components"
 import { ColorsUI } from "../styles/ColorUI"
-import { TMargin } from "../../settings/types/UITypes"
+import { ContainerProps } from "../../settings/types/UITypes"
 
 type TColor = "tiffany" | "red" | "green" | "transparent"
 
-interface IButtonUI extends TMargin {
+interface IButtonUI extends ContainerProps {
   backColor?: TColor
 }
 
@@ -48,7 +48,7 @@ const getBackColor = (color?: TColor) => {
     case "red":
       return ColorsUI.red
     case "transparent":
-      return color
+      return ColorsUI.transparent
     default:
       return ColorsUI.tifany2
   }
@@ -59,7 +59,7 @@ const getBorderColor = (color?: TColor) => {
     return ColorsUI.text1
   }
 
-  return "transparent"
+  return ColorsUI.transparent
 }
 
 const getTextColor = (color?: TColor) => {

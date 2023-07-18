@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { ColorsUI } from "../template/styles/ColorUI"
-import { TMargin } from "../settings/types/UITypes"
+import { ContainerProps } from "../settings/types/UITypes"
 
-interface InputUnderlineProps extends TMargin {
+interface InputUnderlineProps extends ContainerProps {
   letter?: number
 }
 
