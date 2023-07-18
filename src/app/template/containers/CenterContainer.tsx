@@ -1,10 +1,9 @@
 import styled from "styled-components"
+import { MainContainer } from "./MainContainer"
 
-export const CenterContainer = styled.div`
-  display: flex;
+export const CenterContainer = styled(MainContainer)`
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 `
 
 export const CenterContainerFlex = styled(CenterContainer)`

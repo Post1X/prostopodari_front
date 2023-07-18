@@ -1,9 +1,17 @@
 import styled from "styled-components"
-import { TMargin } from "../../settings/types/UITypes"
+import { ContainerProps } from "../../settings/types/UITypes"
+import { MainContainer } from "./MainContainer"
 
-export const RowContainer = styled.div<TMargin>`
-  display: flex;
+export const RowContainer = styled(MainContainer)`
   flex-direction: row;
   align-items: center;
-  margin-bottom: ${({ mb }) => mb || 0}px;
+`
+
+export const RowContainerFlex = styled(RowContainer)`
+  flex: 1;
+  align-items: start;
+`
+
+export const RowContainerEnd = styled(RowContainer)`
+  align-items: end;
 `

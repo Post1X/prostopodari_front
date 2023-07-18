@@ -18,7 +18,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     initAuth: (state) => {
-      const authUser = authService.getToken()
+      const authUser = authService.getLocalStorageToken()
 
       if (authUser) {
         state.authUser = authUser
@@ -30,6 +30,12 @@ const authSlice = createSlice({
         ...state.authForm,
         [action.payload.key]: action.payload.value,
       }
+    },
+
+    logout: (state) => {
+      state.authUser = null
+
+      authService.logout()
     },
   },
   extraReducers: (builder) => {
@@ -59,7 +65,7 @@ export const login = createAsyncThunk("auth/login", async (dto: TAuthDTO) => {
 
 // ACTIONS
 
-export const { changeForm, initAuth } = authSlice.actions
+export const { changeForm, initAuth, logout } = authSlice.actions
 
 export const selectToken = (state: RootState) => state.authSlice.authUser?.token
 export const selectAuthValues = (state: RootState) => state.authSlice
