@@ -1,11 +1,13 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { AuthService } from "./service/AuthService"
 import { TAuthDTO, TAuthState } from "./types/AuthTypes"
-import { AppThunk, RootState } from "../../settings/redux/store"
-import { AuthFormKeys, AuthFormProps, MockAuthForm } from "./form/AuthForm"
+import { RootState } from "../../settings/redux/store"
+import { AuthFormProps, MockAuthForm } from "./form/AuthForm"
 import { KeyLocalStorage } from "../../settings/types/KeyLocalStorage"
+import { TokenService } from "./service/TokenService"
 
 const authService = new AuthService()
+const tokenService = new TokenService()
 
 const initialState: TAuthState = {
   authForm: MockAuthForm,
@@ -18,9 +20,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     initAuth: (state) => {
-      const authUser = authService.getLocalStorageToken()
+      const authUser = tokenService.getLocalStorageToken()
 
       if (authUser) {
+        tokenService.setBearerToken(authUser.token!)
+
         state.authUser = authUser
       }
     },
@@ -35,7 +39,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.authUser = null
 
-      authService.logout()
+      tokenService.logout()
     },
   },
   extraReducers: (builder) => {
@@ -47,6 +51,7 @@ const authSlice = createSlice({
         state.isAuthLoad = "completed"
         state.authUser = action.payload
 
+        tokenService.setBearerToken(action.payload.token!)
         localStorage.setItem(KeyLocalStorage.token, action.payload.token!)
       })
       .addCase(login.rejected, (state) => {
@@ -69,5 +74,7 @@ export const { changeForm, initAuth, logout } = authSlice.actions
 
 export const selectToken = (state: RootState) => state.authSlice.authUser?.token
 export const selectAuthValues = (state: RootState) => state.authSlice
+
+// Export
 
 export default authSlice.reducer

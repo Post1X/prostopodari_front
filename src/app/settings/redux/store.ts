@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
 import AuthSlice from "../../modules/auth/AuthSlice"
+import SellersSlice from "../../modules/sellers/SellersSlice"
 
 export const store = configureStore({
   reducer: {
     authSlice: AuthSlice,
+    sellersSlice: SellersSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

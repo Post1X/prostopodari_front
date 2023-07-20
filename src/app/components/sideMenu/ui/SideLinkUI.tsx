@@ -6,9 +6,10 @@ type TSideLink = {
   color: string
 }
 
-export const SideLink = styled(MainContainer)<TSideLink>`
+export const SideLinkUI = styled(MainContainer)<TSideLink>`
   transition: 0.3s;
   cursor: pointer;
+  position: relative;
 
   background-color: ${({ color }) => color};
 

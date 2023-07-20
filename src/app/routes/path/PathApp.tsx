@@ -5,6 +5,7 @@ export type TPathValue = {
 
 type TPathApp = {
   home: TPathValue
+  seller: TPathValue
   login: TPathValue
   stores: TPathValue
   promocodes: TPathValue
@@ -17,6 +18,9 @@ export const PathApp: TPathApp = {
   home: {
     path: "/",
     menuName: "Заявки",
+  },
+  seller: {
+    path: "/seller",
   },
   login: {
     path: "/login",

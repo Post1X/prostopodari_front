@@ -2,20 +2,19 @@ import styled from "styled-components"
 import { ColorsUI } from "../styles/ColorUI"
 import { ContainerProps } from "../../settings/types/UITypes"
 
-type TColor = "tiffany" | "red" | "green" | "transparent"
+type TColor = "tiffany" | "red" | "green" | "border" | "transparent"
 
 interface IButtonUI extends ContainerProps {
-  backColor?: TColor
+  $backColor?: TColor
 }
 
 export const ButtonUI = styled.button<IButtonUI>`
   width: 100%;
   padding: 15px 0;
 
-  color: ${({ backColor }) => getTextColor(backColor)};
+  background-color: ${({ $backColor }) => getBackColor($backColor)};
+  border: 1px solid ${({ $backColor }) => getBorderColor($backColor)};
 
-  background-color: ${({ backColor }) => getBackColor(backColor)};
-  border: 1px solid ${({ backColor }) => getBorderColor(backColor)};
   border-radius: 8px;
 
   cursor: pointer;
@@ -30,7 +29,7 @@ export const ButtonUI = styled.button<IButtonUI>`
   }
 
   &:active {
-    opacity: 0.8;
+    opacity: 0.5;
   }
 
   &:disabled {
@@ -41,13 +40,14 @@ export const ButtonUI = styled.button<IButtonUI>`
   }
 `
 
-const getBackColor = (color?: TColor) => {
+export const getBackColor = (color?: TColor) => {
   switch (color) {
     case "green":
       return ColorsUI.green
     case "red":
       return ColorsUI.red
     case "transparent":
+    case "border":
       return ColorsUI.transparent
     default:
       return ColorsUI.tifany2
@@ -55,15 +55,15 @@ const getBackColor = (color?: TColor) => {
 }
 
 const getBorderColor = (color?: TColor) => {
-  if (color === "transparent") {
+  if (color === "border") {
     return ColorsUI.text1
   }
 
   return ColorsUI.transparent
 }
 
-const getTextColor = (color?: TColor) => {
-  if (color === "transparent") {
+export const getButtonTextColor = (color?: TColor) => {
+  if (color === "border") {
     return ColorsUI.text1
   }
 
