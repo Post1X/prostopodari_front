@@ -18,7 +18,7 @@ import { RowContainer } from "../../template/containers/RowContainer"
 import { AuthGiftSVG } from "./ui/AuthGiftSVG"
 import { StyleProp } from "../../settings/types/BaseTypes"
 import { InputUnderline } from "../../components/InputUnderline"
-import { ButtonUI } from "../../template/ui/ButtonUI"
+import { ButtonUI, getButtonTextColor } from "../../template/ui/ButtonUI"
 import { useAppDispatch, useAppSelector } from "../../settings/redux/hooks"
 import {
   changeForm,
@@ -114,7 +114,11 @@ export const AuthPage = () => {
                 }
                 type={"button"}
               >
-                {"Войти"}
+                <TextUI
+                  ag={Ag["600_16"]}
+                  color={getButtonTextColor("tiffany")}
+                  text={"Войти"}
+                />
               </ButtonUI>
             </div>
           </CenterContainerFlex>

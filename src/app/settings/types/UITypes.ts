@@ -10,4 +10,9 @@ export interface ContainerProps {
   pb?: number
   pr?: number
   ph?: number
+
+  heightPX?: number
+  heightProc?: number
+
+  width?: number
 }

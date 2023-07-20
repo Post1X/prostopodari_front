@@ -14,4 +14,6 @@ export const MainContainer = styled.div<ContainerProps>`
 
   padding-top: ${({ pt, pv }) => pt || pv || 0}px;
   padding-bottom: ${({ pb, pv }) => pb || pv || 0}px;
+
+  width: ${({ width }) => width + "px" || "fit-content"};
 `

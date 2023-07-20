@@ -5,11 +5,12 @@ import { ColorsUI } from "../../template/styles/ColorUI"
 import { RowContainerEnd } from "../../template/containers/RowContainer"
 import { useLocation, useNavigate } from "react-router"
 import { PathApp, TPathValue } from "../../routes/path/PathApp"
-import { SideLink } from "./ui/SideLink"
 import { ColumnContainerBetweenFlex } from "../../template/containers/ColumnContainer"
 import { SideLogout } from "./ui/SideLogout"
 import { useAppDispatch } from "../../settings/redux/hooks"
 import { logout } from "../../modules/auth/AuthSlice"
+import { SideLink } from "./components/SideLink"
+import { useEffect } from "react"
 
 export const SideMenu = () => {
   const dispatch = useAppDispatch()
@@ -40,22 +41,21 @@ export const SideMenu = () => {
               text={"Админ"}
             />
           </RowContainerEnd>
-          {Object.entries(PathApp).map(([key, value]) => {
+          {Object.entries(PathApp).map(([key, value], index) => {
+            const nameRoute =
+              index === 0 && currentPath !== value.path
+                ? PathApp.seller.path
+                : value.path
+
             if (value.menuName) {
               return (
                 <SideLink
-                  onClick={() => handleNavigation(value)}
-                  color={
-                    currentPath === value.path
-                      ? ColorsUI.pink2
-                      : ColorsUI.transparent
-                  }
-                  pv={16}
-                  pl={45}
+                  onNavigate={() => handleNavigation(value)}
+                  isCurrentPath={currentPath.includes(nameRoute)}
+                  isPending={value.path === PathApp.home.path}
+                  linkText={value.menuName}
                   key={key}
-                >
-                  <TextUI isNoSelect ag={Ag["500_20"]} text={value.menuName} />
-                </SideLink>
+                />
               )
             }
           })}

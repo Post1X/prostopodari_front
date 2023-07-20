@@ -15,3 +15,7 @@ export const RowContainerFlex = styled(RowContainer)`
 export const RowContainerEnd = styled(RowContainer)`
   align-items: end;
 `
+export const RowContainerBeetwen = styled(RowContainer)`
+  justify-content: space-between;
+  align-items: center;
+`
