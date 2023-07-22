@@ -10,7 +10,6 @@ import { SideLogout } from "./ui/SideLogout"
 import { useAppDispatch } from "../../settings/redux/hooks"
 import { logout } from "../../modules/auth/AuthSlice"
 import { SideLink } from "./components/SideLink"
-import { useEffect } from "react"
 
 export const SideMenu = () => {
   const dispatch = useAppDispatch()

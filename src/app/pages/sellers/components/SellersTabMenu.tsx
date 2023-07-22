@@ -16,7 +16,7 @@ type SellersTabMenuProps = {
 }
 
 export const SellersTabMenu = (props: SellersTabMenuProps) => {
-  const { sellerListPending } = useAppSelector(selectSellersValues)
+  const { claimsListPending } = useAppSelector(selectSellersValues)
 
   return (
     <RowContainer>
@@ -31,7 +31,7 @@ export const SellersTabMenu = (props: SellersTabMenuProps) => {
               <TextUI isNoSelect ag={Ag["500_20"]} text={value} />
             </CenterContainerFlex>
 
-            {key === SellersTabMenuType.pending && sellerListPending.length ? (
+            {key === SellersTabMenuType.pending && claimsListPending.length ? (
               <NewPendingUI />
             ) : null}
           </SellersTab>

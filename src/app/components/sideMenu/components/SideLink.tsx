@@ -14,7 +14,7 @@ type SideLinkProps = {
 }
 
 export const SideLink = (props: SideLinkProps) => {
-  const { sellerListPending } = useAppSelector(selectSellersValues)
+  const { claimsListPending } = useAppSelector(selectSellersValues)
 
   return (
     <SideLinkUI
@@ -24,7 +24,7 @@ export const SideLink = (props: SideLinkProps) => {
       pl={45}
     >
       <TextUI isNoSelect ag={Ag["500_20"]} text={props.linkText} />
-      {props.isPending && sellerListPending.length ? <NewPendingUI /> : null}
+      {props.isPending && claimsListPending.length ? <NewPendingUI /> : null}
     </SideLinkUI>
   )
 }

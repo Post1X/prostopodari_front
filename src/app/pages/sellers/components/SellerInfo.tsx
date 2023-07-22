@@ -17,16 +17,27 @@ export const SellerInfo = ({ currentSeller }: SellerInfoProps) => {
     <RowContainerStart>
       <MainContainer mb={50} mr={130}>
         <TextUI mb={15} ag={Ag["600_14"]} text={"Имя"} />
-        <TextUI mb={20} ag={Ag["400_16"]} text={currentSeller.name} />
+        <TextUI
+          mb={20}
+          ag={Ag["400_16"]}
+          text={currentSeller.name || "Не указан"}
+        />
 
         <TextUI mb={15} ag={Ag["600_14"]} text={"Почта"} />
-        <TextUI mb={20} ag={Ag["400_16"]} text={currentSeller.email} />
+        <TextUI
+          mb={20}
+          ag={Ag["400_16"]}
+          text={currentSeller.email || "Не указан"}
+        />
 
         <TextUI mb={15} ag={Ag["600_14"]} text={"Телефон"} />
         <TextUI
           mb={20}
           ag={Ag["400_16"]}
-          text={MaskHelper.formatPhoneNumber(currentSeller.phone_number)}
+          text={
+            MaskHelper.formatPhoneNumber(currentSeller.phone_number) ||
+            "Не указан"
+          }
         />
 
         <TextUI mb={15} ag={Ag["600_14"]} text={"Город"} />
@@ -46,19 +57,39 @@ export const SellerInfo = ({ currentSeller }: SellerInfoProps) => {
 
       <MainContainer>
         <TextUI mb={15} ag={Ag["600_14"]} text={"Фирма"} />
-        <TextUI mb={20} ag={Ag["400_16"]} text={currentSeller.ip} />
+        <TextUI
+          mb={20}
+          ag={Ag["400_16"]}
+          text={currentSeller.ip || "Не указан"}
+        />
 
         <TextUI mb={15} ag={Ag["600_14"]} text={"Юридическое название"} />
-        <TextUI mb={20} ag={Ag["400_16"]} text={currentSeller.legal_name} />
+        <TextUI
+          mb={20}
+          ag={Ag["400_16"]}
+          text={currentSeller.legal_name || "Не указан"}
+        />
 
         <TextUI mb={15} ag={Ag["600_14"]} text={"ИНН"} />
-        <TextUI mb={20} ag={Ag["400_16"]} text={currentSeller.inn} />
+        <TextUI
+          mb={20}
+          ag={Ag["400_16"]}
+          text={currentSeller.inn || "Не указан"}
+        />
 
         <TextUI mb={15} ag={Ag["600_14"]} text={"ОГРН"} />
-        <TextUI mb={20} ag={Ag["400_16"]} text={currentSeller.ogrn} />
+        <TextUI
+          mb={20}
+          ag={Ag["400_16"]}
+          text={currentSeller.ogrn || "Не указан"}
+        />
 
         <TextUI mb={15} ag={Ag["600_14"]} text={"Рассчетный счет"} />
-        <TextUI mb={20} ag={Ag["400_16"]} text={currentSeller.bill_number} />
+        <TextUI
+          mb={20}
+          ag={Ag["400_16"]}
+          text={currentSeller.bill_number || "Не указан"}
+        />
       </MainContainer>
     </RowContainerStart>
   )

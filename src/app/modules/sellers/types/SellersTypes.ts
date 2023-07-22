@@ -1,20 +1,18 @@
 import { Nullable } from "../../../settings/types/BaseTypes"
 import { TSellerDenytForm } from "../form/SellerDenyForm"
 import { Seller } from "../models/Seller"
-import { SellerList } from "../models/SellerList"
 
 export type TSellersState = {
-  sellerDenyForm: TSellerDenytForm
+  claimDenyForm: TSellerDenytForm
   isSellerLoad: "completed" | "load" | "failed"
   isUpdateLoad: "completed" | "load" | "failed"
   currentSeller: Nullable<Seller>
-  sellerList: Nullable<SellerList>
-  sellerListPending: Seller[]
-  sellerListDeny: Seller[]
-  sellerListApprove: Seller[]
+  claimsList: Seller[]
+  claimsListPending: Seller[]
+  claimsListDeny: Seller[]
 }
 
-export type TSellersDTO = {
+export type TClaimDTO = {
   seller_user_id: string
   message_from_admin?: string
 }
