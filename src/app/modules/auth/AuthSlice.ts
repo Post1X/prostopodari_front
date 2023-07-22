@@ -61,8 +61,6 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.isAuthLoad = "failed"
-        console.log(action.error.message)
-        // toast.error("Неверный логин или пароль")
       })
   },
 })

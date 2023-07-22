@@ -15,17 +15,12 @@ import { SellersListContent } from "./components/SellersListContent"
 import { Seller } from "../../modules/sellers/models/Seller"
 
 export const SellersPage = () => {
-  const {
-    isSellerLoad,
-    sellerList,
-    sellerListApprove,
-    sellerListDeny,
-    sellerListPending,
-  } = useAppSelector(selectSellersValues)
+  const { isSellerLoad, claimsList, claimsListDeny, claimsListPending } =
+    useAppSelector(selectSellersValues)
 
   const dispatch = useAppDispatch()
 
-  const [activeTab, setActiveTab] = useState(SellersTabMenuType.all)
+  const [activeTab, setActiveTab] = useState(SellersTabMenuType.pending)
 
   const [list, setList] = useState<Seller[]>([])
 
@@ -37,26 +32,20 @@ export const SellersPage = () => {
 
   useEffect(() => {
     switch (activeTab) {
-      case SellersTabMenuType.all:
-        setList(sellerList?.sellerToApprove || [])
-        break
       case SellersTabMenuType.pending:
-        setList(sellerListPending)
+        setList(claimsListPending)
         break
-      case SellersTabMenuType.approve:
-        setList(sellerListApprove)
-        break
-      case SellersTabMenuType.deny:
-        setList(sellerListDeny)
+      case SellersTabMenuType.denied:
+        setList(claimsListDeny)
         break
     }
-  }, [activeTab, sellerList])
+  }, [activeTab, claimsList])
 
   const handleChangeTab = (key: SellersTabMenuType) => {
     setActiveTab(key)
   }
 
-  if (isSellerLoad === "load" && sellerList === null) {
+  if (isSellerLoad === "load" && claimsList === null) {
     return <FullLoader />
   }
 
@@ -68,7 +57,7 @@ export const SellersPage = () => {
         </SellersHeaderWrapper>
       </HeaderUI>
       <Wrapper $maxWidth={1200}>
-        <SellersListContent sellerList={list} />
+        <SellersListContent claimsList={list} />
       </Wrapper>
     </ColumnContainerFlex>
   )

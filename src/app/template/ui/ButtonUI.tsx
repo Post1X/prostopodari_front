@@ -6,6 +6,7 @@ type TColor = "tiffany" | "red" | "green" | "border" | "transparent"
 
 interface IButtonUI extends ContainerProps {
   $backColor?: TColor
+  $disabledColor?: string
   mr?: number
 }
 
@@ -37,7 +38,8 @@ export const ButtonUI = styled.button<IButtonUI>`
   &:disabled {
     transition: 1s;
     opacity: 1;
-    background-color: ${ColorsUI.pink2};
+    background-color: ${({ $disabledColor }) =>
+      $disabledColor || ColorsUI.pink2};
     color: ${ColorsUI.text1};
   }
 `

@@ -6,26 +6,22 @@ import { ButtonUI, getButtonTextColor } from "../../../template/ui/ButtonUI"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { SellersTabMenuType } from "../types/SellersUITypes"
 import { SellersListItem } from "../ui/SellersListItem"
-import { useAppDispatch } from "../../../settings/redux/hooks"
-import { setCurrentSeller } from "../../../modules/sellers/SellersSlice"
+import { ColorsUI } from "../../../template/styles/ColorUI"
 
 type SellerListProps = {
-  sellerList: Seller[]
+  claimsList: Seller[]
 }
 
-export const SellersListContent = ({ sellerList }: SellerListProps) => {
+export const SellersListContent = ({ claimsList }: SellerListProps) => {
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
 
   const handleNavigate = (seller: Seller) => {
-    dispatch(setCurrentSeller(seller))
-
     navigate(`/seller/${seller._id}`)
   }
 
   return (
     <>
-      {sellerList.map((seller) => (
+      {claimsList.map((seller) => (
         <SellersListItem key={seller._id}>
           <div>
             <MainContainer mb={10}>
@@ -46,11 +42,20 @@ export const SellersListContent = ({ sellerList }: SellerListProps) => {
                   ? "border"
                   : "transparent"
               }
+              $disabledColor={ColorsUI.transparent}
             >
               <TextUI
                 ag={Ag["400_16"]}
-                color={getButtonTextColor("border")}
-                text={"Новая"}
+                color={
+                  seller.status === SellersTabMenuType.pending
+                    ? getButtonTextColor("border")
+                    : ColorsUI.red
+                }
+                text={
+                  seller.status === SellersTabMenuType.pending
+                    ? "Новая"
+                    : "Отклонено"
+                }
               />
             </ButtonUI>
           </MainContainer>
