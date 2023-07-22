@@ -15,7 +15,16 @@ export const RowContainerFlex = styled(RowContainer)`
 export const RowContainerEnd = styled(RowContainer)`
   align-items: end;
 `
+
+export const RowContainerJustEnd = styled(RowContainer)`
+  justify-content: end;
+`
+
 export const RowContainerBeetwen = styled(RowContainer)`
   justify-content: space-between;
   align-items: center;
+`
+
+export const RowContainerStart = styled(RowContainer)`
+  align-items: start;
 `

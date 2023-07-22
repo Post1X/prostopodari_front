@@ -1,9 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { TSellersDTO, TSellersState } from "./types/SellersTypes"
 import { RootState } from "../../settings/redux/store"
-import { MockSellerDenyForm } from "./form/SellerDenyForm"
+import { MockSellerDenyForm, SellerDenyFormProps } from "./form/SellerDenyForm"
 import { SellersService } from "./service/SellersService"
 import { SellersTabMenuType } from "../../pages/sellers/types/SellersUITypes"
+import { Seller } from "./models/Seller"
+import { Nullable } from "../../settings/types/BaseTypes"
+import toast from "react-hot-toast"
 
 const sellersService = new SellersService()
 
@@ -15,12 +18,24 @@ const initialState: TSellersState = {
   sellerListApprove: [],
   sellerListDeny: [],
   isSellerLoad: "completed",
+  isUpdateLoad: "completed",
 }
 
 const sellersSlice = createSlice({
   name: "sellers",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentSeller: (state, action: PayloadAction<Nullable<Seller>>) => {
+      state.currentSeller = action.payload
+    },
+
+    selleryChangeForm: (state, action: PayloadAction<SellerDenyFormProps>) => {
+      state.sellerDenyForm = {
+        ...state.sellerDenyForm,
+        [action.payload.key]: action.payload.value,
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getSellers.pending, (state) => {
@@ -47,7 +62,29 @@ const sellersSlice = createSlice({
         state.sellerList = action.payload
       })
       .addCase(getSellers.rejected, (state) => {
-        state.isSellerLoad = "failed"
+        state.isUpdateLoad = "completed"
+      })
+
+      .addCase(putDenySeller.pending, (state) => {
+        state.isUpdateLoad = "load"
+      })
+      .addCase(putDenySeller.fulfilled, (state, action) => {
+        state.isUpdateLoad = "completed"
+        toast.success("Успешно")
+      })
+      .addCase(putDenySeller.rejected, (state) => {
+        state.isUpdateLoad = "completed"
+      })
+
+      .addCase(putApproveSeller.pending, (state) => {
+        state.isUpdateLoad = "load"
+      })
+      .addCase(putApproveSeller.fulfilled, (state, action) => {
+        state.isUpdateLoad = "completed"
+        toast.success("Успешно")
+      })
+      .addCase(putApproveSeller.rejected, (state) => {
+        state.isUpdateLoad = "completed"
       })
   },
 })
@@ -61,7 +98,7 @@ export const getSellers = createAsyncThunk("sellers/list", async () => {
 })
 
 export const putApproveSeller = createAsyncThunk(
-  "seller/deny",
+  "seller/approve",
   async (dto: TSellersDTO) => {
     const message = await sellersService.putApproveSeller(dto)
 
@@ -80,7 +117,7 @@ export const putDenySeller = createAsyncThunk(
 
 // ACTIONS
 
-export const {} = sellersSlice.actions
+export const { setCurrentSeller, selleryChangeForm } = sellersSlice.actions
 
 export const selectSellersValues = (state: RootState) => state.sellersSlice
 

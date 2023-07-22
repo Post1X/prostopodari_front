@@ -6,6 +6,7 @@ import { SellerList } from "../models/SellerList"
 export type TSellersState = {
   sellerDenyForm: TSellerDenytForm
   isSellerLoad: "completed" | "load" | "failed"
+  isUpdateLoad: "completed" | "load" | "failed"
   currentSeller: Nullable<Seller>
   sellerList: Nullable<SellerList>
   sellerListPending: Seller[]

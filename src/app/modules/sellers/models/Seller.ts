@@ -14,9 +14,11 @@ export class Seller extends AbstractModel {
   subscription_status: Nullable<string> = null
   subscription_valid_until: Nullable<string> = null
   active_store: Nullable<string> = null
-  inn?: string = ""
-  ip?: string = ""
-  ogrn?: string = ""
+  inn: string = ""
+  ip: string = ""
+  ogrn: string = ""
+  city: string = ""
+  address: string = ""
   __v: number = 0
 
   constructor(props: any) {

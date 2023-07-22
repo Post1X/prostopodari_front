@@ -21,17 +21,17 @@ import { InputUnderline } from "../../components/InputUnderline"
 import { ButtonUI, getButtonTextColor } from "../../template/ui/ButtonUI"
 import { useAppDispatch, useAppSelector } from "../../settings/redux/hooks"
 import {
-  changeForm,
+  authChangeForm,
   login,
+  resetForm,
   selectAuthValues,
 } from "../../modules/auth/AuthSlice"
-import {
-  AuthFormKeys,
-  AuthFormValidation,
-} from "../../modules/auth/form/AuthForm"
+import { AuthFormKeys } from "../../modules/auth/form/AuthForm"
 import { Ag, TextUI } from "../../template/ui/TextUI"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+//@ts-ignore
+import GiftImg from "./../../../assets/img/gift.png"
 
 export const AuthPage = () => {
   const { authForm, isAuthLoad, authUser } = useAppSelector(selectAuthValues)
@@ -43,6 +43,12 @@ export const AuthPage = () => {
   const handleLogin = () => {
     dispatch(login(authForm))
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetForm())
+    }
+  }, [])
 
   useEffect(() => {
     if (authUser?.token) {
@@ -59,7 +65,7 @@ export const AuthPage = () => {
         <AuthImage>
           <AuthEllipseTop size={5} />
           <AuthEllipseBottom size={14} />
-          <AuthGiftImage src="src/app/template/assets/img/gift.png" />
+          <AuthGiftImage src={GiftImg} />
           <AuthWhiteLine />
         </AuthImage>
 
@@ -82,7 +88,7 @@ export const AuthPage = () => {
                 value={authForm.email}
                 onChange={(e) => {
                   dispatch(
-                    changeForm({
+                    authChangeForm({
                       key: AuthFormKeys.email,
                       value: e.target.value,
                     }),
@@ -96,7 +102,7 @@ export const AuthPage = () => {
                 value={authForm.password}
                 onChange={(e) => {
                   dispatch(
-                    changeForm({
+                    authChangeForm({
                       key: AuthFormKeys.password,
                       value: e.target.value,
                     }),

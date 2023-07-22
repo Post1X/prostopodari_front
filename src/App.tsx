@@ -1,11 +1,14 @@
 import { RouterProvider } from "react-router-dom"
 import { RouterApp } from "./app/routes/RouterApp"
-import { useAppDispatch } from "./app/settings/redux/hooks"
+import { useAppDispatch, useAppSelector } from "./app/settings/redux/hooks"
 import { useEffect, useState } from "react"
-import { initAuth } from "./app/modules/auth/AuthSlice"
+import { initAuth, selectAuthValues } from "./app/modules/auth/AuthSlice"
 import { FullLoader } from "./app/template/ui/FullLoader"
+import { getSellers } from "./app/modules/sellers/SellersSlice"
+import { Toaster } from "react-hot-toast"
 
 export const App = () => {
+  const { authUser } = useAppSelector(selectAuthValues)
   const dispatch = useAppDispatch()
 
   const [load, setLoad] = useState(true)
@@ -18,6 +21,12 @@ export const App = () => {
     }, 0)
   }, [])
 
+  useEffect(() => {
+    if (authUser?.token) {
+      dispatch(getSellers())
+    }
+  }, [authUser])
+
   if (load) {
     return <FullLoader />
   }
@@ -25,6 +34,7 @@ export const App = () => {
   return (
     <>
       <RouterProvider router={RouterApp} />
+      <Toaster position="top-center" />
     </>
   )
 }

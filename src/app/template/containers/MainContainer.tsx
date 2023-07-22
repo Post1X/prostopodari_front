@@ -6,6 +6,7 @@ export const MainContainer = styled.div<ContainerProps>`
   flex-direction: column;
 
   margin-bottom: ${({ mb }) => mb || 0}px;
+  margin-right: ${({ mr }) => mr || 0}px;
 
   padding: ${({ pv }) => pv || 0}px ${({ ph }) => ph || 0}px;
 
@@ -15,5 +16,5 @@ export const MainContainer = styled.div<ContainerProps>`
   padding-top: ${({ pt, pv }) => pt || pv || 0}px;
   padding-bottom: ${({ pb, pv }) => pb || pv || 0}px;
 
-  width: ${({ width }) => width + "px" || "fit-content"};
+  ${({ width }) => (width ? `width: ${width}px` : "")}
 `

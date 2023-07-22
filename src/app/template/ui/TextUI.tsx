@@ -18,11 +18,13 @@ type TTextUI = {
   text: string
   color?: string
   isNoSelect?: boolean
+  mb?: number
 }
 
 type TStyledP = {
   weight: string
   size: string
+  $mb?: number
 }
 
 export const TextUI = (props: TTextUI) => {
@@ -35,6 +37,7 @@ export const TextUI = (props: TTextUI) => {
       size={size}
       weight={weight}
       color={props.color}
+      $mb={props.mb}
     >
       {props.text}
     </P>
@@ -46,4 +49,5 @@ const P = styled.p<TStyledP>`
   font-size: ${({ size }) => size}px;
   line-height: ${({ size }) => parseInt(size) * 1.22}px;
   color: ${({ color }) => color || ColorsUI.text1};
+  margin-bottom: ${({ $mb }) => $mb || 0}px;
 `

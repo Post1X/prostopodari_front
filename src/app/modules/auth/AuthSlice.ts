@@ -5,6 +5,7 @@ import { RootState } from "../../settings/redux/store"
 import { AuthFormProps, MockAuthForm } from "./form/AuthForm"
 import { KeyLocalStorage } from "../../settings/types/KeyLocalStorage"
 import { TokenService } from "./service/TokenService"
+import toast from "react-hot-toast"
 
 const authService = new AuthService()
 const tokenService = new TokenService()
@@ -19,6 +20,10 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    resetForm: (state) => {
+      state.authForm = MockAuthForm
+    },
+
     initAuth: (state) => {
       const authUser = tokenService.getLocalStorageToken()
 
@@ -29,7 +34,7 @@ const authSlice = createSlice({
       }
     },
 
-    changeForm: (state, action: PayloadAction<AuthFormProps>) => {
+    authChangeForm: (state, action: PayloadAction<AuthFormProps>) => {
       state.authForm = {
         ...state.authForm,
         [action.payload.key]: action.payload.value,
@@ -54,8 +59,10 @@ const authSlice = createSlice({
         tokenService.setBearerToken(action.payload.token!)
         localStorage.setItem(KeyLocalStorage.token, action.payload.token!)
       })
-      .addCase(login.rejected, (state) => {
+      .addCase(login.rejected, (state, action) => {
         state.isAuthLoad = "failed"
+        console.log(action.error.message)
+        // toast.error("Неверный логин или пароль")
       })
   },
 })
@@ -70,7 +77,7 @@ export const login = createAsyncThunk("auth/login", async (dto: TAuthDTO) => {
 
 // ACTIONS
 
-export const { changeForm, initAuth, logout } = authSlice.actions
+export const { authChangeForm, initAuth, logout, resetForm } = authSlice.actions
 
 export const selectToken = (state: RootState) => state.authSlice.authUser?.token
 export const selectAuthValues = (state: RootState) => state.authSlice
