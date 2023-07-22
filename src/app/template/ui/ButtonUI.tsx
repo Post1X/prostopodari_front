@@ -6,6 +6,7 @@ type TColor = "tiffany" | "red" | "green" | "border" | "transparent"
 
 interface IButtonUI extends ContainerProps {
   $backColor?: TColor
+  mr?: number
 }
 
 export const ButtonUI = styled.button<IButtonUI>`
@@ -20,6 +21,7 @@ export const ButtonUI = styled.button<IButtonUI>`
   cursor: pointer;
 
   margin-bottom: ${({ mb }) => mb || 0}px;
+  margin-right: ${({ mr }) => mr || 0}px;
 
   transition: 1s;
 

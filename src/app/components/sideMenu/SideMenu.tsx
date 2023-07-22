@@ -52,7 +52,7 @@ export const SideMenu = () => {
                 <SideLink
                   onNavigate={() => handleNavigation(value)}
                   isCurrentPath={currentPath.includes(nameRoute)}
-                  isPending={value.path === PathApp.home.path}
+                  isPending={index === 0}
                   linkText={value.menuName}
                   key={key}
                 />

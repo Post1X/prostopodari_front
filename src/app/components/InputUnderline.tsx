@@ -4,11 +4,12 @@ import { ContainerProps } from "../settings/types/UITypes"
 
 interface InputUnderlineProps extends ContainerProps {
   letter?: number
+  pl?: number
 }
 
 export const InputUnderline = styled.input<InputUnderlineProps>`
   width: 100%;
-  padding-left: 5px;
+  padding-left: ${({ pl }) => (pl !== undefined ? pl : 5)}px;
   padding-bottom: 5px;
   margin-bottom: ${({ mb }) => mb || 0}px;
 

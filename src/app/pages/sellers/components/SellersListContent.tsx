@@ -6,7 +6,8 @@ import { ButtonUI, getButtonTextColor } from "../../../template/ui/ButtonUI"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { SellersTabMenuType } from "../types/SellersUITypes"
 import { SellersListItem } from "../ui/SellersListItem"
-import { redirect } from "react-router-dom"
+import { useAppDispatch } from "../../../settings/redux/hooks"
+import { setCurrentSeller } from "../../../modules/sellers/SellersSlice"
 
 type SellerListProps = {
   sellerList: Seller[]
@@ -14,9 +15,12 @@ type SellerListProps = {
 
 export const SellersListContent = ({ sellerList }: SellerListProps) => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
-  const handleNavigate = (id: string) => {
-    navigate(`/seller/${id}`)
+  const handleNavigate = (seller: Seller) => {
+    dispatch(setCurrentSeller(seller))
+
+    navigate(`/seller/${seller._id}`)
   }
 
   return (
@@ -36,7 +40,7 @@ export const SellersListContent = ({ sellerList }: SellerListProps) => {
           <MainContainer width={170}>
             <ButtonUI
               disabled={seller.status !== SellersTabMenuType.pending}
-              onClick={() => handleNavigate(seller._id)}
+              onClick={() => handleNavigate(seller)}
               $backColor={
                 seller.status === SellersTabMenuType.pending
                   ? "border"

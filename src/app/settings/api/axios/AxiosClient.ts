@@ -3,6 +3,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios"
 import { IAxiosConfig, IAxiosResponse, IExcludedUrl } from "./IAxiosInterfaces"
 import { appConfig } from "../../../appConfig"
 import { IApiClient } from "../ApiInterfaces"
+import toast from "react-hot-toast"
 
 export default class AxiosClient implements IApiClient {
   readonly SUCCESS_STATUSES = [200, 201]
@@ -52,15 +53,8 @@ export default class AxiosClient implements IApiClient {
   }
 
   protected getApiErrors = (error: any) => {
-    if (error?.message) {
-      if (!Array.isArray(error?.errors) && error?.errors) {
-        const errorsArray = Object.values(error?.errors)
-        const errors = Array.prototype.concat.apply([], errorsArray)
-
-        // TODO: Notif error
-      } else {
-        // TODO: Notif error
-      }
+    if (error?.error) {
+      toast.error(error.error)
     }
   }
 
@@ -103,15 +97,7 @@ export default class AxiosClient implements IApiClient {
         const isExcluded = this.excludedUrls(response)
 
         if (!this.SUCCESS_STATUSES.includes(response.status)) {
-          // TODO: Notif error
-
           return Promise.reject(response)
-        }
-
-        if (!isExcluded) {
-          if (response?.data?.message) {
-            // TODO: Notif error
-          }
         }
 
         return response
@@ -124,7 +110,7 @@ export default class AxiosClient implements IApiClient {
         }
 
         if (error.response?.status === this.SERVER_ERROR) {
-          // TODO: Notif error
+          toast.error("Ошибка сервера")
         }
 
         return Promise.reject(error)
