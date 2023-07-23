@@ -26,7 +26,7 @@ export const OwnerListItem = (props: OwnerListItemProps) => {
 
   return (
     <SellersListItem>
-      <MainContainer>
+      <div>
         <RowContainer mb={10}>
           <TextUI ag={Ag["600_16"]} text={props.seller.name} />
           <MainContainer ph={10}>
@@ -51,7 +51,7 @@ export const OwnerListItem = (props: OwnerListItemProps) => {
             text={`г. ${props.seller.city || "Не указан"}`}
           />
         </RowContainer>
-      </MainContainer>
+      </div>
 
       <RowContainer>
         {props.seller.is_baned ? (

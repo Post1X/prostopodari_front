@@ -2,7 +2,12 @@ import styled from "styled-components"
 import { Wrapper } from "../template/containers/Wrapper"
 import { ColorsUI } from "../template/styles/ColorUI"
 
-export const HeaderWrapperUI = styled(Wrapper)`
+type THeaderWrapperProps = {
+  $isNoBorder?: boolean
+}
+
+export const HeaderWrapperUI = styled(Wrapper)<THeaderWrapperProps>`
   justify-content: flex-end;
-  border-bottom: 1px solid ${ColorsUI.lines};
+  border-bottom: ${({ $isNoBorder }) => ($isNoBorder ? 0 : 1)}px solid
+    ${ColorsUI.lines};
 `

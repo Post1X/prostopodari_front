@@ -15,6 +15,7 @@ import {
 import { FullLoader } from "../../template/ui/FullLoader"
 import { OwnerListItem } from "./components/OwnerListItem"
 import { Seller } from "../../modules/sellers/models/Seller"
+import { StyleProp } from "../../settings/types/BaseTypes"
 
 export const OwnersPage = () => {
   const { sellersList, isSellersLoad } = useAppSelector(selectSellersValues)
@@ -56,15 +57,11 @@ export const OwnersPage = () => {
     )
   }
 
-  if (isSellersLoad === "load") {
-    return <FullLoader />
-  }
-
   return (
-    <ColumnContainerFlex>
+    <ColumnContainerFlex style={styles.container}>
       <HeaderUI>
-        <HeaderWrapperUI pv={17} ph={17}>
-          <RowContainer>
+        <HeaderWrapperUI>
+          <RowContainer pv={17} ph={17}>
             <MainContainer mr={35}>
               <SearchContainer
                 value={search}
@@ -90,11 +87,22 @@ export const OwnersPage = () => {
           </RowContainer>
         </HeaderWrapperUI>
       </HeaderUI>
-      <Wrapper $maxWidth={1200}>
-        {list.map((seller) => (
-          <OwnerListItem key={seller._id} seller={seller} />
-        ))}
-      </Wrapper>
+
+      {isSellersLoad === "load" ? (
+        <FullLoader />
+      ) : (
+        <Wrapper $maxWidth={1200}>
+          {list.map((seller) => (
+            <OwnerListItem key={seller._id} seller={seller} />
+          ))}
+        </Wrapper>
+      )}
     </ColumnContainerFlex>
   )
+}
+
+const styles: StyleProp = {
+  container: {
+    height: "100%",
+  },
 }
