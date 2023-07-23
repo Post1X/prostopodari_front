@@ -15,7 +15,7 @@ export const HeaderBack = () => {
 
   return (
     <HeaderUI>
-      <HeaderWrapperUI>
+      <HeaderWrapperUI $isNoBorder>
         <MainContainer
           onClick={() => handlePop()}
           style={styles.btn}
