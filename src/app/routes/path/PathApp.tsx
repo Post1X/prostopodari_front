@@ -7,7 +7,7 @@ type TPathApp = {
   home: TPathValue
   seller: TPathValue
   login: TPathValue
-  stores: TPathValue
+  owners: TPathValue
   promocodes: TPathValue
   settings: TPathValue
   finances: TPathValue
@@ -25,8 +25,8 @@ export const PathApp: TPathApp = {
   login: {
     path: "/login",
   },
-  stores: {
-    path: "/stores",
+  owners: {
+    path: "/owners",
     menuName: "Владельцы",
   },
   finances: {

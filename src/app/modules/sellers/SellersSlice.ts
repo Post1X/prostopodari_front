@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { TClaimDTO, TSellersState } from "./types/SellersTypes"
+import { TBanSellerDTO, TClaimDTO, TSellersState } from "./types/SellersTypes"
 import { RootState } from "../../settings/redux/store"
-import { MockSellerDenyForm, SellerDenyFormProps } from "./form/SellerDenyForm"
+import { MockClaimDenyForm, ClaimDenyFormProps } from "./form/ClaimDenyForm"
 import { SellersService } from "./service/SellersService"
 import { SellersTabMenuType } from "../../pages/sellers/types/SellersUITypes"
 import { Seller } from "./models/Seller"
@@ -11,13 +11,20 @@ import toast from "react-hot-toast"
 const sellersService = new SellersService()
 
 const initialState: TSellersState = {
-  claimDenyForm: MockSellerDenyForm,
-  currentSeller: null,
+  claimDenyForm: MockClaimDenyForm,
+
+  isClaimsLoad: "completed",
+  isSellersLoad: "completed",
+
+  isUpdateLoad: "completed",
+
   claimsList: [],
   claimsListPending: [],
   claimsListDeny: [],
-  isSellerLoad: "completed",
-  isUpdateLoad: "completed",
+  currentClaim: null,
+
+  sellersList: [],
+  currentSeller: null,
 }
 
 const sellersSlice = createSlice({
@@ -25,10 +32,10 @@ const sellersSlice = createSlice({
   initialState,
   reducers: {
     setCurrentSeller: (state, action: PayloadAction<Nullable<Seller>>) => {
-      state.currentSeller = action.payload
+      state.currentClaim = action.payload
     },
 
-    selleryChangeForm: (state, action: PayloadAction<SellerDenyFormProps>) => {
+    selleryChangeForm: (state, action: PayloadAction<ClaimDenyFormProps>) => {
       state.claimDenyForm = {
         ...state.claimDenyForm,
         [action.payload.key]: action.payload.value,
@@ -37,12 +44,12 @@ const sellersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // GET Sellers
-      .addCase(getSellers.pending, (state) => {
-        state.isSellerLoad = "load"
+      // GET Claims
+      .addCase(getClaims.pending, (state) => {
+        state.isClaimsLoad = "load"
       })
-      .addCase(getSellers.fulfilled, (state, action) => {
-        state.isSellerLoad = "completed"
+      .addCase(getClaims.fulfilled, (state, action) => {
+        state.isClaimsLoad = "completed"
 
         state.claimsListPending = sellersService.getTypeList(
           action.payload,
@@ -56,27 +63,27 @@ const sellersSlice = createSlice({
 
         state.claimsList = action.payload
       })
-      .addCase(getSellers.rejected, (state) => {
-        state.isSellerLoad = "completed"
+      .addCase(getClaims.rejected, (state) => {
+        state.isClaimsLoad = "completed"
       })
 
-      // GET Seller
+      // GET Current Claim
 
-      .addCase(getCurrentSeller.pending, (state) => {
-        state.isSellerLoad = "load"
+      .addCase(getCurrentClaim.pending, (state) => {
+        state.isClaimsLoad = "load"
       })
-      .addCase(getCurrentSeller.fulfilled, (state, action) => {
-        state.isSellerLoad = "completed"
+      .addCase(getCurrentClaim.fulfilled, (state, action) => {
+        state.isClaimsLoad = "completed"
 
         if (action.payload?.sellerData) {
-          state.currentSeller = action.payload?.sellerData
+          state.currentClaim = action.payload?.sellerData
         }
       })
-      .addCase(getCurrentSeller.rejected, (state) => {
-        state.isSellerLoad = "completed"
+      .addCase(getCurrentClaim.rejected, (state) => {
+        state.isClaimsLoad = "completed"
       })
 
-      // PUT Deny
+      // PUT Claim Deny
 
       .addCase(putDenySeller.pending, (state) => {
         state.isUpdateLoad = "load"
@@ -87,10 +94,9 @@ const sellersSlice = createSlice({
       })
       .addCase(putDenySeller.rejected, (state) => {
         state.isUpdateLoad = "completed"
-        toast.error("Ошибка")
       })
 
-      // PUT Approve
+      // PUT Claim Approve
 
       .addCase(putApproveSeller.pending, (state) => {
         state.isUpdateLoad = "load"
@@ -101,25 +107,67 @@ const sellersSlice = createSlice({
       })
       .addCase(putApproveSeller.rejected, (state) => {
         state.isUpdateLoad = "completed"
-        toast.error("Ошибка")
+      })
+
+      // GET Sellers
+
+      .addCase(getSellers.pending, (state) => {
+        state.isSellersLoad = "load"
+      })
+      .addCase(getSellers.fulfilled, (state, action) => {
+        state.isSellersLoad = "completed"
+
+        state.sellersList = action.payload
+      })
+      .addCase(getSellers.rejected, (state) => {
+        state.isSellersLoad = "completed"
+      })
+
+      // GET Current Seller
+
+      .addCase(getCurrentSeller.pending, (state) => {
+        state.isSellersLoad = "load"
+      })
+      .addCase(getCurrentSeller.fulfilled, (state, action) => {
+        state.isSellersLoad = "completed"
+
+        if (action.payload?.sellerData) {
+          state.currentSeller = action.payload
+        }
+      })
+      .addCase(getCurrentSeller.rejected, (state) => {
+        state.isSellersLoad = "completed"
+      })
+
+      // PUT Baned Seller
+
+      .addCase(putBanedSeller.pending, (state) => {
+        state.isUpdateLoad = "load"
+      })
+      .addCase(putBanedSeller.fulfilled, (state, action) => {
+        state.isUpdateLoad = "completed"
+        toast.success("Успешно")
+      })
+      .addCase(putBanedSeller.rejected, (state) => {
+        state.isUpdateLoad = "completed"
       })
   },
 })
 
 // ASYNC REDUCERS
+// CLAIMS
+export const getClaims = createAsyncThunk("sellers/claims", async () => {
+  const claimsList = await sellersService.getClaims()
 
-export const getSellers = createAsyncThunk("sellers/list", async () => {
-  const sellersList = await sellersService.getSellers()
-
-  return sellersList
+  return claimsList
 })
 
-export const getCurrentSeller = createAsyncThunk(
-  "sellers/currentSeller",
+export const getCurrentClaim = createAsyncThunk(
+  "sellers/currentClaim",
   async (id: string) => {
-    const sellersList = await sellersService.getCurrentSeller(id)
+    const currentClaim = await sellersService.getCurrentClaim(id)
 
-    return sellersList
+    return currentClaim
   },
 )
 
@@ -138,6 +186,30 @@ export const putDenySeller = createAsyncThunk(
     const message = await sellersService.putDenySeller(dto)
 
     return message
+  },
+)
+// SELLERS
+export const getSellers = createAsyncThunk("sellers/owners", async () => {
+  const sellers = await sellersService.getSellers()
+
+  return sellers
+})
+
+export const getCurrentSeller = createAsyncThunk(
+  "sellers/currentSeller",
+  async (id: string) => {
+    const currentSeller = await sellersService.getCurrentSeller(id)
+
+    return currentSeller
+  },
+)
+
+export const putBanedSeller = createAsyncThunk(
+  "sellers/baned",
+  async (dto: TBanSellerDTO) => {
+    const currentSeller = await sellersService.putBanedSeller(dto)
+
+    return currentSeller
   },
 )
 

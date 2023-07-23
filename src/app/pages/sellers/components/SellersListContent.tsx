@@ -5,8 +5,8 @@ import { MainContainer } from "../../../template/containers/MainContainer"
 import { ButtonUI, getButtonTextColor } from "../../../template/ui/ButtonUI"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { SellersTabMenuType } from "../types/SellersUITypes"
-import { SellersListItem } from "../ui/SellersListItem"
 import { ColorsUI } from "../../../template/styles/ColorUI"
+import { SellersListItem } from "../../../components/SellerListItem"
 
 type SellerListProps = {
   claimsList: Seller[]

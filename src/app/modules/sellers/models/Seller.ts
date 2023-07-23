@@ -19,6 +19,7 @@ export class Seller extends AbstractModel {
   ogrn: string = ""
   city: string = ""
   address: string = ""
+  is_baned: boolean = false
   __v: number = 0
 
   constructor(props: any) {

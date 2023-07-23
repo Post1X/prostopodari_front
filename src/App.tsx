@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "./app/settings/redux/hooks"
 import { useEffect, useState } from "react"
 import { initAuth, selectAuthValues } from "./app/modules/auth/AuthSlice"
 import { FullLoader } from "./app/template/ui/FullLoader"
-import { getSellers } from "./app/modules/sellers/SellersSlice"
+import { getClaims } from "./app/modules/sellers/SellersSlice"
 import { Toaster } from "react-hot-toast"
 
 export const App = () => {
@@ -23,7 +23,7 @@ export const App = () => {
 
   useEffect(() => {
     if (authUser?.token) {
-      dispatch(getSellers())
+      dispatch(getClaims())
     }
   }, [authUser])
 
