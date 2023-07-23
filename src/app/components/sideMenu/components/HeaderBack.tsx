@@ -1,10 +1,10 @@
 import React from "react"
 import { HeaderUI } from "../../HeaderUI"
-import { SellersHeaderWrapper } from "../../../pages/sellers/ui/SellersHeaderWrapper"
 import { MainContainer } from "../../../template/containers/MainContainer"
 import { BackSVG } from "../../../template/svg/BackSVG"
 import { StyleProp } from "../../../settings/types/BaseTypes"
 import { useNavigate } from "react-router-dom"
+import { HeaderWrapperUI } from "../../HeaderWrapperUI"
 
 export const HeaderBack = () => {
   const navigate = useNavigate()
@@ -15,7 +15,7 @@ export const HeaderBack = () => {
 
   return (
     <HeaderUI>
-      <SellersHeaderWrapper>
+      <HeaderWrapperUI>
         <MainContainer
           onClick={() => handlePop()}
           style={styles.btn}
@@ -24,7 +24,7 @@ export const HeaderBack = () => {
         >
           <BackSVG />
         </MainContainer>
-      </SellersHeaderWrapper>
+      </HeaderWrapperUI>
     </HeaderUI>
   )
 }

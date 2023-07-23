@@ -54,7 +54,9 @@ export default class AxiosClient implements IApiClient {
 
   protected getApiErrors = (error: any) => {
     if (error?.error) {
-      toast.error(error.error)
+      toast.error(error.error, {
+        duration: 1500,
+      })
     }
   }
 
@@ -110,7 +112,9 @@ export default class AxiosClient implements IApiClient {
         }
 
         if (error.response?.status === this.SERVER_ERROR) {
-          toast.error("Ошибка сервера")
+          toast.error("Ошибка сервера", {
+            duration: 1500,
+          })
         }
 
         return Promise.reject(error)

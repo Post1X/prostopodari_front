@@ -5,6 +5,8 @@ import { AuthPage } from "../pages/auth/AuthPage"
 import { RedirectApp } from "./redirect/RedirectApp"
 import { SellersPage } from "../pages/sellers/SellersPage"
 import { SellerPage } from "../pages/sellers/seller/SellerPage"
+import { OwnersPage } from "../pages/owners/OwnersPage"
+import { OwnerPage } from "../pages/owners/owner/OwnerPage"
 
 export const RouterApp = createBrowserRouter([
   {
@@ -23,8 +25,14 @@ export const RouterApp = createBrowserRouter([
     ],
   },
   {
-    path: PathApp.stores.path,
-    element: <RedirectApp element={<ErrorPage />} />,
+    path: PathApp.owners.path,
+    element: <RedirectApp element={<OwnersPage />} />,
+    children: [
+      {
+        path: `${PathApp.owners.path}/:ownerId`,
+        element: <OwnerPage />,
+      },
+    ],
   },
   {
     path: PathApp.promocodes.path,

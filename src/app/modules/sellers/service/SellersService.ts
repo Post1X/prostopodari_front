@@ -1,4 +1,4 @@
-import { TClaimDTO } from "../types/SellersTypes"
+import { TBanSellerDTO, TClaimDTO } from "../types/SellersTypes"
 import AbstractServiceRepository from "../../../settings/abstrcations/repositories/AbstractServiceRepository"
 import { ResponseMessage } from "../models/ResponseMessage"
 import { ApiSellerService } from "./api/ApiSellerService"
@@ -14,10 +14,22 @@ export class SellersService extends AbstractServiceRepository {
     this.apiService = new ApiSellerService()
   }
 
+  getClaims = async () => {
+    const { data } = await this.apiService.getClaims()
+
+    return this.createList<Seller>(Seller, data)
+  }
+
   getSellers = async () => {
     const { data } = await this.apiService.getSellers()
 
     return this.createList<Seller>(Seller, data)
+  }
+
+  getCurrentClaim = async (id: string) => {
+    const { data } = await this.apiService.getCurrentClaim(id)
+
+    return this.create<SellerData>(SellerData, data)
   }
 
   getCurrentSeller = async (id: string) => {
@@ -34,6 +46,12 @@ export class SellersService extends AbstractServiceRepository {
 
   putDenySeller = async (dto: TClaimDTO) => {
     const { data } = await this.apiService.putDenySeller(dto)
+
+    return this.create<ResponseMessage>(ResponseMessage, data)
+  }
+
+  putBanedSeller = async (dto: TBanSellerDTO) => {
+    const { data } = await this.apiService.putBanedSeller(dto)
 
     return this.create<ResponseMessage>(ResponseMessage, data)
   }

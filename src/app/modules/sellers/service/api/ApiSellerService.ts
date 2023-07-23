@@ -1,14 +1,26 @@
-import { TClaimDTO } from "../../types/SellersTypes"
+import { TBanSellerDTO, TClaimDTO } from "../../types/SellersTypes"
 import AbstractApiRepository from "../../../../settings/abstrcations/repositories/AbstractApiRepository"
 
 export class ApiSellerService extends AbstractApiRepository {
-  getSellers = async () => {
+  getClaims = async () => {
     return this.apiClient.get({
       url: "/users/sellers/claims",
     })
   }
 
+  getSellers = async () => {
+    return this.apiClient.get({
+      url: "/users/sellers",
+    })
+  }
+
   getCurrentSeller = async (id: string) => {
+    return this.apiClient.get({
+      url: `/users/sellers?seller_id=${id}`,
+    })
+  }
+
+  getCurrentClaim = async (id: string) => {
     return this.apiClient.get({
       url: `/users/sellers?seller_id=${id}`,
     })
@@ -33,6 +45,12 @@ export class ApiSellerService extends AbstractApiRepository {
           "Content-Type": "multipart/form-data",
         },
       },
+    })
+  }
+
+  putBanedSeller = async (dto: TBanSellerDTO) => {
+    return this.apiClient.put({
+      url: `/users/sellers/claims?seller_id=${dto.seller_id}&ban=${dto.ban}`,
     })
   }
 }

@@ -2,10 +2,9 @@ import { HeaderBack } from "../../../components/sideMenu/components/HeaderBack"
 import {
   selleryChangeForm,
   selectSellersValues,
-  setCurrentSeller,
   putApproveSeller,
   putDenySeller,
-  getCurrentSeller,
+  getCurrentClaim,
 } from "../../../modules/sellers/SellersSlice"
 import { useAppDispatch, useAppSelector } from "../../../settings/redux/hooks"
 import { ColumnContainerFlex } from "../../../template/containers/ColumnContainer"
@@ -13,11 +12,9 @@ import { MainContainer } from "../../../template/containers/MainContainer"
 import { RowContainer } from "../../../template/containers/RowContainer"
 import { FullLoader } from "../../../template/ui/FullLoader"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
-import { SellerInfo } from "../components/SellerInfo"
 import { SellerButtonsGroup } from "../ui/SellerButtonsGroup"
 import { ButtonUI, getButtonTextColor } from "../../../template/ui/ButtonUI"
 import { InputUnderline } from "../../../components/InputUnderline"
-import { SellerDenyFormKeys } from "../../../modules/sellers/form/SellerDenyForm"
 import { useEffect, useRef, useState } from "react"
 import { Params, useNavigate, useParams } from "react-router-dom"
 import { CenterContainerFlex } from "../../../template/containers/CenterContainer"
@@ -26,9 +23,11 @@ import { TClaimDTO } from "../../../modules/sellers/types/SellersTypes"
 import { PathApp } from "../../../routes/path/PathApp"
 import toast from "react-hot-toast"
 import { SellersTabMenuType } from "../types/SellersUITypes"
+import { ClaimDenyFormKeys } from "../../../modules/sellers/form/ClaimDenyForm"
+import { UserInfo } from "../../../components/UserInfo"
 
 export const SellerPage = () => {
-  const { currentSeller, claimDenyForm, isSellerLoad } =
+  const { currentClaim, claimDenyForm, isClaimsLoad } =
     useAppSelector(selectSellersValues)
 
   const dispatch = useAppDispatch()
@@ -41,25 +40,27 @@ export const SellerPage = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(selleryChangeForm({ key: SellerDenyFormKeys.reason, value: "" }))
+      dispatch(selleryChangeForm({ key: ClaimDenyFormKeys.reason, value: "" }))
     }
   }, [])
 
   useEffect(() => {
     if (!load.current) return
 
-    dispatch(getCurrentSeller(params.sellerId!))
+    dispatch(getCurrentClaim(params.sellerId!))
 
     load.current = false
   }, [])
 
   const handleChangeForm = (value: string) => {
-    dispatch(selleryChangeForm({ key: SellerDenyFormKeys.reason, value }))
+    dispatch(selleryChangeForm({ key: ClaimDenyFormKeys.reason, value }))
   }
 
   const handleDeny = async () => {
     if (!claimDenyForm.reason.length) {
-      toast.error("Укажите причину отклонения!")
+      toast.error("Укажите причину отклонения!", {
+        duration: 1500,
+      })
       return
     }
 
@@ -76,16 +77,16 @@ export const SellerPage = () => {
   }
 
   const handleApprove = async () => {
-    await dispatch(putApproveSeller({ seller_user_id: currentSeller?._id! }))
+    await dispatch(putApproveSeller({ seller_user_id: currentClaim?._id! }))
 
     navigate(PathApp.home.path)
   }
 
-  if (isSellerLoad === "load") {
+  if (isClaimsLoad === "load") {
     return <FullLoader />
   }
 
-  if (currentSeller === null) {
+  if (currentClaim === null) {
     return (
       <CenterContainerFlex style={{ height: "100%" }}>
         <TextUI ag={Ag["700_16"]} text={"Заявка не найдена"} />
@@ -98,9 +99,9 @@ export const SellerPage = () => {
       <HeaderBack />
 
       <MainContainer width={680} pl={50} pt={20}>
-        <SellerInfo currentSeller={currentSeller} />
+        <UserInfo seller={currentClaim} />
 
-        {currentSeller.status === SellersTabMenuType.pending ? (
+        {currentClaim.status === SellersTabMenuType.pending ? (
           <SellerButtonsGroup pt={20}>
             <MainContainer style={{ width: "50%" }}>
               <RowContainer mb={60}>

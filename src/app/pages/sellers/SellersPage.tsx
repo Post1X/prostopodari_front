@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react"
 import {
-  getSellers,
+  getClaims,
   selectSellersValues,
 } from "../../modules/sellers/SellersSlice"
 import { useAppDispatch, useAppSelector } from "../../settings/redux/hooks"
 import { ColumnContainerFlex } from "../../template/containers/ColumnContainer"
 import { FullLoader } from "../../template/ui/FullLoader"
 import { HeaderUI } from "../../components/HeaderUI"
-import { SellersHeaderWrapper } from "./ui/SellersHeaderWrapper"
 import { SellersTabMenu } from "./components/SellersTabMenu"
 import { SellersTabMenuType } from "./types/SellersUITypes"
 import { Wrapper } from "../../template/containers/Wrapper"
 import { SellersListContent } from "./components/SellersListContent"
 import { Seller } from "../../modules/sellers/models/Seller"
+import { HeaderWrapperUI } from "../../components/HeaderWrapperUI"
 
 export const SellersPage = () => {
-  const { isSellerLoad, claimsList, claimsListDeny, claimsListPending } =
+  const { isClaimsLoad, claimsList, claimsListDeny, claimsListPending } =
     useAppSelector(selectSellersValues)
 
   const dispatch = useAppDispatch()
@@ -25,8 +25,8 @@ export const SellersPage = () => {
   const [list, setList] = useState<Seller[]>([])
 
   useEffect(() => {
-    if (isSellerLoad !== "load") {
-      dispatch(getSellers())
+    if (isClaimsLoad !== "load") {
+      dispatch(getClaims())
     }
   }, [])
 
@@ -45,16 +45,16 @@ export const SellersPage = () => {
     setActiveTab(key)
   }
 
-  if (isSellerLoad === "load" && claimsList === null) {
+  if (isClaimsLoad === "load" && claimsList === null) {
     return <FullLoader />
   }
 
   return (
     <ColumnContainerFlex>
       <HeaderUI>
-        <SellersHeaderWrapper>
+        <HeaderWrapperUI>
           <SellersTabMenu activeTab={activeTab} onChangeTab={handleChangeTab} />
-        </SellersHeaderWrapper>
+        </HeaderWrapperUI>
       </HeaderUI>
       <Wrapper $maxWidth={1200}>
         <SellersListContent claimsList={list} />
