@@ -12,5 +12,6 @@ export const ColorsUI = {
   lightRed: "#FFF2F7",
   shadow: "rgba(0, 0, 0, 0.25)",
   green: "#008A82;",
+  bronze: "#C38204",
   transparent: "transparent",
 }

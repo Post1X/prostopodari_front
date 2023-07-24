@@ -98,17 +98,17 @@ export const SellerPage = () => {
     <ColumnContainerFlex>
       <HeaderBack />
 
-      <MainContainer width={680} pl={50} pt={20}>
+      <MainContainer width={680} $pl={50} $pt={20}>
         <UserInfo seller={currentClaim} />
 
         {currentClaim.status === SellersTabMenuType.pending ? (
-          <SellerButtonsGroup pt={20}>
+          <SellerButtonsGroup $pt={20}>
             <MainContainer style={{ width: "50%" }}>
-              <RowContainer mb={60}>
+              <RowContainer $mb={60}>
                 <ButtonUI
                   onClick={() => handleDeny()}
                   $backColor={"red"}
-                  mr={10}
+                  $mr={10}
                 >
                   <TextUI
                     color={getButtonTextColor("red")}
@@ -130,7 +130,7 @@ export const SellerPage = () => {
 
               <InputUnderline
                 value={claimDenyForm.reason}
-                pl={0}
+                $pl={0}
                 placeholder={"Введите текст..."}
                 onChange={(e) => handleChangeForm(e.target.value)}
               />

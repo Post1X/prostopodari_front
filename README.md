@@ -1,11 +1,3 @@
-# Ошибки в консоле в dev режиме от styled-components
-
-1. Сейчас в консоле при запуске dev сборки отображается ошибка styled-components: it looks like an unknow.
-
-   - Это проблема либы версии 6.04, исправят в следующей версии
-   - ссылка на пр: https://github.com/styled-components/styled-components/pull/4084
-   - !!!! Обязательно обновить
-
 # CORS ошибки и запуск proxy
 
 При отправке запроса на сервер мы столкнемся с CORS ошибкой

@@ -20,8 +20,8 @@ export const SideLink = (props: SideLinkProps) => {
     <SideLinkUI
       onClick={props.onNavigate}
       color={props.isCurrentPath ? ColorsUI.pink2 : ColorsUI.transparent}
-      pv={16}
-      pl={45}
+      $pv={16}
+      $pl={45}
     >
       <TextUI isNoSelect ag={Ag["500_20"]} text={props.linkText} />
       {props.isPending && claimsListPending.length ? <NewPendingUI /> : null}

@@ -25,6 +25,10 @@ export const RowContainerBeetwen = styled(RowContainer)`
   align-items: center;
 `
 
+export const RowContainerBeetwenEnd = styled(RowContainerBeetwen)`
+  align-items: flex-end;
+`
+
 export const RowContainerStart = styled(RowContainer)`
   align-items: start;
 `

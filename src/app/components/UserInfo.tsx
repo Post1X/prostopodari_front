@@ -11,8 +11,8 @@ type UserInfoProps = {
 
 export const UserInfo = ({ seller, shopsCount }: UserInfoProps) => {
   return (
-    <RowContainerStart mb={50}>
-      <MainContainer mr={130}>
+    <RowContainerStart $mb={50}>
+      <MainContainer $mr={130}>
         <TextUI mb={15} ag={Ag["600_14"]} text={"Имя"} />
         <TextUI mb={20} ag={Ag["400_16"]} text={seller.name || "Не указан"} />
 
@@ -39,7 +39,7 @@ export const UserInfo = ({ seller, shopsCount }: UserInfoProps) => {
         />
       </MainContainer>
 
-      <MainContainer mr={shopsCount !== undefined ? 50 : 0}>
+      <MainContainer $mr={shopsCount !== undefined ? 50 : 0}>
         <TextUI mb={15} ag={Ag["600_14"]} text={"Фирма"} />
         <TextUI mb={20} ag={Ag["400_16"]} text={seller.ip || "Не указан"} />
 

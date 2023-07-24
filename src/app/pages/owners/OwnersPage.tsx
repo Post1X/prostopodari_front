@@ -16,6 +16,7 @@ import { FullLoader } from "../../template/ui/FullLoader"
 import { OwnerListItem } from "./components/OwnerListItem"
 import { Seller } from "../../modules/sellers/models/Seller"
 import { StyleProp } from "../../settings/types/BaseTypes"
+import { MockCities } from "../../components/searchCity/mock/MockCities"
 
 export const OwnersPage = () => {
   const { sellersList, isSellersLoad } = useAppSelector(selectSellersValues)
@@ -61,8 +62,8 @@ export const OwnersPage = () => {
     <ColumnContainerFlex style={styles.container}>
       <HeaderUI>
         <HeaderWrapperUI>
-          <RowContainer pv={17} ph={17}>
-            <MainContainer mr={35}>
+          <RowContainer $pv={17} $ph={17}>
+            <MainContainer $mr={35}>
               <SearchContainer
                 value={search}
                 onChangeText={(value: string) => handleChangeSearch(value)}
@@ -71,16 +72,7 @@ export const OwnersPage = () => {
 
             <SelectCity
               currentCity={""}
-              cities={[
-                "Москва",
-                "Казань",
-                "Самара",
-                "Новосибирск",
-                "Екатеринбург",
-                "Ростов",
-                "Санк-Петербург",
-                "Нижний-Новгород",
-              ]}
+              cities={MockCities}
               isDefault={true}
               setIsDefault={(value: boolean) => {}}
             />

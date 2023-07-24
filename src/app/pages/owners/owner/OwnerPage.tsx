@@ -59,14 +59,14 @@ export const OwnerPage = () => {
   return (
     <ColumnContainerFlex>
       <HeaderBack />
-      <Wrapper $maxWidth={1000} pt={20}>
-        <MainContainer pl={50}>
+      <Wrapper $maxWidth={1000} $pt={20}>
+        <MainContainer $pl={50}>
           <UserInfo
             seller={currentSeller.sellerData}
             shopsCount={currentSeller.shopsCount}
           />
         </MainContainer>
-        <OwnerButtonsGroup pl={50} pt={15}>
+        <OwnerButtonsGroup $pl={50} $pt={15}>
           <OwnerButtons
             id={currentSeller.sellerData._id}
             is_baned={currentSeller.sellerData.is_baned}

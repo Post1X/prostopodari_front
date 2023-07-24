@@ -75,7 +75,7 @@ export const AuthPage = () => {
 
         <AuthForm>
           <CenterContainerFlex style={styles.containerForm}>
-            <RowContainer mb={50}>
+            <RowContainer $mb={50}>
               <div style={styles.icon}>
                 <AuthGiftSVG />
               </div>
@@ -94,7 +94,7 @@ export const AuthPage = () => {
                     }),
                   )
                 }}
-                mb={35}
+                $mb={35}
                 placeholder={"Email"}
               />
               <InputUnderline
@@ -108,7 +108,7 @@ export const AuthPage = () => {
                     }),
                   )
                 }}
-                mb={50}
+                $mb={50}
                 placeholder={"Пароль"}
               />
 

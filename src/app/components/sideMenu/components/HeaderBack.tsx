@@ -19,8 +19,8 @@ export const HeaderBack = () => {
         <MainContainer
           onClick={() => handlePop()}
           style={styles.btn}
-          pv={20}
-          ph={20}
+          $pv={20}
+          $ph={20}
         >
           <BackSVG />
         </MainContainer>

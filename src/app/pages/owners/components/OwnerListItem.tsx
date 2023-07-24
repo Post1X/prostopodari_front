@@ -27,9 +27,9 @@ export const OwnerListItem = (props: OwnerListItemProps) => {
   return (
     <SellersListItem>
       <div>
-        <RowContainer mb={10}>
+        <RowContainer $mb={10}>
           <TextUI ag={Ag["600_16"]} text={props.seller.name} />
-          <MainContainer ph={10}>
+          <MainContainer $ph={10}>
             <TextUI ag={Ag["400_16"]} text={"|"} />
           </MainContainer>
           <TextUI
@@ -43,7 +43,7 @@ export const OwnerListItem = (props: OwnerListItemProps) => {
             ag={Ag["400_16"]}
             text={MaskHelper.formatPhoneNumber(props.seller.phone_number)}
           />
-          <MainContainer ph={10}>
+          <MainContainer $ph={10}>
             <TextUI ag={Ag["400_16"]} text={"|"} />
           </MainContainer>
           <TextUI
@@ -55,7 +55,7 @@ export const OwnerListItem = (props: OwnerListItemProps) => {
 
       <RowContainer>
         {props.seller.is_baned ? (
-          <MainContainer mr={25}>
+          <MainContainer $mr={25}>
             <TextUI
               color={ColorsUI.red}
               ag={Ag["400_16"]}
