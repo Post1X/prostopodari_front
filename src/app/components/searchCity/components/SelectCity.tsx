@@ -20,7 +20,7 @@ export const SelectCity = (props: SelectCityProps) => {
     <SelectCityPick
       onMouseMove={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
-      pb={10}
+      $pb={10}
     >
       <TextUI
         isNoSelect
@@ -32,7 +32,7 @@ export const SelectCity = (props: SelectCityProps) => {
       {isVisible ? (
         <SelectorCityContainer>
           {props.cities.map((city) => (
-            <CityPick pv={15} key={city}>
+            <CityPick $pv={15} key={city}>
               <TextUI isNoSelect ag={Ag["500_14"]} text={city} />
             </CityPick>
           ))}

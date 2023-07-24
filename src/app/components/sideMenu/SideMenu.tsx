@@ -29,9 +29,9 @@ export const SideMenu = () => {
 
   return (
     <SideContainer>
-      <ColumnContainerBetweenFlex pv={30}>
+      <ColumnContainerBetweenFlex $pv={30}>
         <div>
-          <RowContainerEnd pr={10} mb={35} pl={45}>
+          <RowContainerEnd $pr={10} $mb={35} $pl={45}>
             <SideLogoSVG />
             <TextUI
               isNoSelect
@@ -60,7 +60,7 @@ export const SideMenu = () => {
           })}
         </div>
 
-        <SideLogout onClick={() => handleLogout()} pl={45}>
+        <SideLogout onClick={() => handleLogout()} $pl={45}>
           <TextUI isNoSelect ag={Ag["400_16"]} text={"Выйти"} />
         </SideLogout>
       </ColumnContainerBetweenFlex>

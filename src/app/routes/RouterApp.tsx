@@ -7,6 +7,8 @@ import { SellersPage } from "../pages/sellers/SellersPage"
 import { SellerPage } from "../pages/sellers/seller/SellerPage"
 import { OwnersPage } from "../pages/owners/OwnersPage"
 import { OwnerPage } from "../pages/owners/owner/OwnerPage"
+import { FinancesPage } from "../pages/finances/FinancesPage"
+import { FinancesStorePage } from "../pages/finances/store/FinancesStorePage"
 
 export const RouterApp = createBrowserRouter([
   {
@@ -31,6 +33,16 @@ export const RouterApp = createBrowserRouter([
       {
         path: `${PathApp.owners.path}/:ownerId`,
         element: <OwnerPage />,
+      },
+    ],
+  },
+  {
+    path: PathApp.finances.path,
+    element: <RedirectApp element={<FinancesPage />} />,
+    children: [
+      {
+        path: `${PathApp.finances.path}/:storeId`,
+        element: <FinancesStorePage />,
       },
     ],
   },

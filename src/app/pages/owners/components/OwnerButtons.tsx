@@ -26,7 +26,7 @@ export const OwnerButtons = (props: OwnerButtonsProps) => {
       />
 
       <RowContainer>
-        <MainContainer onClick={() => props.onBaned()} width={200} mr={10}>
+        <MainContainer onClick={() => props.onBaned()} width={200} $mr={10}>
           <ButtonUI $backColor={props.is_baned ? "green" : "red"}>
             <TextUI
               color={ColorsUI.white}
@@ -36,7 +36,7 @@ export const OwnerButtons = (props: OwnerButtonsProps) => {
           </ButtonUI>
         </MainContainer>
 
-        <MainContainer width={200} mr={10}>
+        <MainContainer width={200} $mr={10}>
           <ButtonUI $backColor={"border"}>
             <TextUI ag={Ag["600_16"]} text="Чат" />
           </ButtonUI>

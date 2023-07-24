@@ -140,7 +140,6 @@ html {
   flex: 1;
   flex-direction: column;
   width: 100vw;
-  max-width: 1920px;
   height: 100vh;
   font-family: "Montserrat";
   font-weight: 500;

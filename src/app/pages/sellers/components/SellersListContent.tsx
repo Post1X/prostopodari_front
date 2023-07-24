@@ -24,7 +24,7 @@ export const SellersListContent = ({ claimsList }: SellerListProps) => {
       {claimsList.map((seller) => (
         <SellersListItem key={seller._id}>
           <div>
-            <MainContainer mb={10}>
+            <MainContainer $mb={10}>
               <TextUI ag={Ag["400_16"]} text={seller.name} />
             </MainContainer>
             <TextUI

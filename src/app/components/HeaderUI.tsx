@@ -2,8 +2,12 @@ import styled from "styled-components"
 import { ColorsUI } from "../template/styles/ColorUI"
 import { MainContainer } from "../template/containers/MainContainer"
 
-export const HeaderUI = styled(MainContainer)`
+type HeaderUIProps = {
+  $isNoHeight?: boolean
+}
+
+export const HeaderUI = styled(MainContainer)<HeaderUIProps>`
   width: 100%;
-  height: 88px;
+  height: ${({ $isNoHeight }) => ($isNoHeight ? "fit-content" : "88px")};
   background-color: ${ColorsUI.lightBlue};
 `
