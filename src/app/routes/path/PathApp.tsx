@@ -11,7 +11,7 @@ type TPathApp = {
   promocodes: TPathValue
   settings: TPathValue
   finances: TPathValue
-  messages: TPathValue
+  chats: TPathValue
 }
 
 export const PathApp: TPathApp = {
@@ -33,8 +33,8 @@ export const PathApp: TPathApp = {
     path: "/finances",
     menuName: "Финансы магазинов",
   },
-  messages: {
-    path: "/messages",
+  chats: {
+    path: "/chat",
     menuName: "Сообщения",
   },
   promocodes: {

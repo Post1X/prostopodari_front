@@ -1,3 +1,8 @@
+import {
+  FinanceStatistics,
+  FinancesOrdersSeller,
+  FinancesSellers,
+} from "./FinancesTypes"
 import { SellerData } from "./../models/SellerData"
 import { Nullable } from "../../../settings/types/BaseTypes"
 import { TClaimDenytForm } from "../form/ClaimDenyForm"
@@ -8,6 +13,7 @@ export type TSellersState = {
   isClaimsLoad: "completed" | "load" | "failed"
   isSellersLoad: "completed" | "load" | "failed"
   isUpdateLoad: "completed" | "load" | "failed"
+  isFinancesLoad: "completed" | "load" | "failed"
 
   claimsList: Seller[]
   claimsListPending: Seller[]
@@ -16,6 +22,11 @@ export type TSellersState = {
 
   sellersList: Seller[]
   currentSeller: Nullable<SellerData>
+
+  financesList: FinancesSellers[]
+  financeStats: Nullable<FinanceStatistics>
+  financesOrdersList: FinancesOrdersSeller[]
+  financeOrderStats: Nullable<FinanceStatistics>
 }
 
 export type TClaimDTO = {

@@ -1,6 +1,5 @@
 import {
   RowContainer,
-  RowContainerBeetwen,
   RowContainerBeetwenEnd,
   RowContainerEnd,
 } from "../../../template/containers/RowContainer"
@@ -9,25 +8,117 @@ import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { SearchContainer } from "../../../components/SearchContainer"
 import { SelectCity } from "../../../components/searchCity/components/SelectCity"
 import { MockCities } from "../../../components/searchCity/mock/MockCities"
+import { DatePickerUI } from "../../../components/DatePickerUI"
+import { ColorsUI } from "../../../template/styles/ColorUI"
+import { FinanceStatistics } from "../../../modules/sellers/types/FinancesTypes"
+import { Nullable, StyleProp } from "../../../settings/types/BaseTypes"
+import { BackSVG } from "../../../template/svg/BackSVG"
+import { useNavigate } from "react-router-dom"
 
-export const FinanceHeaderContent = () => {
+type FinanceHeaderContentProps = {
+  searchValue: string
+  startDate: Date
+  endDate: Date
+  statistics: Nullable<FinanceStatistics>
+  changeStartDate: (date: Date) => void
+  changeEndDate: (date: Date) => void
+  searchChange: (value: string) => void
+  isOrder?: boolean
+  sellerInfo?: boolean
+}
+
+export const FinanceHeaderContent = (props: FinanceHeaderContentProps) => {
+  const navigate = useNavigate()
+
+  const handlePop = () => {
+    navigate(-1)
+  }
+
   return (
-    <RowContainerBeetwenEnd $ph={17} $pv={17}>
-      <RowContainerEnd>
-        <MainContainer $mr={30}>
+    <RowContainerBeetwenEnd $ph={17} $pt={37} $pb={17}>
+      <MainContainer>
+        {props.isOrder ? (
+          <RowContainer $mb={20}>
+            <MainContainer
+              $mr={10}
+              onClick={() => handlePop()}
+              style={styles.btn}
+            >
+              <BackSVG />
+            </MainContainer>
+
+            <TextUI ag={Ag["500_20"]} text={"TODO: Заголовок"} />
+          </RowContainer>
+        ) : (
           <TextUI mb={20} ag={Ag["500_20"]} text={"Владельцы на выплату"} />
-          <SearchContainer value={""} onChangeText={(value: string) => {}} />
+        )}
+
+        <RowContainerEnd>
+          <MainContainer $mr={30}>
+            <SearchContainer
+              value={props.searchValue}
+              onChangeText={props.searchChange}
+            />
+          </MainContainer>
+
+          <SelectCity
+            currentCity={""}
+            cities={MockCities}
+            isDefault={true}
+            setIsDefault={(value: boolean) => {}}
+          />
+        </RowContainerEnd>
+      </MainContainer>
+
+      <RowContainer>
+        <MainContainer $mr={16}>
+          <TextUI ag={Ag["400_16"]} text="С" />
         </MainContainer>
 
-        <SelectCity
-          currentCity={""}
-          cities={MockCities}
-          isDefault={true}
-          setIsDefault={(value: boolean) => {}}
+        <DatePickerUI
+          date={props.startDate}
+          changeDate={props.changeStartDate}
         />
-      </RowContainerEnd>
 
-      <MainContainer></MainContainer>
+        <MainContainer $ph={10}>
+          <TextUI ag={Ag["400_16"]} text="по" />
+        </MainContainer>
+
+        <DatePickerUI
+          date={props.endDate}
+          changeDate={props.changeEndDate}
+          minDate={props.startDate}
+        />
+      </RowContainer>
+
+      <MainContainer>
+        <TextUI
+          mb={10}
+          color={ColorsUI.green}
+          ag={Ag["500_18"]}
+          text={`Сумма на выплату: ${props.statistics?.payAmount || 0} р`}
+          align={"right"}
+        />
+        <TextUI
+          mb={10}
+          color={ColorsUI.bronze}
+          ag={Ag["500_18"]}
+          text={`Наша выручка: ${props.statistics?.income || 0} р`}
+          align={"right"}
+        />
+        <TextUI
+          mb={10}
+          ag={Ag["500_18"]}
+          text={`Общая сумма: ${props.statistics?.allAmount || 0} р`}
+          align={"right"}
+        />
+      </MainContainer>
     </RowContainerBeetwenEnd>
   )
+}
+
+const styles: StyleProp = {
+  btn: {
+    cursor: "pointer",
+  },
 }

@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { ColorsUI } from "../styles/ColorUI"
 
+type TAlign = "start" | "center" | "right" | "left"
+
 export enum Ag {
   "700_16" = "700_16",
   "600_16" = "600_16",
@@ -19,12 +21,16 @@ type TTextUI = {
   color?: string
   isNoSelect?: boolean
   mb?: number
+  align?: TAlign
+  mr?: number
 }
 
 type TStyledP = {
   $weight: string
   size: string
   $mb?: number
+  $align?: TAlign
+  $mr?: number
 }
 
 export const TextUI = (props: TTextUI) => {
@@ -38,6 +44,8 @@ export const TextUI = (props: TTextUI) => {
       $weight={weight}
       color={props.color}
       $mb={props.mb}
+      $align={props.align}
+      $mr={props.mr}
     >
       {props.text}
     </P>
@@ -50,4 +58,6 @@ const P = styled.p<TStyledP>`
   line-height: ${({ size }) => parseInt(size) * 1.22}px;
   color: ${({ color }) => color || ColorsUI.text1};
   margin-bottom: ${({ $mb }) => $mb || 0}px;
+  text-align: ${({ $align }) => $align || "left"};
+  margin-right: ${({ $mr }) => $mr || 0}px;
 `
