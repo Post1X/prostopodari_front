@@ -42,6 +42,10 @@ export const ButtonUI = styled.button<IButtonUI>`
       $disabledColor || ColorsUI.pink2};
     color: ${ColorsUI.text1};
   }
+
+  p {
+    text-align: center;
+  }
 `
 
 export const getBackColor = (color?: TColor) => {

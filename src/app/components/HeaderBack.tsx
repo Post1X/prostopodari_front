@@ -1,10 +1,9 @@
-import React from "react"
-import { HeaderUI } from "../../HeaderUI"
-import { MainContainer } from "../../../template/containers/MainContainer"
-import { BackSVG } from "../../../template/svg/BackSVG"
-import { StyleProp } from "../../../settings/types/BaseTypes"
+import { HeaderUI } from "./HeaderUI"
+import { MainContainer } from "../template/containers/MainContainer"
+import { BackSVG } from "../template/svg/BackSVG"
+import { StyleProp } from "../settings/types/BaseTypes"
 import { useNavigate } from "react-router-dom"
-import { HeaderWrapperUI } from "../../HeaderWrapperUI"
+import { HeaderWrapperUI } from "./HeaderWrapperUI"
 
 export const HeaderBack = () => {
   const navigate = useNavigate()

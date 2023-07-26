@@ -7,6 +7,8 @@ import { SellersTabMenuType } from "../../pages/sellers/types/SellersUITypes"
 import { Seller } from "./models/Seller"
 import { Nullable } from "../../settings/types/BaseTypes"
 import toast from "react-hot-toast"
+import { Finances } from "./models/Finances"
+import { TFinanceDTO } from "./types/FinancesTypes"
 
 const sellersService = new SellersService()
 
@@ -15,6 +17,7 @@ const initialState: TSellersState = {
 
   isClaimsLoad: "completed",
   isSellersLoad: "completed",
+  isFinancesLoad: "completed",
 
   isUpdateLoad: "completed",
 
@@ -25,6 +28,11 @@ const initialState: TSellersState = {
 
   sellersList: [],
   currentSeller: null,
+
+  financesList: [],
+  financeStats: null,
+  financesOrdersList: [],
+  financeOrderStats: null,
 }
 
 const sellersSlice = createSlice({
@@ -41,16 +49,19 @@ const sellersSlice = createSlice({
         [action.payload.key]: action.payload.value,
       }
     },
+    resetCurrentFinance: (state) => {
+      state.financeOrderStats = null
+      state.financesOrdersList = []
+    },
   },
   extraReducers: (builder) => {
     builder
       // GET Claims
+
       .addCase(getClaims.pending, (state) => {
         state.isClaimsLoad = "load"
       })
       .addCase(getClaims.fulfilled, (state, action) => {
-        state.isClaimsLoad = "completed"
-
         state.claimsListPending = sellersService.getTypeList(
           action.payload,
           SellersTabMenuType.pending,
@@ -62,6 +73,8 @@ const sellersSlice = createSlice({
         )
 
         state.claimsList = action.payload
+
+        state.isClaimsLoad = "completed"
       })
       .addCase(getClaims.rejected, (state) => {
         state.isClaimsLoad = "completed"
@@ -73,11 +86,11 @@ const sellersSlice = createSlice({
         state.isClaimsLoad = "load"
       })
       .addCase(getCurrentClaim.fulfilled, (state, action) => {
-        state.isClaimsLoad = "completed"
-
         if (action.payload?.sellerData) {
           state.currentClaim = action.payload?.sellerData
         }
+
+        state.isClaimsLoad = "completed"
       })
       .addCase(getCurrentClaim.rejected, (state) => {
         state.isClaimsLoad = "completed"
@@ -151,6 +164,38 @@ const sellersSlice = createSlice({
       .addCase(putBanedSeller.rejected, (state) => {
         state.isUpdateLoad = "completed"
       })
+
+      // GET Financs
+
+      .addCase(getFinances.pending, (state) => {
+        state.isFinancesLoad = "load"
+      })
+      .addCase(getFinances.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.financesList = action.payload.financesSellers
+          state.financeStats = action.payload.statistics
+        }
+
+        state.isFinancesLoad = "completed"
+      })
+      .addCase(getFinances.rejected, (state) => {
+        state.isFinancesLoad = "completed"
+      })
+
+      .addCase(getOrders.pending, (state) => {
+        state.isFinancesLoad = "load"
+      })
+      .addCase(getOrders.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.financesOrdersList = action.payload.orders
+          state.financeOrderStats = action.payload.statistics
+        }
+
+        state.isFinancesLoad = "completed"
+      })
+      .addCase(getOrders.rejected, (state) => {
+        state.isFinancesLoad = "completed"
+      })
   },
 })
 
@@ -213,9 +258,29 @@ export const putBanedSeller = createAsyncThunk(
   },
 )
 
+// FINANCES
+export const getFinances = createAsyncThunk(
+  "sellers/finances",
+  async (dto: TFinanceDTO) => {
+    const finances = await sellersService.getFinances(dto)
+
+    return finances
+  },
+)
+
+export const getOrders = createAsyncThunk(
+  "sellers/orders",
+  async (dto: TFinanceDTO) => {
+    const orders = await sellersService.getOrders(dto)
+
+    return orders
+  },
+)
+
 // ACTIONS
 
-export const { setCurrentSeller, selleryChangeForm } = sellersSlice.actions
+export const { setCurrentSeller, selleryChangeForm, resetCurrentFinance } =
+  sellersSlice.actions
 
 export const selectSellersValues = (state: RootState) => state.sellersSlice
 

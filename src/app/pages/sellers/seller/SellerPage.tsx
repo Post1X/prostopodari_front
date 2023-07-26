@@ -1,4 +1,4 @@
-import { HeaderBack } from "../../../components/sideMenu/components/HeaderBack"
+import { HeaderBack } from "../../../components/HeaderBack"
 import {
   selleryChangeForm,
   selectSellersValues,

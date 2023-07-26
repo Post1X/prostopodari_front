@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { ColumnContainerFlex } from "../../../template/containers/ColumnContainer"
-import { HeaderBack } from "../../../components/sideMenu/components/HeaderBack"
+import { HeaderBack } from "../../../components/HeaderBack"
 import { useParams } from "react-router-dom"
 import { OwnerParams } from "../../../routes/params/OwnerParams"
 import { useAppDispatch, useAppSelector } from "../../../settings/redux/hooks"

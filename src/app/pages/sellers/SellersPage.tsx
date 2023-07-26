@@ -13,6 +13,8 @@ import { Wrapper } from "../../template/containers/Wrapper"
 import { SellersListContent } from "./components/SellersListContent"
 import { Seller } from "../../modules/sellers/models/Seller"
 import { HeaderWrapperUI } from "../../components/HeaderWrapperUI"
+import { StyleProp } from "../../settings/types/BaseTypes"
+import { EmptyList } from "../../components/EmptyList"
 
 export const SellersPage = () => {
   const { isClaimsLoad, claimsList, claimsListDeny, claimsListPending } =
@@ -44,21 +46,29 @@ export const SellersPage = () => {
   const handleChangeTab = (key: SellersTabMenuType) => {
     setActiveTab(key)
   }
-
-  if (isClaimsLoad === "load" && claimsList === null) {
-    return <FullLoader />
-  }
-
   return (
-    <ColumnContainerFlex>
+    <ColumnContainerFlex style={styles.container}>
       <HeaderUI>
         <HeaderWrapperUI>
           <SellersTabMenu activeTab={activeTab} onChangeTab={handleChangeTab} />
         </HeaderWrapperUI>
       </HeaderUI>
+
+      {isClaimsLoad === "load" && !claimsList.length ? <FullLoader /> : null}
+
       <Wrapper $maxWidth={1200}>
+        {isClaimsLoad === "completed" && !claimsList.length ? (
+          <EmptyList listName={"заявок"} />
+        ) : null}
+
         <SellersListContent claimsList={list} />
       </Wrapper>
     </ColumnContainerFlex>
   )
+}
+
+const styles: StyleProp = {
+  container: {
+    height: "100%",
+  },
 }

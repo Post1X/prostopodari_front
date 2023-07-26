@@ -1,14 +1,10 @@
-import React from "react"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { ColorsUI } from "../../../template/styles/ColorUI"
 import { MainContainer } from "../../../template/containers/MainContainer"
 import { ButtonUI } from "../../../template/ui/ButtonUI"
 import { RowContainer } from "../../../template/containers/RowContainer"
-import { useAppDispatch, useAppSelector } from "../../../settings/redux/hooks"
-import {
-  putBanedSeller,
-  selectSellersValues,
-} from "../../../modules/sellers/SellersSlice"
+import { PathApp } from "../../../routes/path/PathApp"
+import { useNavigate } from "react-router-dom"
 
 type OwnerButtonsProps = {
   id: string
@@ -17,10 +13,16 @@ type OwnerButtonsProps = {
 }
 
 export const OwnerButtons = (props: OwnerButtonsProps) => {
+  const navigate = useNavigate()
+
+  const handleGoFinances = () => {
+    navigate(`${PathApp.finances.path}/${props.id}`)
+  }
+
   return (
     <>
       <TextUI
-        color={props.is_baned ? ColorsUI.red : ColorsUI.green}
+        color={props.is_baned ? ColorsUI.red : ColorsUI.tifany1}
         ag={Ag["400_16"]}
         text={props.is_baned ? "Заблокирован" : "Активен"}
       />
@@ -43,7 +45,7 @@ export const OwnerButtons = (props: OwnerButtonsProps) => {
         </MainContainer>
 
         <MainContainer width={200}>
-          <ButtonUI $backColor={"border"}>
+          <ButtonUI $backColor={"border"} onClick={() => handleGoFinances()}>
             <TextUI ag={Ag["600_16"]} text="Финансы" />
           </ButtonUI>
         </MainContainer>

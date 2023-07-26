@@ -2,7 +2,9 @@ export const ColorsUI = {
   text1: "#213F50",
   text2: "#64768A",
   lines: "#C7D7EA",
+  blue: "#DCF3FB",
   lightBlue: "#F4FCFF",
+  tifany1: "#71A1A5",
   tifany2: "#0BC5BA",
   white: "#FFFFFF",
   pink: "#EF52B0",
@@ -11,7 +13,7 @@ export const ColorsUI = {
   red: "#F37171",
   lightRed: "#FFF2F7",
   shadow: "rgba(0, 0, 0, 0.25)",
-  green: "#008A82;",
+  green: "#098341;",
   bronze: "#C38204",
   transparent: "transparent",
 }

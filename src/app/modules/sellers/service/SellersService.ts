@@ -5,6 +5,9 @@ import { ApiSellerService } from "./api/ApiSellerService"
 import { SellersTabMenuType } from "../../../pages/sellers/types/SellersUITypes"
 import { Seller } from "../models/Seller"
 import { SellerData } from "../models/SellerData"
+import { TFinanceDTO } from "../types/FinancesTypes"
+import { Finances } from "../models/Finances"
+import { FinancesOrders } from "../models/FinancesOrders"
 
 export class SellersService extends AbstractServiceRepository {
   private apiService: ApiSellerService
@@ -69,5 +72,17 @@ export class SellersService extends AbstractServiceRepository {
       default:
         return sellerList
     }
+  }
+
+  getFinances = async (dto: TFinanceDTO) => {
+    const { data } = await this.apiService.getFinances(dto)
+
+    return this.create<Finances>(Finances, data)
+  }
+
+  getOrders = async (dto: TFinanceDTO) => {
+    const { data } = await this.apiService.getOrders(dto)
+
+    return this.create<FinancesOrders>(FinancesOrders, data)
   }
 }

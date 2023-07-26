@@ -17,6 +17,7 @@ import { OwnerListItem } from "./components/OwnerListItem"
 import { Seller } from "../../modules/sellers/models/Seller"
 import { StyleProp } from "../../settings/types/BaseTypes"
 import { MockCities } from "../../components/searchCity/mock/MockCities"
+import { EmptyList } from "../../components/EmptyList"
 
 export const OwnersPage = () => {
   const { sellersList, isSellersLoad } = useAppSelector(selectSellersValues)
@@ -53,7 +54,7 @@ export const OwnersPage = () => {
       sellersList.filter((seller) =>
         (seller.name + seller.phone_number + seller.city)
           .toLowerCase()
-          .includes(search.toLowerCase()),
+          .includes(value.toLowerCase()),
       ),
     )
   }
@@ -79,16 +80,17 @@ export const OwnersPage = () => {
           </RowContainer>
         </HeaderWrapperUI>
       </HeaderUI>
+      {isSellersLoad === "load" && !sellersList.length ? <FullLoader /> : null}
 
-      {isSellersLoad === "load" ? (
-        <FullLoader />
-      ) : (
-        <Wrapper $maxWidth={1200}>
-          {list.map((seller) => (
-            <OwnerListItem key={seller._id} seller={seller} />
-          ))}
-        </Wrapper>
-      )}
+      <Wrapper $maxWidth={1200}>
+        {isSellersLoad === "completed" && !sellersList.length ? (
+          <EmptyList listName={"владельцев"} />
+        ) : null}
+
+        {list.map((seller) => (
+          <OwnerListItem key={seller._id} seller={seller} />
+        ))}
+      </Wrapper>
     </ColumnContainerFlex>
   )
 }
