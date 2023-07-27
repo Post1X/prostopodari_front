@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import { ColorsUI } from "../../../template/styles/ColorUI"
 
-type TSellersTab = {
+type TTab = {
   color?: string
 }
 
-export const SellersTab = styled.div<TSellersTab>`
+export const Tab = styled.div<TTab>`
   width: 170px;
   padding-bottom: 8px;
   margin-bottom: -1px;

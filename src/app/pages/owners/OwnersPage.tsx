@@ -18,6 +18,7 @@ import { Seller } from "../../modules/sellers/models/Seller"
 import { StyleProp } from "../../settings/types/BaseTypes"
 import { MockCities } from "../../components/searchCity/mock/MockCities"
 import { EmptyList } from "../../components/EmptyList"
+import { ScrollContent } from "../../components/ScrollContent"
 
 export const OwnersPage = () => {
   const { sellersList, isSellersLoad } = useAppSelector(selectSellersValues)
@@ -87,9 +88,11 @@ export const OwnersPage = () => {
           <EmptyList listName={"владельцев"} />
         ) : null}
 
-        {list.map((seller) => (
-          <OwnerListItem key={seller._id} seller={seller} />
-        ))}
+        <ScrollContent>
+          {list.map((seller) => (
+            <OwnerListItem key={seller._id} seller={seller} />
+          ))}
+        </ScrollContent>
       </Wrapper>
     </ColumnContainerFlex>
   )

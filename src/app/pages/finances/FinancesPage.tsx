@@ -15,6 +15,7 @@ import { StyleProp } from "../../settings/types/BaseTypes"
 import { FinanceListItem } from "./components/FinanceListItem"
 import { FinancesSellers } from "../../modules/sellers/types/FinancesTypes"
 import { EmptyList } from "../../components/EmptyList"
+import { ScrollContent } from "../../components/ScrollContent"
 
 export const FinancesPage = () => {
   const { financesList, financeStats, isFinancesLoad } =
@@ -93,14 +94,15 @@ export const FinancesPage = () => {
         {isFinancesLoad === "completed" && !financesList.length ? (
           <EmptyList listName={"финансов"} />
         ) : null}
-
-        {list.map((finances, idx) => (
-          <FinanceListItem
-            key={`finance-${idx}`}
-            info={finances.seller}
-            finances={finances.finance}
-          />
-        ))}
+        <ScrollContent>
+          {list.map((finances, idx) => (
+            <FinanceListItem
+              key={`finance-${idx}`}
+              info={finances.seller}
+              finances={finances.finance}
+            />
+          ))}
+        </ScrollContent>
       </Wrapper>
     </ColumnContainerFlex>
   )

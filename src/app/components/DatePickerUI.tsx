@@ -21,6 +21,7 @@ type DatePickerUIProps = {
   changeDate: (date: Date) => void
   minDate?: Date
   maxDate?: Date
+  isUnderline?: boolean
 }
 
 export const DatePickerUI = (props: DatePickerUIProps) => {
@@ -34,7 +35,11 @@ export const DatePickerUI = (props: DatePickerUIProps) => {
     <DatePicker
       ref={calendarRef}
       customInput={
-        <CustomInput onOpenCalendar={handleOpenCalendar} date={props.date} />
+        <CustomInput
+          isUnderline={props.isUnderline}
+          onOpenCalendar={handleOpenCalendar}
+          date={props.date}
+        />
       }
       locale={"ru"}
       selected={props.date}
@@ -44,7 +49,7 @@ export const DatePickerUI = (props: DatePickerUIProps) => {
         }
       }}
       minDate={props.minDate}
-      maxDate={props.maxDate || new Date()}
+      maxDate={props.maxDate}
     />
   )
 }
@@ -52,11 +57,18 @@ export const DatePickerUI = (props: DatePickerUIProps) => {
 type CustomInputProps = {
   date: Date
   onOpenCalendar: () => void
+  isUnderline?: boolean
 }
 
 const CustomInput = forwardRef((props: CustomInputProps, ref) => {
   return (
-    <CustomInputUI $pv={15} $ph={10} onClick={() => props.onOpenCalendar()}>
+    <CustomInputUI
+      $isUnderline={props.isUnderline}
+      $pb={props.isUnderline ? 8 : 0}
+      $pv={props.isUnderline ? 0 : 15}
+      $ph={props.isUnderline ? 0 : 10}
+      onClick={() => props.onOpenCalendar()}
+    >
       <MainContainer>
         <TextUI
           isNoSelect
@@ -69,8 +81,16 @@ const CustomInput = forwardRef((props: CustomInputProps, ref) => {
   )
 })
 
-const CustomInputUI = styled(RowContainerBeetwen)`
+type CustomInputUIProps = {
+  $isUnderline?: boolean
+}
+
+const CustomInputUI = styled(RowContainerBeetwen)<CustomInputUIProps>`
   width: 120px;
-  background-color: ${ColorsUI.blue};
-  border-radius: 8px;
+  background-color: ${({ $isUnderline }) =>
+    $isUnderline ? ColorsUI.transparent : ColorsUI.blue};
+  border-radius: ${({ $isUnderline }) => ($isUnderline ? 0 : 8)}px;
+
+  ${({ $isUnderline }) =>
+    $isUnderline ? `border-bottom: 1px solid ${ColorsUI.text1};` : ""}
 `

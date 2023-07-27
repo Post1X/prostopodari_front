@@ -12,6 +12,7 @@ export const SelectCityPick = styled(RowContainerBeetwen)`
 
 export const SelectorCityContainer = styled.div`
   position: absolute;
+  z-index: 10;
 
   width: 100%;
   background-color: ${ColorsUI.white};

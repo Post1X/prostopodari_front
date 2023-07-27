@@ -1,6 +1,7 @@
 export const ColorsUI = {
   text1: "#213F50",
   text2: "#64768A",
+  scroll: "#AEC9D3",
   lines: "#C7D7EA",
   blue: "#DCF3FB",
   lightBlue: "#F4FCFF",

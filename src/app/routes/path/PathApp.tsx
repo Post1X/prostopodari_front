@@ -34,7 +34,7 @@ export const PathApp: TPathApp = {
     menuName: "Финансы магазинов",
   },
   chats: {
-    path: "/chat",
+    path: "/chats",
     menuName: "Сообщения",
   },
   promocodes: {

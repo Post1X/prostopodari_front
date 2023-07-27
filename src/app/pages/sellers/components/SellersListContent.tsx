@@ -6,7 +6,7 @@ import { ButtonUI, getButtonTextColor } from "../../../template/ui/ButtonUI"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { SellersTabMenuType } from "../types/SellersUITypes"
 import { ColorsUI } from "../../../template/styles/ColorUI"
-import { SellersListItem } from "../../../components/SellerListItem"
+import { ListItemUI } from "../../../components/ListItemUI"
 
 type SellerListProps = {
   claimsList: Seller[]
@@ -22,7 +22,7 @@ export const SellersListContent = ({ claimsList }: SellerListProps) => {
   return (
     <>
       {claimsList.map((seller) => (
-        <SellersListItem key={seller._id}>
+        <ListItemUI key={seller._id}>
           <div>
             <MainContainer $mb={10}>
               <TextUI ag={Ag["400_16"]} text={seller.name} />
@@ -59,7 +59,7 @@ export const SellersListContent = ({ claimsList }: SellerListProps) => {
               />
             </ButtonUI>
           </MainContainer>
-        </SellersListItem>
+        </ListItemUI>
       ))}
     </>
   )
