@@ -9,6 +9,8 @@ import { OwnersPage } from "../pages/owners/OwnersPage"
 import { OwnerPage } from "../pages/owners/owner/OwnerPage"
 import { FinancesPage } from "../pages/finances/FinancesPage"
 import { FinancesOrdersPage } from "../pages/finances/orders/FinancesOrdersPage"
+import { ChatsPage } from "../pages/chats/ChatsPage"
+import { PromocodesPage } from "../pages/promocodes/PromocodesPage"
 
 export const RouterApp = createBrowserRouter([
   {
@@ -48,7 +50,7 @@ export const RouterApp = createBrowserRouter([
   },
   {
     path: PathApp.chats.path,
-    element: <RedirectApp element={<ErrorPage />} />,
+    element: <RedirectApp element={<ChatsPage />} />,
     children: [
       {
         path: `${PathApp.chats.path}/:chatId`,
@@ -58,7 +60,7 @@ export const RouterApp = createBrowserRouter([
   },
   {
     path: PathApp.promocodes.path,
-    element: <RedirectApp element={<ErrorPage />} />,
+    element: <RedirectApp element={<PromocodesPage />} />,
   },
   {
     path: PathApp.settings.path,

@@ -2,17 +2,19 @@ import styled from "styled-components"
 import { ColorsUI } from "../styles/ColorUI"
 import { ContainerProps } from "../../settings/types/UITypes"
 
-type TColor = "tiffany" | "red" | "green" | "border" | "transparent"
+type TColor = "tiffany" | "red" | "green" | "border" | "pink" | "transparent"
 
 interface IButtonUI extends ContainerProps {
   $backColor?: TColor
   $disabledColor?: string
   $mr?: number
+
+  $isCustom?: boolean
 }
 
 export const ButtonUI = styled.button<IButtonUI>`
-  width: 100%;
-  padding: 15px 0;
+  width: ${({ $isCustom }) => ($isCustom ? "fit-content" : "100%")};
+  padding: ${({ $isCustom }) => ($isCustom ? "0" : "15px 0")};
 
   background-color: ${({ $backColor }) => getBackColor($backColor)};
   border: 1px solid ${({ $backColor }) => getBorderColor($backColor)};
@@ -48,10 +50,12 @@ export const ButtonUI = styled.button<IButtonUI>`
   }
 `
 
-export const getBackColor = (color?: TColor) => {
+const getBackColor = (color?: TColor) => {
   switch (color) {
     case "green":
       return ColorsUI.green
+    case "pink":
+      return ColorsUI.pink
     case "red":
       return ColorsUI.red
     case "transparent":

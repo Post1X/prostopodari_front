@@ -8,7 +8,7 @@ import { MainContainer } from "../../../template/containers/MainContainer"
 import { ButtonUI } from "../../../template/ui/ButtonUI"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { MaskHelper } from "../../../helpers/MaskHelper"
-import { SellersListItem } from "../../../components/SellerListItem"
+import { ListItemUI } from "../../../components/ListItemUI"
 import { ColorsUI } from "../../../template/styles/ColorUI"
 import { useNavigate } from "react-router-dom"
 import { PathApp } from "../../../routes/path/PathApp"
@@ -25,7 +25,7 @@ export const OwnerListItem = (props: OwnerListItemProps) => {
   }
 
   return (
-    <SellersListItem>
+    <ListItemUI>
       <div>
         <RowContainer $mb={10}>
           <TextUI ag={Ag["600_16"]} text={props.seller.name} />
@@ -69,6 +69,6 @@ export const OwnerListItem = (props: OwnerListItemProps) => {
           </ButtonUI>
         </MainContainer>
       </RowContainer>
-    </SellersListItem>
+    </ListItemUI>
   )
 }

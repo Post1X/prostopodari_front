@@ -7,7 +7,6 @@ import { SellersTabMenuType } from "../../pages/sellers/types/SellersUITypes"
 import { Seller } from "./models/Seller"
 import { Nullable } from "../../settings/types/BaseTypes"
 import toast from "react-hot-toast"
-import { Finances } from "./models/Finances"
 import { TFinanceDTO } from "./types/FinancesTypes"
 
 const sellersService = new SellersService()

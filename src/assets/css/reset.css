@@ -127,7 +127,8 @@ path {
   transition: 300ms;
 }
 
-input {
+input,
+textarea {
   font-family: "Montserrat";
   outline: none;
   border: none;

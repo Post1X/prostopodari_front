@@ -15,6 +15,7 @@ import { Seller } from "../../modules/sellers/models/Seller"
 import { HeaderWrapperUI } from "../../components/HeaderWrapperUI"
 import { StyleProp } from "../../settings/types/BaseTypes"
 import { EmptyList } from "../../components/EmptyList"
+import { ScrollContent } from "../../components/ScrollContent"
 
 export const SellersPage = () => {
   const { isClaimsLoad, claimsList, claimsListDeny, claimsListPending } =
@@ -60,8 +61,9 @@ export const SellersPage = () => {
         {isClaimsLoad === "completed" && !claimsList.length ? (
           <EmptyList listName={"заявок"} />
         ) : null}
-
-        <SellersListContent claimsList={list} />
+        <ScrollContent>
+          <SellersListContent claimsList={list} />
+        </ScrollContent>
       </Wrapper>
     </ColumnContainerFlex>
   )

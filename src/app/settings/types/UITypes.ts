@@ -11,8 +11,12 @@ export interface ContainerProps {
   $pr?: number
   $ph?: number
 
+  $isPointer?: boolean
+
   $heightPX?: number
   heightProc?: number
+
+  $isFitContent?: boolean
 
   width?: number
 }

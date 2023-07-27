@@ -5,6 +5,10 @@ export const ColumnContainerFlex = styled(MainContainer)`
   flex: 1;
 `
 
+export const ColumnContainerFlexCenter = styled(ColumnContainerFlex)`
+  justify-content: center;
+`
+
 export const ColumnContainerBetween = styled(MainContainer)`
   justify-content: space-between;
 `

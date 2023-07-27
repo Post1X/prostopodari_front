@@ -20,6 +20,7 @@ import { Wrapper } from "../../../template/containers/Wrapper"
 import { StyleProp } from "../../../settings/types/BaseTypes"
 import { FinanceListItem } from "../components/FinanceListItem"
 import { EmptyList } from "../../../components/EmptyList"
+import { ScrollContent } from "../../../components/ScrollContent"
 
 export const FinancesOrdersPage = () => {
   const { financesOrdersList, financeOrderStats, isFinancesLoad } =
@@ -110,14 +111,16 @@ export const FinancesOrdersPage = () => {
           <EmptyList listName={"заказов"} />
         ) : null}
 
-        {list.map((finances, idx) => (
-          <FinanceListItem
-            key={`finance-orders-${idx}`}
-            info={finances.info}
-            finances={finances.finance}
-            isOrder
-          />
-        ))}
+        <ScrollContent>
+          {list.map((finances, idx) => (
+            <FinanceListItem
+              key={`finance-orders-${idx}`}
+              info={finances.info}
+              finances={finances.finance}
+              isOrder
+            />
+          ))}
+        </ScrollContent>
       </Wrapper>
     </ColumnContainerFlex>
   )

@@ -76,6 +76,7 @@ export const FinanceHeaderContent = (props: FinanceHeaderContentProps) => {
         </MainContainer>
 
         <DatePickerUI
+          maxDate={new Date()}
           date={props.startDate}
           changeDate={props.changeStartDate}
         />
@@ -85,6 +86,7 @@ export const FinanceHeaderContent = (props: FinanceHeaderContentProps) => {
         </MainContainer>
 
         <DatePickerUI
+          maxDate={new Date()}
           date={props.endDate}
           changeDate={props.changeEndDate}
           minDate={props.startDate}

@@ -1,5 +1,5 @@
 import toast from "react-hot-toast"
-import { SellersListItem } from "../../../components/SellerListItem"
+import { ListItemUI } from "../../../components/ListItemUI"
 import { MaskHelper } from "../../../helpers/MaskHelper"
 import {
   FinanceSellerUnit,
@@ -48,7 +48,7 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
   }
 
   return (
-    <SellersListItem>
+    <ListItemUI>
       <MainContainer>
         <RowContainer $mb={10}>
           {isOrder ? (
@@ -160,7 +160,7 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
           </MainContainer>
         )}
       </RowContainer>
-    </SellersListItem>
+    </ListItemUI>
   )
 }
 

@@ -1,5 +1,5 @@
 import React from "react"
-import { SellersListItem } from "./SellerListItem"
+import { ListItemUI } from "./ListItemUI"
 import { Ag, TextUI } from "../template/ui/TextUI"
 
 type EmptyListProps = {
@@ -8,8 +8,8 @@ type EmptyListProps = {
 
 export const EmptyList = ({ listName }: EmptyListProps) => {
   return (
-    <SellersListItem>
+    <ListItemUI>
       <TextUI ag={Ag["500_20"]} text={`Список ${listName} пуст`} />
-    </SellersListItem>
+    </ListItemUI>
   )
 }
