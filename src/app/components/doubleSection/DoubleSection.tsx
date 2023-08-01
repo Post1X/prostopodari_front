@@ -9,6 +9,7 @@ import { StyleProp } from "../../settings/types/BaseTypes"
 type DoubleSectionProps = {
   firstContent: ReactNode
   secondContent: ReactNode
+  isNoMT?: boolean
 }
 
 export const DoubleSection = (props: DoubleSectionProps) => {
@@ -16,13 +17,16 @@ export const DoubleSection = (props: DoubleSectionProps) => {
     <Wrapper $maxWidth={800}>
       <RowContainerFlex>
         <DoubleSectionContainer $ph={25}>
-          <ColumnContainerFlex $mt={30}>
+          <ColumnContainerFlex $mt={props.isNoMT ? 0 : 30}>
             <>{props.firstContent}</>
           </ColumnContainerFlex>
         </DoubleSectionContainer>
 
         <DoubleSectionContainer $ph={25}>
-          <ColumnContainerFlex $mt={30} style={styles.containerScroll}>
+          <ColumnContainerFlex
+            $mt={props.isNoMT ? 0 : 30}
+            style={styles.containerScroll}
+          >
             <ScrollContent>{props.secondContent}</ScrollContent>
           </ColumnContainerFlex>
         </DoubleSectionContainer>

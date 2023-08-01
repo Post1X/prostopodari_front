@@ -11,6 +11,7 @@ import { FinancesPage } from "../pages/finances/FinancesPage"
 import { FinancesOrdersPage } from "../pages/finances/orders/FinancesOrdersPage"
 import { ChatsPage } from "../pages/chats/ChatsPage"
 import { PromocodesPage } from "../pages/promocodes/PromocodesPage"
+import { CategoriesPage } from "../pages/categories/CategoriesPage"
 
 export const RouterApp = createBrowserRouter([
   {
@@ -64,6 +65,6 @@ export const RouterApp = createBrowserRouter([
   },
   {
     path: PathApp.settings.path,
-    element: <RedirectApp element={<ErrorPage />} />,
+    element: <RedirectApp element={<CategoriesPage />} />,
   },
 ])

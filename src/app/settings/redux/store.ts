@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
 import AuthSlice from "../../modules/auth/AuthSlice"
 import SellersSlice from "../../modules/sellers/SellersSlice"
 import MessagesSlice from "../../modules/messages/MessagesSlice"
+import CategoriesSlice from "../../modules/categories/CategoriesSlice"
 
 export const store = configureStore({
   reducer: {
     authSlice: AuthSlice,
     sellersSlice: SellersSlice,
     messagesSlice: MessagesSlice,
+    categoriesSlice: CategoriesSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
