@@ -22,4 +22,6 @@ export const MainContainer = styled.div<ContainerProps>`
 
   ${({ width, $isFitContent }) =>
     $isFitContent ? "fit-content" : width ? `width: ${width}px` : ""}
+
+  ${({ $isRelative }) => ($isRelative ? `position: relative;` : "")}
 `

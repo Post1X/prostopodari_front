@@ -12,6 +12,7 @@ export interface ContainerProps {
   $ph?: number
 
   $isPointer?: boolean
+  $isRelative?: boolean
 
   $heightPX?: number
   heightProc?: number

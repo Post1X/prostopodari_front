@@ -12,6 +12,7 @@ export class MessagesService extends AbstractServiceRepository {
   }
 
   getChats = async () => {
+    // TODO: Mocks
     // const { data } = await this.apiService.getChats()
 
     const data = MockChats

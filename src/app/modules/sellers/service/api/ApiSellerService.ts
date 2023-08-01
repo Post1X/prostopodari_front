@@ -51,7 +51,7 @@ export class ApiSellerService extends AbstractApiRepository {
 
   putBanedSeller = async (dto: TBanSellerDTO) => {
     return this.apiClient.put({
-      url: `/users/sellers/claims?seller_id=${dto.seller_id}&ban=${dto.ban}`,
+      url: `/users/sellers/ban?seller_id=${dto.seller_id}&ban=${dto.ban}`,
     })
   }
 
