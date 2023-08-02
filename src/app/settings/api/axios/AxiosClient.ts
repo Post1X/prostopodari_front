@@ -61,7 +61,7 @@ export default class AxiosClient implements IApiClient {
   }
 
   protected excludedUrls(response: any) {
-    const excluded: IExcludedUrl[] = []
+    const excluded: IExcludedUrl[] = [{ url: "/categories", method: "GET" }]
     let isExclude = false
 
     const request = response.request

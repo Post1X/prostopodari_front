@@ -29,11 +29,15 @@ export const DoubleSection = (props: DoubleSectionProps) => {
             $mt={props.isNoMT ? 0 : 30}
             style={styles.containerScroll}
           >
-            <ScrollContent>
-              <MainContainer $ph={props.isScrollSecond ? 25 : 0}>
-                {props.secondContent}
-              </MainContainer>
-            </ScrollContent>
+            {props.isScrollSecond ? (
+              <ScrollContent>
+                <MainContainer $ph={props.isScrollSecond ? 25 : 0}>
+                  {props.secondContent}
+                </MainContainer>
+              </ScrollContent>
+            ) : (
+              props.secondContent
+            )}
           </ColumnContainerFlex>
         </DoubleSectionContainer>
       </RowContainerFlex>
