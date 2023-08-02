@@ -13,7 +13,7 @@ export const InputUnderline = styled.input<InputUnderlineProps>`
   padding-bottom: 5px;
   margin-bottom: ${({ $mb }) => $mb || 0}px;
 
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: ${({ $letter }) => $letter || 0}em;
 

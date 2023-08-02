@@ -20,8 +20,8 @@ export const MainContainer = styled.div<ContainerProps>`
 
   ${({ $isPointer }) => ($isPointer ? "cursor: pointer;" : "")}
 
-  ${({ width, $isFitContent }) =>
-    $isFitContent ? "fit-content" : width ? `width: ${width}px` : ""}
+  ${({ $width, $isFitContent }) =>
+    $isFitContent ? "fit-content" : $width ? `width: ${$width}px` : ""}
 
   ${({ $isRelative }) => ($isRelative ? `position: relative;` : "")}
 `

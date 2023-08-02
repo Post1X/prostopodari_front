@@ -33,7 +33,7 @@ export const SellersListContent = ({ claimsList }: SellerListProps) => {
             />
           </div>
 
-          <MainContainer width={170}>
+          <MainContainer $width={170}>
             <ButtonUI
               disabled={seller.status !== SellersTabMenuType.pending}
               onClick={() => handleNavigate(seller)}

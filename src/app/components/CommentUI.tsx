@@ -14,7 +14,7 @@ export const CommentUI = styled.textarea<CommentUIProps>`
   resize: vertical;
   padding: 15px;
 
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: ${({ $letter }) => $letter || 0}em;
 

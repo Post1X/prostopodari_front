@@ -12,10 +12,7 @@ export class CategoriesService extends AbstractServiceRepository {
   }
 
   getCategories = async () => {
-    // TODO: Mocks
-    // const { data } = await this.api.getCategories()
-
-    const data = MockCategoriesList
+    const { data } = await this.api.getCategories()
 
     return this.createList<Category>(Category, data)
   }

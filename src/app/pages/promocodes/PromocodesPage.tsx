@@ -33,6 +33,7 @@ export const PromocodesPage = () => {
       <DoubleSection
         firstContent={<PromocodeCreateContent />}
         secondContent={<PromocodeCards />}
+        isScrollSecond
       />
     </ColumnContainerFlex>
   )

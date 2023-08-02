@@ -5,6 +5,7 @@ import { Outlet, useNavigate, useOutlet } from "react-router-dom"
 import { RowContainerFlex } from "../../template/containers/RowContainer"
 import { SideMenu } from "../../components/sideMenu/SideMenu"
 import { PathApp } from "../path/PathApp"
+import { RedirectUI } from "./ui/RedirectUI"
 
 type RedirectPage = {
   element: ReactNode
@@ -27,9 +28,9 @@ export const RedirectApp = ({ element }: RedirectPage) => {
   }
 
   return (
-    <RowContainerFlex>
+    <RedirectUI>
       <SideMenu />
       {checkOutlet ? <Outlet /> : element}
-    </RowContainerFlex>
+    </RedirectUI>
   )
 }

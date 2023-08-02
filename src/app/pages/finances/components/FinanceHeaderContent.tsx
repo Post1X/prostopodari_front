@@ -1,7 +1,9 @@
 import {
   RowContainer,
   RowContainerBeetwenEnd,
+  RowContainerBeetwenEndFlex,
   RowContainerEnd,
+  RowContainerJustEnd,
 } from "../../../template/containers/RowContainer"
 import { MainContainer } from "../../../template/containers/MainContainer"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
@@ -14,6 +16,7 @@ import { FinanceStatistics } from "../../../modules/sellers/types/FinancesTypes"
 import { Nullable, StyleProp } from "../../../settings/types/BaseTypes"
 import { BackSVG } from "../../../template/svg/BackSVG"
 import { useNavigate } from "react-router-dom"
+import { CenterContainerFlex } from "../../../template/containers/CenterContainer"
 
 type FinanceHeaderContentProps = {
   searchValue: string
@@ -35,65 +38,73 @@ export const FinanceHeaderContent = (props: FinanceHeaderContentProps) => {
   }
 
   return (
-    <RowContainerBeetwenEnd $ph={17} $pt={37} $pb={17}>
-      <MainContainer>
-        {props.isOrder ? (
-          <RowContainer $mb={20}>
-            <MainContainer
-              $mr={10}
-              onClick={() => handlePop()}
-              style={styles.btn}
-            >
-              <BackSVG />
+    <RowContainerBeetwenEnd
+      className={"finances-header"}
+      $ph={17}
+      $pt={37}
+      $pb={17}
+    >
+      <RowContainerBeetwenEndFlex className={"select-container"}>
+        <MainContainer>
+          {props.isOrder ? (
+            <RowContainer $mb={20}>
+              <MainContainer
+                $mr={10}
+                onClick={() => handlePop()}
+                style={styles.btn}
+              >
+                <BackSVG />
+              </MainContainer>
+
+              <TextUI ag={Ag["500_20"]} text={"TODO: Заголовок"} />
+            </RowContainer>
+          ) : (
+            <TextUI mb={20} ag={Ag["500_20"]} text={"Владельцы на выплату"} />
+          )}
+
+          <RowContainerEnd className="search">
+            <MainContainer $mr={30}>
+              <SearchContainer
+                value={props.searchValue}
+                onChangeText={props.searchChange}
+              />
             </MainContainer>
 
-            <TextUI ag={Ag["500_20"]} text={"TODO: Заголовок"} />
-          </RowContainer>
-        ) : (
-          <TextUI mb={20} ag={Ag["500_20"]} text={"Владельцы на выплату"} />
-        )}
-
-        <RowContainerEnd>
-          <MainContainer $mr={30}>
-            <SearchContainer
-              value={props.searchValue}
-              onChangeText={props.searchChange}
+            <SelectCity
+              currentCity={""}
+              cities={MockCities}
+              isDefault={true}
+              setIsDefault={(value: boolean) => {}}
             />
-          </MainContainer>
-
-          <SelectCity
-            currentCity={""}
-            cities={MockCities}
-            isDefault={true}
-            setIsDefault={(value: boolean) => {}}
-          />
-        </RowContainerEnd>
-      </MainContainer>
-
-      <RowContainer>
-        <MainContainer $mr={16}>
-          <TextUI ag={Ag["400_16"]} text="С" />
+          </RowContainerEnd>
         </MainContainer>
 
-        <DatePickerUI
-          maxDate={new Date()}
-          date={props.startDate}
-          changeDate={props.changeStartDate}
-        />
+        <CenterContainerFlex className="select-date">
+          <RowContainerJustEnd>
+            <MainContainer $mr={16}>
+              <TextUI ag={Ag["400_16"]} text="С" />
+            </MainContainer>
 
-        <MainContainer $ph={10}>
-          <TextUI ag={Ag["400_16"]} text="по" />
-        </MainContainer>
+            <DatePickerUI
+              maxDate={new Date()}
+              date={props.startDate}
+              changeDate={props.changeStartDate}
+            />
 
-        <DatePickerUI
-          maxDate={new Date()}
-          date={props.endDate}
-          changeDate={props.changeEndDate}
-          minDate={props.startDate}
-        />
-      </RowContainer>
+            <MainContainer $ph={10}>
+              <TextUI ag={Ag["400_16"]} text="по" />
+            </MainContainer>
 
-      <MainContainer>
+            <DatePickerUI
+              maxDate={new Date()}
+              date={props.endDate}
+              changeDate={props.changeEndDate}
+              minDate={props.startDate}
+            />
+          </RowContainerJustEnd>
+        </CenterContainerFlex>
+      </RowContainerBeetwenEndFlex>
+      <MainContainer className="statistics">
         <TextUI
           mb={10}
           color={ColorsUI.green}

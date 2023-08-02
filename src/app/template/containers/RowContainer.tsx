@@ -28,6 +28,9 @@ export const RowContainerBeetwen = styled(RowContainer)`
 export const RowContainerBeetwenEnd = styled(RowContainerBeetwen)`
   align-items: flex-end;
 `
+export const RowContainerBeetwenEndFlex = styled(RowContainerBeetwenEnd)`
+  flex: 1;
+`
 
 export const RowContainerStart = styled(RowContainer)`
   align-items: start;

@@ -31,8 +31,6 @@ type FinanceListItemProps = {
 export const FinanceListItem = (props: FinanceListItemProps) => {
   const { info, finances, isOrder } = props
 
-  const dispatch = useAppDispatch()
-
   const navigate = useNavigate()
 
   const handleCopyToClipboard = () => {
@@ -41,10 +39,7 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
   }
 
   const handleGoOrders = () => {
-    // TODO: Убрать статичный id
-    // navigate(`${PathApp.finances.path}/${info._id}`)
-
-    navigate(`${PathApp.finances.path}/64bbee260fbf9dbab5755ee7`)
+    navigate(`${PathApp.finances.path}/${info._id}`)
   }
 
   return (
@@ -133,12 +128,12 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
       <RowContainer>
         {!isOrder ? (
           <>
-            <MainContainer $mr={15} width={170}>
+            <MainContainer $mr={15} $width={170}>
               <ButtonUI $backColor={"border"} onClick={() => handleGoOrders()}>
                 <TextUI ag={Ag["400_16"]} text={"Подробнее"} />
               </ButtonUI>
             </MainContainer>
-            <MainContainer width={170}>
+            <MainContainer $width={170}>
               <ButtonUI $backColor={"green"}>
                 <TextUI
                   color={ColorsUI.white}
@@ -149,7 +144,7 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
             </MainContainer>
           </>
         ) : (
-          <MainContainer width={170}>
+          <MainContainer $width={170}>
             <ButtonUI $backColor={"green"}>
               <TextUI
                 color={ColorsUI.white}

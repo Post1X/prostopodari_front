@@ -63,7 +63,7 @@ export const OwnerListItem = (props: OwnerListItemProps) => {
             />
           </MainContainer>
         ) : null}
-        <MainContainer width={170}>
+        <MainContainer $width={170}>
           <ButtonUI $backColor={"border"} onClick={() => handleNavigate()}>
             <TextUI ag={Ag["400_16"]} text={"Подробнее"} />
           </ButtonUI>

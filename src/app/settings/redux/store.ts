@@ -3,6 +3,7 @@ import AuthSlice from "../../modules/auth/AuthSlice"
 import SellersSlice from "../../modules/sellers/SellersSlice"
 import MessagesSlice from "../../modules/messages/MessagesSlice"
 import CategoriesSlice from "../../modules/categories/CategoriesSlice"
+import PromocodesSlice from "../../modules/promocodes/PromocodesSlice"
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     sellersSlice: SellersSlice,
     messagesSlice: MessagesSlice,
     categoriesSlice: CategoriesSlice,
+    promocodesSlice: PromocodesSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
