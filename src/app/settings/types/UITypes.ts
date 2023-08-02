@@ -19,5 +19,5 @@ export interface ContainerProps {
 
   $isFitContent?: boolean
 
-  width?: number
+  $width?: number
 }

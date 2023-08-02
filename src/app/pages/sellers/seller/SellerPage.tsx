@@ -98,7 +98,7 @@ export const SellerPage = () => {
     <ColumnContainerFlex>
       <HeaderBack />
 
-      <MainContainer width={680} $pl={50} $pt={20}>
+      <MainContainer $width={680} $pl={50} $pt={20}>
         <UserInfo seller={currentClaim} />
 
         {currentClaim.status === SellersTabMenuType.pending ? (

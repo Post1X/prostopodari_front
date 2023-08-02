@@ -145,4 +145,11 @@ html {
   font-family: "Montserrat";
   font-weight: 500;
   background-color: white;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 1520px) {
+  html {
+    font-size: 12px;
+  }
 }

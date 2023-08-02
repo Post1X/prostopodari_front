@@ -31,7 +31,7 @@ const SearchContainerUI = styled.div`
 `
 const SearchInputUI = styled.input`
   font-weight: 400;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 19.5px;
   color: ${ColorsUI.text1};
   flex: 1;

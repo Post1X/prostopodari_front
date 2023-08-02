@@ -15,6 +15,7 @@ import { CategoriesHelper } from "../../../helpers/CategoriesHelper"
 import { ButtonUI } from "../../../template/ui/ButtonUI"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { ColorsUI } from "../../../template/styles/ColorUI"
+import { EmptyList } from "../../../components/EmptyList"
 
 export const CategoriesList = () => {
   const { categoriesList } = useAppSelector(selectCatsValues)
@@ -49,6 +50,10 @@ export const CategoriesList = () => {
     })
   }
 
+  if (!categoriesList.length) {
+    return <EmptyList listName={"категорий"} />
+  }
+
   return (
     <ColumnContainerFlex $isRelative>
       <ScrollContent>
@@ -56,7 +61,7 @@ export const CategoriesList = () => {
           {list.map((cat) => (
             <MainContainer $mb={17} key={cat.catId}>
               <RowContainer>
-                <MainContainer width={180} $mr={10}>
+                <MainContainer $width={180} $mr={10}>
                   <CheckboxUI
                     checked={cat.isActive}
                     text={cat.catTitle}

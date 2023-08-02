@@ -81,6 +81,7 @@ export const ChatsPage = () => {
         <DoubleSection
           firstContent={<ChatsCreateNotifContent />}
           secondContent={<ChatNotifContent />}
+          isScrollSecond
         />
       )}
     </ColumnContainerFlex>

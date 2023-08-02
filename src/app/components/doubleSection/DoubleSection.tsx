@@ -5,11 +5,13 @@ import { RowContainerFlex } from "../../template/containers/RowContainer"
 import { Wrapper } from "../../template/containers/Wrapper"
 import { ColumnContainerFlex } from "../../template/containers/ColumnContainer"
 import { StyleProp } from "../../settings/types/BaseTypes"
+import { MainContainer } from "../../template/containers/MainContainer"
 
 type DoubleSectionProps = {
   firstContent: ReactNode
   secondContent: ReactNode
   isNoMT?: boolean
+  isScrollSecond?: boolean
 }
 
 export const DoubleSection = (props: DoubleSectionProps) => {
@@ -22,12 +24,16 @@ export const DoubleSection = (props: DoubleSectionProps) => {
           </ColumnContainerFlex>
         </DoubleSectionContainer>
 
-        <DoubleSectionContainer $ph={25}>
+        <DoubleSectionContainer $ph={props.isScrollSecond ? 0 : 25}>
           <ColumnContainerFlex
             $mt={props.isNoMT ? 0 : 30}
             style={styles.containerScroll}
           >
-            <ScrollContent>{props.secondContent}</ScrollContent>
+            <ScrollContent>
+              <MainContainer $ph={props.isScrollSecond ? 25 : 0}>
+                {props.secondContent}
+              </MainContainer>
+            </ScrollContent>
           </ColumnContainerFlex>
         </DoubleSectionContainer>
       </RowContainerFlex>

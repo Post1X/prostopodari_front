@@ -3,15 +3,16 @@ import { InputUnderline } from "../../../components/InputUnderline"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { ButtonUI } from "../../../template/ui/ButtonUI"
 import { ColorsUI } from "../../../template/styles/ColorUI"
-import { DatePickerUI } from "../../../components/DatePickerUI"
-import { MainContainer } from "../../../template/containers/MainContainer"
+import { useAppSelector } from "../../../settings/redux/hooks"
+import { selectPromocodesValues } from "../../../modules/promocodes/PromocodesSlice"
 
 export const PromocodeCreateContent = () => {
   const [titlePromo, setTitlePromo] = useState("")
   const [namePromo, setNamePromo] = useState("")
-  const [discountPromo, setDiscountPromo] = useState("")
 
-  const [date, setDate] = useState(new Date())
+  const { isPromocodeUpdate } = useAppSelector(selectPromocodesValues)
+
+  const handleCreatePromocode = () => {}
 
   return (
     <>
@@ -33,7 +34,7 @@ export const PromocodeCreateContent = () => {
         onChange={(e) => setNamePromo(e.target.value)}
       />
 
-      <TextUI mb={15} ag={Ag["500_14"]} text={"Скидка %"} />
+      {/* <TextUI mb={15} ag={Ag["500_14"]} text={"Скидка %"} />
       <InputUnderline
         $mb={40}
         value={discountPromo}
@@ -43,16 +44,19 @@ export const PromocodeCreateContent = () => {
       />
 
       <TextUI mb={15} ag={Ag["500_14"]} text={"Действует до"} />
-      <MainContainer width={140} $mb={40}>
+      <MainContainer $width={140} $mb={40}>
         <DatePickerUI
           isUnderline
           date={date}
           changeDate={setDate}
           minDate={new Date()}
         />
-      </MainContainer>
+      </MainContainer> */}
 
-      <ButtonUI>
+      <ButtonUI
+        disabled={isPromocodeUpdate === "load"}
+        onClick={() => handleCreatePromocode()}
+      >
         <TextUI color={ColorsUI.white} ag={Ag["600_16"]} text={"Создать"} />
       </ButtonUI>
     </>

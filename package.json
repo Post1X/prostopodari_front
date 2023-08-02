@@ -12,7 +12,7 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "type-check": "tsc",
-    "proxy": "lcp --proxyUrl http://95.163.229.187:3001/"
+    "proxy": "lcp --proxyUrl http://194.58.121.218:3001/"
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.8.1",
