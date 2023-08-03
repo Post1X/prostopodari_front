@@ -72,7 +72,7 @@ export const ChatsPage = () => {
             ) : null}
             <ScrollContent>
               {list.map((chat) => (
-                <ChatsListItem key={chat.id} chat={chat} />
+                <ChatsListItem key={chat.chatID} chat={chat} />
               ))}
             </ScrollContent>
           </Wrapper>

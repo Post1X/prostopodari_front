@@ -10,16 +10,17 @@ interface IButtonUI extends ContainerProps {
   $mr?: number
 
   $isCustom?: boolean
+  $isInput?: boolean
 }
 
 export const ButtonUI = styled.button<IButtonUI>`
   width: ${({ $isCustom }) => ($isCustom ? "fit-content" : "100%")};
-  padding: ${({ $isCustom }) => ($isCustom ? "0" : "15px 0")};
+  padding: ${({ $isCustom, $pv }) => ($isCustom ? "0" : `${$pv || 15}px 0`)};
 
   background-color: ${({ $backColor }) => getBackColor($backColor)};
   border: 1px solid ${({ $backColor }) => getBorderColor($backColor)};
 
-  border-radius: 8px;
+  border-radius: ${({ $isInput }) => ($isInput ? "0 8px 8px 0" : "8px")};
 
   cursor: pointer;
 

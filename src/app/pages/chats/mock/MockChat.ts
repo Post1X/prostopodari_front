@@ -1,7 +1,7 @@
 export const MockChats = [
   {
     name: "Alice Johnson",
-    id: "001",
+    chatID: "001",
     city: "New York",
     phone_number: "123-456-7890",
     newMessCount: 2,
@@ -9,7 +9,7 @@ export const MockChats = [
   },
   {
     name: "Bob Smith",
-    id: "002",
+    chatID: "002",
     city: "Los Angeles",
     phone_number: "987-654-3210",
     newMessCount: 0,
@@ -17,7 +17,7 @@ export const MockChats = [
   },
   {
     name: "Charlie Brown",
-    id: "003",
+    chatID: "003",
     city: "Chicago",
     phone_number: "555-555-5555",
     newMessCount: 5,
@@ -25,7 +25,7 @@ export const MockChats = [
   },
   {
     name: "Diana Williams",
-    id: "004",
+    chatID: "004",
     city: "San Francisco",
     phone_number: "111-222-3333",
     newMessCount: 1,
@@ -33,7 +33,7 @@ export const MockChats = [
   },
   {
     name: "Ella Davis",
-    id: "005",
+    chatID: "005",
     city: "Houston",
     phone_number: "444-444-4444",
     newMessCount: 0,
@@ -41,7 +41,7 @@ export const MockChats = [
   },
   {
     name: "Frank Wilson",
-    id: "006",
+    chatID: "006",
     city: "Miami",
     phone_number: "777-777-7777",
     newMessCount: 3,
@@ -49,7 +49,7 @@ export const MockChats = [
   },
   {
     name: "Grace Lee",
-    id: "007",
+    chatID: "007",
     city: "Seattle",
     phone_number: "999-888-7777",
     newMessCount: 0,
@@ -57,7 +57,7 @@ export const MockChats = [
   },
   {
     name: "Henry Martinez",
-    id: "008",
+    chatID: "008",
     city: "Boston",
     phone_number: "222-333-4444",
     newMessCount: 0,
@@ -65,7 +65,7 @@ export const MockChats = [
   },
   {
     name: "Ivy Anderson",
-    id: "009",
+    chatID: "009",
     city: "Atlanta",
     phone_number: "666-666-6666",
     newMessCount: 1,
@@ -73,7 +73,7 @@ export const MockChats = [
   },
   {
     name: "Jack Thomas",
-    id: "010",
+    chatID: "010",
     city: "Denver",
     phone_number: "888-999-0000",
     newMessCount: 0,
@@ -81,7 +81,7 @@ export const MockChats = [
   },
   {
     name: "Kate Thompson",
-    id: "011",
+    chatID: "011",
     city: "Portland",
     phone_number: "777-111-2222",
     newMessCount: 2,
@@ -89,7 +89,7 @@ export const MockChats = [
   },
   {
     name: "Leo Martin",
-    id: "012",
+    chatID: "012",
     city: "San Diego",
     phone_number: "999-555-4444",
     newMessCount: 0,
@@ -97,7 +97,7 @@ export const MockChats = [
   },
   {
     name: "Mia Walker",
-    id: "013",
+    chatID: "013",
     city: "Dallas",
     phone_number: "222-888-9999",
     newMessCount: 3,
@@ -105,7 +105,7 @@ export const MockChats = [
   },
   {
     name: "Noah Scott",
-    id: "014",
+    chatID: "014",
     city: "Phoenix",
     phone_number: "666-333-1111",
     newMessCount: 1,
@@ -113,7 +113,7 @@ export const MockChats = [
   },
   {
     name: "Olivia Wright",
-    id: "015",
+    chatID: "015",
     city: "Philadelphia",
     phone_number: "444-222-8888",
     newMessCount: 0,
@@ -121,7 +121,7 @@ export const MockChats = [
   },
   {
     name: "Peter Evans",
-    id: "016",
+    chatID: "016",
     city: "Austin",
     phone_number: "111-999-6666",
     newMessCount: 2,
@@ -129,7 +129,7 @@ export const MockChats = [
   },
   {
     name: "Quinn Harris",
-    id: "017",
+    chatID: "017",
     city: "Charlotte",
     phone_number: "777-000-3333",
     newMessCount: 0,
@@ -137,7 +137,7 @@ export const MockChats = [
   },
   {
     name: "Ryan Clark",
-    id: "018",
+    chatID: "018",
     city: "San Antonio",
     phone_number: "333-111-7777",
     newMessCount: 1,
@@ -145,7 +145,7 @@ export const MockChats = [
   },
   {
     name: "Samantha Rodriguez",
-    id: "019",
+    chatID: "019",
     city: "Detroit",
     phone_number: "555-444-2222",
     newMessCount: 0,
@@ -153,7 +153,7 @@ export const MockChats = [
   },
   {
     name: "Thomas Allen",
-    id: "020",
+    chatID: "020",
     city: "Minneapolis",
     phone_number: "888-999-1111",
     newMessCount: 0,

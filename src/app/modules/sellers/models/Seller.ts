@@ -20,6 +20,7 @@ export class Seller extends AbstractModel {
   city: string = ""
   address: string = ""
   is_baned: boolean = false
+  chatID: string = ""
   __v: number = 0
 
   constructor(props: any) {

@@ -1,9 +1,8 @@
 import AbstractModel from "../../../settings/abstrcations/models/AbstractModel"
-import { Nullable } from "../../../settings/types/BaseTypes"
 
 export class Chats extends AbstractModel {
   name: string = ""
-  id: string = ""
+  chatID: string = ""
   city: string = ""
   phone_number: string = ""
   newMessCount: number = 0

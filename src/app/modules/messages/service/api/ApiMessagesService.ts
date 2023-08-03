@@ -6,4 +6,10 @@ export class ApiMessagesService extends AbstractApiRepository {
       url: "/chats",
     })
   }
+
+  getMessages = async (chatID: string) => {
+    return this.apiClient.get({
+      url: `/messages?chatID=${chatID}`,
+    })
+  }
 }

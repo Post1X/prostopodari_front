@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { MainContainer } from "./MainContainer"
 
-type MaxWidthType = 1600 | 1200 | 1000 | 800
+type MaxWidthType = 1600 | 1200 | 1000 | 800 | 600
 
 type TWrapper = {
   $maxWidth?: MaxWidthType
