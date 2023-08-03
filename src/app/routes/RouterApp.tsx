@@ -12,6 +12,7 @@ import { FinancesOrdersPage } from "../pages/finances/orders/FinancesOrdersPage"
 import { ChatsPage } from "../pages/chats/ChatsPage"
 import { PromocodesPage } from "../pages/promocodes/PromocodesPage"
 import { CategoriesPage } from "../pages/categories/CategoriesPage"
+import { MessagesPage } from "../pages/chats/messages/MessagesPage"
 
 export const RouterApp = createBrowserRouter([
   {
@@ -55,7 +56,7 @@ export const RouterApp = createBrowserRouter([
     children: [
       {
         path: `${PathApp.chats.path}/:chatId`,
-        element: <ErrorPage />,
+        element: <MessagesPage />,
       },
     ],
   },
