@@ -7,6 +7,7 @@ export const ScrollContent = styled(MainContainer)`
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
     width: 10px;
