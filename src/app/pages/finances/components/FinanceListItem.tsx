@@ -125,7 +125,7 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
         </RowContainerEnd>
       </MainContainer>
 
-      <RowContainer>
+      <RowContainer $ml={50}>
         {!isOrder ? (
           <>
             <MainContainer $mr={15} $width={170}>

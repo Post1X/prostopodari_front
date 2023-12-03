@@ -3,16 +3,45 @@ import { InputUnderline } from "../../../components/InputUnderline"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { ButtonUI } from "../../../template/ui/ButtonUI"
 import { ColorsUI } from "../../../template/styles/ColorUI"
-import { useAppSelector } from "../../../settings/redux/hooks"
-import { selectPromocodesValues } from "../../../modules/promocodes/PromocodesSlice"
+import { useAppDispatch, useAppSelector } from "../../../settings/redux/hooks"
+import {
+  createPromocode,
+  getPromocodes,
+  selectPromocodesValues,
+} from "../../../modules/promocodes/PromocodesSlice"
+import toast from "react-hot-toast"
 
 export const PromocodeCreateContent = () => {
+  const dispatch = useAppDispatch()
   const [titlePromo, setTitlePromo] = useState("")
   const [namePromo, setNamePromo] = useState("")
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const { isPromocodeUpdate } = useAppSelector(selectPromocodesValues)
 
-  const handleCreatePromocode = () => {}
+  const handleCreatePromocode = async () => {
+    if (isLoading) return
+
+    setIsLoading(true)
+    try {
+      await dispatch(
+        createPromocode({
+          text: titlePromo,
+          event_name: namePromo,
+        }),
+      )
+
+      setTitlePromo("")
+      setNamePromo("")
+
+      toast.success("Промокод добавлен")
+
+      await dispatch(getPromocodes())
+    } catch {}
+
+    setIsLoading(false)
+  }
 
   return (
     <>

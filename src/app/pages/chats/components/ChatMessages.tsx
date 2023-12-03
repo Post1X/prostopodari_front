@@ -24,6 +24,7 @@ export const ChatMessages = () => {
   const dispatch = useAppDispatch()
 
   const load = useRef(true)
+  const scrollRef = useRef<HTMLDivElement | null>(null)
 
   const [list, setList] = useState<FormattedMessagesModel[]>([])
 
@@ -39,12 +40,18 @@ export const ChatMessages = () => {
 
   useEffect(() => {
     setList(MessageHelper.getFormattedMessages(messagesList))
+
+    setTimeout(() => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+      }
+    }, 500)
   }, [messagesList])
 
   return (
     <Wrapper $mb={30} $ml={15} $mt={30} $maxWidth={600}>
       <ColumnContainerFlex $isRelative>
-        <ScrollContent>
+        <ScrollContent ref={scrollRef}>
           {list.map((groupMessages, idx) => (
             <MainContainer
               $mb={list.length - 1 === idx ? 10 : 60}

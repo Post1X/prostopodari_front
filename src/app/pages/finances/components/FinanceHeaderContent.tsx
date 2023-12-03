@@ -27,6 +27,7 @@ type FinanceHeaderContentProps = {
   changeEndDate: (date: Date) => void
   searchChange: (value: string) => void
   isOrder?: boolean
+  orderTitle?: string
   sellerInfo?: boolean
 }
 
@@ -56,7 +57,7 @@ export const FinanceHeaderContent = (props: FinanceHeaderContentProps) => {
                 <BackSVG />
               </MainContainer>
 
-              <TextUI ag={Ag["500_20"]} text={"TODO: Заголовок"} />
+              <TextUI ag={Ag["500_20"]} text={props.orderTitle || ""} />
             </RowContainer>
           ) : (
             <TextUI mb={20} ag={Ag["500_20"]} text={"Владельцы на выплату"} />
