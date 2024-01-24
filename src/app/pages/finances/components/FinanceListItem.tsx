@@ -65,10 +65,13 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
           <LineTextVertical />
           <TextUI ag={Ag["400_16"]} text={`ID: ${info._id || info.orderID}`} />
           <LineTextVertical />
-          <TextUI
-            ag={Ag["400_16"]}
-            text={`${MaskHelper.formatPhoneNumber(info.phone_number)}`}
-          />
+          {info.phone_number && (
+  <TextUI
+  ag={Ag["400_16"]}
+  text={`${MaskHelper.formatPhoneNumber(info.phone_number)}`}
+/>
+          )}
+        
         </RowContainer>
 
         <RowContainerEnd>
