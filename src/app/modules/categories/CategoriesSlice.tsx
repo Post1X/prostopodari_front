@@ -29,7 +29,7 @@ export const categoriesSlice = createSlice({
         state.categoriesList = action.payload
       })
       .addCase(getCategories.rejected, (state) => {
-        state.isLoadCats = "completed"
+        state.isLoadCats = "failed"
       })
   },
 })

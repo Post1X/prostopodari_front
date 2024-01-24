@@ -3,7 +3,7 @@ import AbstractApiRepository from "../../../../settings/abstrcations/repositorie
 export class ApiCategoriesService extends AbstractApiRepository {
   getCategories = () => {
     return this.apiClient.get({
-      url: "/categories",
+      url: "/categories/admin",
     })
   }
 }
