@@ -26,4 +26,10 @@ export class DateHelper {
     const [year, month, day] = date.split("-")
     return new Date(`${Number(year) + 2000}-${month}-${day}`)
   }
+  static getFormatDateFromShort = (shortDate: string) => {
+    const [day, month, year] = shortDate.split("-")
+    const fullYear = `20${year}`
+
+    return `${day}.${month}.${fullYear}`
+  }
 }

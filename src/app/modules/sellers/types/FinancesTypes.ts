@@ -22,7 +22,9 @@ export interface FinancesOrdersSeller {
 
 export interface FinanceSellerUnit {
   _id?: string
+  order_number?: string
   ip?: string
+  time?: object
   phone_number: string
   storeName: string
   orderID?: string

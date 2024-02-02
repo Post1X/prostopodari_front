@@ -48,14 +48,15 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
         <RowContainer $mb={10}>
           {isOrder ? (
             <>
-              <TextUI ag={Ag["400_16"]} text={`Заказ №: НЕ УКАЗАН`} />
+              <TextUI ag={Ag["400_16"]} text={`Заказ №:  ${info.order_number ?info.order_number  : 'НЕ УКАЗАН' } `} />
               <LineTextVertical />
               <TextUI
                 ag={Ag["400_16"]}
+        
                 text={`${DateHelper.getFormatDateOfBack(info.dateTime!)}`}
               />
               <LineTextVertical />
-              <TextUI ag={Ag["400_16"]} text={`TODO: Время`} />
+              <TextUI ag={Ag["400_16"]} text={`TODO: ${info.time ? `${info.time.hours}:${info.time.minutes}` : ''}`} />
               <LineTextVertical />
               <TextUI ag={Ag["400_16"]} text={`${info.storeName}`} />
             </>
