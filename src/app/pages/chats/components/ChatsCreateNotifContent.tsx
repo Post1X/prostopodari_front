@@ -4,10 +4,34 @@ import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { ButtonUI } from "../../../template/ui/ButtonUI"
 import { ColorsUI } from "../../../template/styles/ColorUI"
 import { CommentUI } from "../../../components/CommentUI"
+import { useAppDispatch } from "../../../settings/redux/hooks"
+import { postMessageBuyers, postMessageSellers } from "../../../modules/messages/MessagesSlice"
 
 export const ChatsCreateNotifContent = () => {
+  let dispatch = useAppDispatch()
   const [notifTitle, setNotifTitle] = useState("")
   const [notifDesc, setNotifDesc] = useState("")
+
+  function handlePostMessageSellers() {
+    dispatch(
+      postMessageSellers({
+        title: notifTitle,
+        body: notifDesc,
+      }),
+    )
+    setNotifTitle("")
+    setNotifDesc("")
+  }
+  function handlePostMessageByuers() {
+    dispatch(
+      postMessageBuyers({
+        title: notifTitle,
+        body: notifDesc,
+      }),
+    )
+    setNotifTitle("")
+    setNotifDesc("")
+  }
   return (
     <>
       <TextUI mb={15} ag={Ag["500_14"]} text={"Заголовок"} />
@@ -27,14 +51,14 @@ export const ChatsCreateNotifContent = () => {
         placeholder="Напишите текст уведомления"
       />
 
-      <ButtonUI $mb={10}>
+      <ButtonUI onClick={() => handlePostMessageSellers()} $mb={10}>
         <TextUI
           color={ColorsUI.white}
           ag={Ag["600_16"]}
           text={"Отправить магазинам"}
         />
       </ButtonUI>
-      <ButtonUI $backColor={"pink"}>
+      <ButtonUI onClick={() => handlePostMessageByuers()} $backColor={"pink"}>
         <TextUI
           color={ColorsUI.white}
           ag={Ag["600_16"]}

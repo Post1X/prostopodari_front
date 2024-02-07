@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit"
-import { MessagesStateModel } from "./types/MessagesTypes"
+import { MessagesStateModel, PostMessageType } from "./types/MessagesTypes"
 import { MessagesService } from "./service/MessagesService"
 import { RootState } from "../../settings/redux/store"
 
@@ -52,7 +52,25 @@ const messagesSlice = createSlice({
         state.isMessagesLoad = "completed"
       })
       .addCase(getMessages.rejected, (state) => {
+        state.isMessagesLoad = "failed"
+      })
+      .addCase(postMessageSellers.pending, (state) => {
+        state.isMessagesLoad = "load"
+      })
+      .addCase(postMessageSellers.fulfilled, (state) => {
         state.isMessagesLoad = "completed"
+      })
+      .addCase(postMessageSellers.rejected, (state) => {
+        state.isMessagesLoad = "failed"
+      })
+      .addCase(postMessageBuyers.pending, (state) => {
+        state.isMessagesLoad = "load"
+      })
+      .addCase(postMessageBuyers.fulfilled, (state) => {
+        state.isMessagesLoad = "completed"
+      })
+      .addCase(postMessageBuyers.rejected, (state) => {
+        state.isMessagesLoad = "failed"
       })
   },
 })
@@ -67,6 +85,23 @@ export const getMessages = createAsyncThunk(
   "messages/messages",
   async (chatID: string) => {
     const messages = await messagesService.getMessages(chatID)
+
+    return messages
+  },
+)
+
+export const postMessageSellers = createAsyncThunk(
+  "message/postMessageSellers",
+  async (dto: PostMessageType) => {
+    const messages = await messagesService.postMessageSellers(dto)
+
+    return messages
+  },
+)
+export const postMessageBuyers = createAsyncThunk(
+  "message/postMessageBuyers",
+  async (dto: PostMessageType) => {
+    const messages = await messagesService.postMessageBuyers(dto)
 
     return messages
   },

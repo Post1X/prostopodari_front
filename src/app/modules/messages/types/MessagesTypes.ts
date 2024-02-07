@@ -9,4 +9,9 @@ export interface MessagesStateModel {
   messagesList: Message[]
 }
 
+export type PostMessageType = {
+  body: string
+  title: string
+}
+
 export type MessageRoleType = "admin" | "seller"

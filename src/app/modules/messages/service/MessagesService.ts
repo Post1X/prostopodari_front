@@ -3,6 +3,7 @@ import { MockMessages } from "../../../pages/chats/mock/MockMessages"
 import AbstractServiceRepository from "../../../settings/abstrcations/repositories/AbstractServiceRepository"
 import { Chats } from "../models/Chats"
 import { Message } from "../models/Message"
+import { PostMessageType } from "../types/MessagesTypes"
 import { ApiMessagesService } from "./api/ApiMessagesService"
 
 export class MessagesService extends AbstractServiceRepository {
@@ -29,5 +30,17 @@ export class MessagesService extends AbstractServiceRepository {
     const data = MockMessages
 
     return this.createList<Message>(Message, data)
+  }
+
+  postMessageSellers = async (dto: PostMessageType) => {
+    const { data } = await this.apiService.postMessageSellers(dto)
+
+    return data
+  }
+
+  postMessageBuyers = async (dto: PostMessageType) => {
+    const { data } = await this.apiService.postMessageBuyers(dto)
+
+    return data
   }
 }

@@ -18,9 +18,9 @@ export const MessagesPage = () => {
   const { currentSeller } = useAppSelector(selectSellersValues)
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    dispatch(getCurrentSeller("64c8c5582c9865d526add077"))
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getCurrentSeller("65b26c023a11b3af0a87bdda"))
+  // }, [])
 
   return (
     <ColumnContainerFlex style={styles.container}>

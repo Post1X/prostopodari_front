@@ -12,11 +12,11 @@ export class BannerService extends AbstractServiceRepository {
   }
   postBanner = async (image: string) => {
     try {
-      const response = await this.api.postBanner(image);
-      console.log("Response:", response.data);
+      const response = await this.api.postBanner(image)
+      console.log("Response:", response.data)
     } catch (error) {
-      console.error("Error uploading image:", error);
-      throw error;
+      console.error("Error uploading image:", error)
+      throw error
     }
   }
 
@@ -24,5 +24,10 @@ export class BannerService extends AbstractServiceRepository {
     const { data } = await this.api.getBanner()
 
     return this.createList<Banner>(Banner, data)
+  }
+  deleteBanner = async (banner_id: string) => {
+    const { data } = await this.api.deleteBanner(banner_id)
+
+    return data
   }
 }

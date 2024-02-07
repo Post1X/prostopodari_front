@@ -11,6 +11,7 @@ const bannerService = new BannerService()
 const initialState = {
   isPostedBanner: false,
   isPostedBannerStatus: "idle",
+  deleteBannerStatus: "idle",
   getBannerStatus: "idle",
 
   banner: [] as Banner[],
@@ -37,6 +38,12 @@ export const BannerSlice = createSlice({
       .addCase(getBanner.rejected, (state) => {
         state.getBannerStatus = "failed"
       })
+      .addCase(deleteBanner.rejected, (state) => {
+        state.deleteBannerStatus = "failed"
+      })
+      .addCase(deleteBanner.fulfilled, (state, action) => {
+        state.deleteBannerStatus = action.payload
+      })
   },
 })
 
@@ -45,9 +52,19 @@ export const postBanner = createAsyncThunk(
   async (image: string) => {
     const Banner = await bannerService.postBanner(image)
 
-    return Banner 
-   }
-);
+    return Banner
+  },
+)
+
+export const deleteBanner = createAsyncThunk(
+  "Banner/delete",
+  async (banner_id: string) => {
+    const deleteBanner = await bannerService.deleteBanner(banner_id)
+
+    return deleteBanner
+  },
+)
+
 export const getBanner = createAsyncThunk("Banner/get", async () => {
   const Banner = await bannerService.getBanner()
 

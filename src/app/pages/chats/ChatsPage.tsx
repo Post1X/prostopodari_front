@@ -19,12 +19,39 @@ import { ScrollContent } from "../../components/ScrollContent"
 import { DoubleSection } from "../../components/doubleSection/DoubleSection"
 import { ChatsCreateNotifContent } from "./components/ChatsCreateNotifContent"
 import { ChatNotifContent } from "./components/ChatNotifContent"
+import io from "socket.io-client"
+import { getCurrentSeller } from "../../modules/sellers/SellersSlice"
 
 export const ChatsPage = () => {
   const { isChatsLoad, chatList, chatListPending } =
     useAppSelector(selectMessagesValues)
 
   const dispatch = useAppDispatch()
+
+  // useEffect(() => {
+  //   dispatch(getCurrentSeller("65b26c023a11b3af0a87bdda"))
+  // }, [])
+  // const [message, setMessage] = useState("")
+  // const [messages, setMessages] = useState([])
+  // const [socket, setSocket] = useState(null)
+
+  // useEffect(() => {
+  //   // connect to WebSocket server
+  //   const newSocket = io("http://194.58.121.218:3001")
+  //   setSocket(newSocket)
+
+  //   // set up event listeners for incoming messages
+  //   newSocket.on("connect", () => console.log("Connected to WebSocket"))
+  //   newSocket.on("disconnect", () => console.log("Disconnected from WebSocket"))
+  //   newSocket.on("message", (data) => {
+  //     setMessages((msgs) => [...msgs, data])
+  //   })
+
+  //   // clean up on unmount
+  //   return () => {
+  //     newSocket.disconnect()
+  //   }
+  // }, [])
 
   const [activeTab, setActiveTab] = useState(ChatTabMenuTypes.all)
 

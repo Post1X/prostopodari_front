@@ -7,6 +7,7 @@ import { ButtonUI } from "../../../template/ui/ButtonUI"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { BannerUI } from "../ui/BannerUI"
 import {
+  deleteBanner,
   getBanner,
   postBanner,
   selectBannerValues,
@@ -20,6 +21,8 @@ export const CategoriesBanner = () => {
 
   let lastBannerImage = banner[banner.length - 1]?.url
 
+  let bannerId = banner[banner.length - 1]?._id
+
   const dispatch = useAppDispatch()
 
   const [selectedImage, setSelectedImage] = useState(null)
@@ -29,6 +32,12 @@ export const CategoriesBanner = () => {
   }
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0])
+  }
+
+  const handleDelete = async (banner_id: string) => {
+    console.log("banner id ", banner_id)
+    dispatch(deleteBanner(banner_id))
+    triggerEffect()
   }
 
   const handleUpload = async () => {
@@ -56,8 +65,6 @@ export const CategoriesBanner = () => {
       )
       dispatch(postBanner(response.data))
       console.log("Response:", response.data)
-      triggerEffect()
-
     } catch (error) {
       console.error("Error uploading image:", error)
     }
@@ -65,8 +72,6 @@ export const CategoriesBanner = () => {
 
   useEffect(() => {
     dispatch(getBanner())
-    triggerEffect()
-
   }, [dispatch])
 
   return (
@@ -76,9 +81,10 @@ export const CategoriesBanner = () => {
         <div
           className="img"
           style={{
-            backgroundImage: `url(${lastBannerImage})`,
+            backgroundImage: lastBannerImage ? `url(${lastBannerImage})` : null,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
+            backgroundColor: lastBannerImage ? null : ColorsUI.text2,
           }}
         >
           <input
@@ -97,7 +103,11 @@ export const CategoriesBanner = () => {
         </div>
       </BannerUI>
       <RowContainerBeetwen>
-        <ButtonUI $mr={10} $backColor={"red"}>
+        <ButtonUI
+          onClick={() => handleDelete(bannerId)}
+          $mr={10}
+          $backColor={"red"}
+        >
           <TextUI color={ColorsUI.white} ag={Ag["600_16"]} text={"Удалить"} />
         </ButtonUI>
         <ButtonUI onClick={handleUpload}>

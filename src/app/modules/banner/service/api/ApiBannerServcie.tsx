@@ -8,6 +8,17 @@ export class ApiBannerService extends AbstractApiRepository {
       url: `/users/admin/banner`,
     })
   }
+  deleteBanner = async (banner_id: string) => {
+    return this.apiClient.delete({
+      url: `/users/admin/banner?banner_id=${banner_id}`,
+      data: banner_id,
+      config: {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    })
+  }
   postBanner = (image: string) => {
     return this.apiClient.post({
       url: `/users/admin/banner`,
