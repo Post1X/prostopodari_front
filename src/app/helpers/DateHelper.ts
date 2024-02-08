@@ -17,12 +17,11 @@ export class DateHelper {
   }
 
   static getFormatDateChat = (date: string) => {
-    if(date){
-    const dateObj = this.parseDateString(date)
+    if (date) {
+      const dateObj = this.parseDateString(date)
 
-    return format(new Date(dateObj), "dd MMMM yyyy", { locale: ru })
+      return format(new Date(dateObj), "dd MMMM yyyy", { locale: ru })
     }
-
   }
 
   static parseDateString = (date: string) => {
@@ -37,11 +36,9 @@ export class DateHelper {
   }
 
   static getFormatHoursMinutes = (time: string) => {
-
-    if(time) {
+    if (time) {
       const [hours, minutes] = time.split(":")
       return `${hours}:${minutes}`
     }
-
   }
 }

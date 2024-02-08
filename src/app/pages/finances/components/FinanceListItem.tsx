@@ -48,15 +48,24 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
         <RowContainer $mb={10}>
           {isOrder ? (
             <>
-              <TextUI ag={Ag["400_16"]} text={`Заказ №:  ${info.order_number ?info.order_number  : 'НЕ УКАЗАН' } `} />
+              <TextUI
+                ag={Ag["400_16"]}
+                text={`Заказ №:  ${
+                  info.order_number ? info.order_number : "НЕ УКАЗАН"
+                } `}
+              />
               <LineTextVertical />
               <TextUI
                 ag={Ag["400_16"]}
-        
                 text={`${DateHelper.getFormatDateOfBack(info.dateTime!)}`}
               />
               <LineTextVertical />
-              <TextUI ag={Ag["400_16"]} text={`TODO: ${info.time ? `${info.time.hours}:${info.time.minutes}` : ''}`} />
+              <TextUI
+                ag={Ag["400_16"]}
+                text={`TODO: ${
+                  info.time ? `${info.time.hours}:${info.time.minutes}` : ""
+                }`}
+              />
               <LineTextVertical />
               <TextUI ag={Ag["400_16"]} text={`${info.storeName}`} />
             </>
@@ -67,12 +76,11 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
           <TextUI ag={Ag["400_16"]} text={`ID: ${info._id || info.orderID}`} />
           <LineTextVertical />
           {info.phone_number && (
-  <TextUI
-  ag={Ag["400_16"]}
-  text={`${MaskHelper.formatPhoneNumber(info.phone_number)}`}
-/>
+            <TextUI
+              ag={Ag["400_16"]}
+              text={`${MaskHelper.formatPhoneNumber(info.phone_number)}`}
+            />
           )}
-        
         </RowContainer>
 
         <RowContainerEnd>

@@ -21,11 +21,9 @@ export const ChatsListItem = (props: ChatsListItemProps) => {
   const navigate = useNavigate()
   let sellerId = props.chat.user_id
 
-
   let dispatch = useAppDispatch()
 
   const handleGoToChat = () => {
-
     console.log(sellerId)
 
     dispatch(getCurrentSeller(sellerId))

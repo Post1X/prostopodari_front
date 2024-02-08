@@ -5,7 +5,10 @@ import { ButtonUI } from "../../../template/ui/ButtonUI"
 import { ColorsUI } from "../../../template/styles/ColorUI"
 import { CommentUI } from "../../../components/CommentUI"
 import { useAppDispatch } from "../../../settings/redux/hooks"
-import { postMessageBuyers, postMessageSellers } from "../../../modules/messages/MessagesSlice"
+import {
+  postMessageBuyers,
+  postMessageSellers,
+} from "../../../modules/messages/MessagesSlice"
 
 export const ChatsCreateNotifContent = () => {
   let dispatch = useAppDispatch()

@@ -94,7 +94,7 @@ export const getChatId = createAsyncThunk(
   "messages/chatId",
   async (id: string) => {
     const chatId = await messagesService.getChatId(id)
-    
+
     return chatId
   },
 )

@@ -1,23 +1,23 @@
-import { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from "axios"
 
-import { Nullable } from '../../types/BaseTypes';
-import { IApiConfig, IApisResponse } from '../ApiInterfaces';
+import { Nullable } from "../../types/BaseTypes"
+import { IApiConfig, IApisResponse } from "../ApiInterfaces"
 
 export interface IAxiosConfig extends IApiConfig {
-  data?: Object;
-  config?: AxiosRequestConfig;
+  data?: Object
+  config?: AxiosRequestConfig
 }
 
 export interface IAxiosResponse<T> extends IApisResponse<T> {
-  success: boolean;
+  success: boolean
   errors: Nullable<{
-    [key: string]: string[];
-  }>;
-  message: Nullable<string>;
-  data: T | T[];
+    [key: string]: string[]
+  }>
+  message: Nullable<string>
+  data: T | T[]
 }
 
 export interface IExcludedUrl {
-  url: string;
-  method: string;
+  url: string
+  method: string
 }

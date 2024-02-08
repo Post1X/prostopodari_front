@@ -35,7 +35,6 @@ export const ChatMessages = () => {
 
   console.log(sellerId, myRoom.chatId)
 
-
   const [list, setList] = useState<FormattedMessagesModel[]>([])
 
   const [socket, setSocket] = useState(null)
@@ -53,8 +52,8 @@ export const ChatMessages = () => {
   }, [messages])
 
   useEffect(() => {
-    let socketInstance;
-  
+    let socketInstance
+
     if (sellerId && myRoom.chatId) {
       socketInstance = io("http://194.58.121.218:3001/chat/user", {
         query: {
@@ -62,18 +61,17 @@ export const ChatMessages = () => {
           seller_id: sellerId,
           token: localStorage.getItem("token"),
         },
-      });
-  
-      setSocket(socketInstance);
+      })
+
+      setSocket(socketInstance)
     }
-  
+
     return () => {
       if (socketInstance) {
-        socketInstance.disconnect();
+        socketInstance.disconnect()
       }
-    };
-  }, [sellerId, myRoom.chatId]);
-  
+    }
+  }, [sellerId, myRoom.chatId])
 
   const sendMessage = (e) => {
     e.preventDefault()

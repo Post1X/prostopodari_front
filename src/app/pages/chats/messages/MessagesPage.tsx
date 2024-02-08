@@ -16,6 +16,8 @@ import { MainContainer } from "../../../template/containers/MainContainer"
 
 export const MessagesPage = () => {
   const { currentSeller } = useAppSelector(selectSellersValues)
+
+  console.log("messagePage", currentSeller)
   const dispatch = useAppDispatch()
 
   // useEffect(() => {
@@ -32,8 +34,8 @@ export const MessagesPage = () => {
             </MainContainer>
             {currentSeller?.sellerData ? (
               <ChatHeader
-              key={currentSeller.sellerData._id}
-                name={currentSeller.sellerData.name}
+                key={currentSeller.sellerData._id}
+                name={currentSeller.sellerData.legal_name}
                 _id={currentSeller.sellerData._id}
                 city={currentSeller.sellerData.city}
                 phone={currentSeller.sellerData.phone_number}

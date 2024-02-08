@@ -26,7 +26,10 @@ export const ChatMessageContainer = (props: ChatMessageContainerProps) => {
         <TextUI ag={Ag["400_16"]} text={text} />
 
         <MessageTimeUI $isAuthor={isAuthor}>
-          <TextUI ag={Ag["400_10"]} text={DateHelper.getFormatHoursMinutes(time)} />
+          <TextUI
+            ag={Ag["400_10"]}
+            text={DateHelper.getFormatHoursMinutes(time)}
+          />
         </MessageTimeUI>
       </MessageUI>
     </MessageContainerUI>
