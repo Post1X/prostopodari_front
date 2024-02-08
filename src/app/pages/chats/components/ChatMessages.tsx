@@ -8,6 +8,7 @@ import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { MessageInputContainerUI, MessageInputUI } from "../ui/MessageInputUI"
 import { useAppDispatch, useAppSelector } from "../../../settings/redux/hooks"
 import {
+  getChatId,
   getMessages,
   selectMessagesValues,
 } from "../../../modules/messages/MessagesSlice"
@@ -18,35 +19,100 @@ import { DateHelper } from "../../../helpers/DateHelper"
 import { ScrollContent } from "../../../components/ScrollContent"
 import { ChatMessageContainer } from "./ChatMessageContainer"
 import { ColumnContainerFlex } from "../../../template/containers/ColumnContainer"
+import io from "socket.io-client"
+import { selectSellersValues } from "../../../modules/sellers/SellersSlice"
 
 export const ChatMessages = () => {
-  const { messagesList } = useAppSelector(selectMessagesValues)
-  const dispatch = useAppDispatch()
+  const { chatId } = useAppSelector(selectMessagesValues)
 
+  const { currentSeller } = useAppSelector(selectSellersValues)
+  const sellerId = currentSeller?.sellerData?._id
+  const dispatch = useAppDispatch()
   const load = useRef(true)
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
+  let myRoom = useParams()
+
+  console.log(sellerId, myRoom.chatId)
+
+
   const [list, setList] = useState<FormattedMessagesModel[]>([])
 
-  const params = useParams()
+  const [socket, setSocket] = useState(null)
+  const [messages, setMessages] = useState([])
 
+  const [messageInput, setMessageInput] = useState("")
   useEffect(() => {
-    if (load.current && params.chatId) {
-      dispatch(getMessages(params.chatId))
-    }
-
-    load.current = false
-  }, [])
-
-  useEffect(() => {
-    setList(MessageHelper.getFormattedMessages(messagesList))
+    setList(MessageHelper.getFormattedMessages(messages))
 
     setTimeout(() => {
       if (scrollRef.current) {
         scrollRef.current.scrollTop = scrollRef.current.scrollHeight
       }
     }, 500)
-  }, [messagesList])
+  }, [messages])
+
+  useEffect(() => {
+    let socketInstance;
+  
+    if (sellerId && myRoom.chatId) {
+      socketInstance = io("http://194.58.121.218:3001/chat/user", {
+        query: {
+          roomId: myRoom.chatId,
+          seller_id: sellerId,
+          token: localStorage.getItem("token"),
+        },
+      });
+  
+      setSocket(socketInstance);
+    }
+  
+    return () => {
+      if (socketInstance) {
+        socketInstance.disconnect();
+      }
+    };
+  }, [sellerId, myRoom.chatId]);
+  
+
+  const sendMessage = (e) => {
+    e.preventDefault()
+    if (messageInput) {
+      socket.emit("sendMessage", { text: messageInput })
+      addMessage(`You: ${messageInput}`)
+      setMessageInput("")
+    }
+  }
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("connect", () => {
+        console.log("Connected to the server.")
+      })
+
+      socket.on("messages", (data) => {
+        setMessages(data.messages)
+      })
+
+      socket.on("newMessage", (message) => {
+        setMessages((prevMessages) => [...prevMessages, message])
+      })
+
+      socket.on("disconnect", () => {
+        console.log("Disconnected from the server.")
+      })
+    }
+  }, [socket])
+
+  const handleEnterPress = (e) => {
+    if (e.key === "Enter") {
+      sendMessage(e)
+    }
+  }
+
+  const addMessage = (message) => {
+    setMessages((prevMessages) => [...prevMessages, message])
+  }
 
   return (
     <Wrapper $mb={30} $ml={15} $mt={30} $maxWidth={600}>
@@ -72,10 +138,15 @@ export const ChatMessages = () => {
       </ColumnContainerFlex>
       <RowContainer>
         <MessageInputContainerUI>
-          <MessageInputUI placeholder={"Сообщение"} />
+          <MessageInputUI
+            value={messageInput}
+            onKeyPress={handleEnterPress}
+            onChange={(e) => setMessageInput(e.target.value)}
+            placeholder={"Сообщение"}
+          />
         </MessageInputContainerUI>
         <MainContainer $width={130}>
-          <ButtonUI $isInput $pv={10}>
+          <ButtonUI onClick={sendMessage} $isInput $pv={10}>
             <TextUI
               color={ColorsUI.white}
               ag={Ag["600_16"]}

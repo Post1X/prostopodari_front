@@ -35,7 +35,6 @@ export const CategoriesBanner = () => {
   }
 
   const handleDelete = async (banner_id: string) => {
-    console.log("banner id ", banner_id)
     dispatch(deleteBanner(banner_id))
     triggerEffect()
   }
@@ -48,7 +47,6 @@ export const CategoriesBanner = () => {
       }
 
       const formData = new FormData()
-      console.log("selected file", selectedImage)
       formData.append("file", selectedImage)
 
       const token = localStorage.getItem("token")
@@ -64,7 +62,6 @@ export const CategoriesBanner = () => {
         },
       )
       dispatch(postBanner(response.data))
-      console.log("Response:", response.data)
     } catch (error) {
       console.error("Error uploading image:", error)
     }

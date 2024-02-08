@@ -4,7 +4,13 @@ import { PostMessageType } from "../../types/MessagesTypes"
 export class ApiMessagesService extends AbstractApiRepository {
   getChats = async () => {
     return this.apiClient.get({
-      url: "/chats",
+      url: "/chat/im/admin",
+    })
+  }
+  getChatId = async (id: string) => {
+    return this.apiClient.get({
+      url: `/chat/is-created/admin?seller_id=${id}`,
+      data: id,
     })
   }
 

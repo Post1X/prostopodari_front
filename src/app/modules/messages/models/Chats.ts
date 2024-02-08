@@ -7,6 +7,8 @@ export class Chats extends AbstractModel {
   phone_number: string = ""
   newMessCount: number = 0
   lastMessage: string = ""
+  _id: string = ""
+  user_id: string = ""
 
   constructor(props: any) {
     super()

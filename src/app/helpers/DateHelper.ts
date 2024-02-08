@@ -17,19 +17,31 @@ export class DateHelper {
   }
 
   static getFormatDateChat = (date: string) => {
+    if(date){
     const dateObj = this.parseDateString(date)
 
     return format(new Date(dateObj), "dd MMMM yyyy", { locale: ru })
+    }
+
   }
 
   static parseDateString = (date: string) => {
-    const [year, month, day] = date.split("-")
-    return new Date(`${Number(year) + 2000}-${month}-${day}`)
+    return new Date(Date.parse(date))
   }
+
   static getFormatDateFromShort = (shortDate: string) => {
     const [day, month, year] = shortDate.split("-")
     const fullYear = `20${year}`
 
     return `${day}.${month}.${fullYear}`
+  }
+
+  static getFormatHoursMinutes = (time: string) => {
+
+    if(time) {
+      const [hours, minutes] = time.split(":")
+      return `${hours}:${minutes}`
+    }
+
   }
 }

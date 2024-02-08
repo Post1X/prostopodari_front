@@ -7,6 +7,7 @@ export interface MessagesStateModel {
   isMessagesLoad: "completed" | "load" | "failed"
   chatListPending: Chats[]
   messagesList: Message[]
+  chatId?: string | null
 }
 
 export type PostMessageType = {

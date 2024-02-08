@@ -15,12 +15,14 @@ export class MessagesService extends AbstractServiceRepository {
   }
 
   getChats = async () => {
-    // TODO: Mocks
-    // const { data } = await this.apiService.getChats()
-
-    const data = MockChats
-
+    const { data } = await this.apiService.getChats()
     return this.createList<Chats>(Chats, data)
+  }
+
+  getChatId = async (id: string) => {
+    const { data } = await this.apiService.getChatId(id)
+
+    return data
   }
 
   getMessages = async (chatID: string) => {

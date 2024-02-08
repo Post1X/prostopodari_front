@@ -12,6 +12,7 @@ const initialState: MessagesStateModel = {
   isMessagesLoad: "completed",
   chatListPending: [],
   messagesList: [],
+  chatId: "",
 }
 
 const messagesSlice = createSlice({
@@ -72,6 +73,14 @@ const messagesSlice = createSlice({
       .addCase(postMessageBuyers.rejected, (state) => {
         state.isMessagesLoad = "failed"
       })
+      .addCase(getChatId.fulfilled, (state, action) => {
+        state.chatId = action.payload
+        state.isMessagesLoad = "completed"
+      })
+      .addCase(getChatId.rejected, (state, action) => {
+        state.chatId = action.payload
+        state.isMessagesLoad = "failed"
+      })
   },
 })
 
@@ -80,6 +89,15 @@ export const getChats = createAsyncThunk("messages/chats", async () => {
 
   return chats
 })
+
+export const getChatId = createAsyncThunk(
+  "messages/chatId",
+  async (id: string) => {
+    const chatId = await messagesService.getChatId(id)
+    
+    return chatId
+  },
+)
 
 export const getMessages = createAsyncThunk(
   "messages/messages",

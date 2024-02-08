@@ -23,8 +23,8 @@ export const OwnerPage = () => {
   const load = useRef(true)
 
   const { isSellersLoad, currentSeller } = useAppSelector(selectSellersValues)
-  const dispatch = useAppDispatch()
-
+  const dispatch = useAppDispatch();
+  
   useEffect(() => {
     if (!load.current) return
 

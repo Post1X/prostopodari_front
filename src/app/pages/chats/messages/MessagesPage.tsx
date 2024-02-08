@@ -32,6 +32,7 @@ export const MessagesPage = () => {
             </MainContainer>
             {currentSeller?.sellerData ? (
               <ChatHeader
+              key={currentSeller.sellerData._id}
                 name={currentSeller.sellerData.name}
                 _id={currentSeller.sellerData._id}
                 city={currentSeller.sellerData.city}

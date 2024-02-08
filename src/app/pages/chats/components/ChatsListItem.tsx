@@ -9,6 +9,9 @@ import { ChatNewMessCountUI } from "../ui/ChatNewMessCountUI"
 import { ColorsUI } from "../../../template/styles/ColorUI"
 import { useNavigate } from "react-router-dom"
 import { PathApp } from "../../../routes/path/PathApp"
+import { useAppDispatch } from "../../../settings/redux/hooks"
+import { getChatId } from "../../../modules/messages/MessagesSlice"
+import { getCurrentSeller } from "../../../modules/sellers/SellersSlice"
 
 type ChatsListItemProps = {
   chat: Chats
@@ -16,8 +19,17 @@ type ChatsListItemProps = {
 
 export const ChatsListItem = (props: ChatsListItemProps) => {
   const navigate = useNavigate()
+  let sellerId = props.chat.user_id
+
+
+  let dispatch = useAppDispatch()
 
   const handleGoToChat = () => {
+
+    console.log(sellerId)
+
+    dispatch(getCurrentSeller(sellerId))
+
     navigate(`${PathApp.chats.path}/${props.chat.chatID.toString()}`)
   }
 
@@ -27,7 +39,7 @@ export const ChatsListItem = (props: ChatsListItemProps) => {
         <RowContainer $mb={10}>
           <TextUI ag={Ag["600_16"]} text={props.chat.name} />
           <LineTextVertical />
-          <TextUI ag={Ag["400_16"]} text={`ID: ${props.chat.chatID}`} />
+          <TextUI ag={Ag["400_16"]} text={`ID: ${props.chat.user_id}`} />
           <LineTextVertical />
           <TextUI ag={Ag["400_16"]} text={`г.${props.chat.city}`} />
           <LineTextVertical />
