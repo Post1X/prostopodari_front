@@ -10,7 +10,6 @@ import { ColorsUI } from "../../../template/styles/ColorUI"
 import { useNavigate } from "react-router-dom"
 import { PathApp } from "../../../routes/path/PathApp"
 import { useAppDispatch } from "../../../settings/redux/hooks"
-import { getChatId } from "../../../modules/messages/MessagesSlice"
 import { getCurrentSeller } from "../../../modules/sellers/SellersSlice"
 
 type ChatsListItemProps = {
@@ -24,8 +23,6 @@ export const ChatsListItem = (props: ChatsListItemProps) => {
   let dispatch = useAppDispatch()
 
   const handleGoToChat = () => {
-    console.log(sellerId)
-
     dispatch(getCurrentSeller(sellerId))
 
     navigate(`${PathApp.chats.path}/${props.chat.chatID.toString()}`)

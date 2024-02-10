@@ -3,6 +3,7 @@ import { MockMessages } from "../../../pages/chats/mock/MockMessages"
 import AbstractServiceRepository from "../../../settings/abstrcations/repositories/AbstractServiceRepository"
 import { Chats } from "../models/Chats"
 import { Message } from "../models/Message"
+import { Notification } from "../models/Notifications"
 import { PostMessageType } from "../types/MessagesTypes"
 import { ApiMessagesService } from "./api/ApiMessagesService"
 
@@ -17,6 +18,10 @@ export class MessagesService extends AbstractServiceRepository {
   getChats = async () => {
     const { data } = await this.apiService.getChats()
     return this.createList<Chats>(Chats, data)
+  }
+  getNotifications = async () => {
+    const { data } = await this.apiService.getNotifications()
+    return this.createList<Notification>(Notification, data)
   }
 
   getChatId = async (id: string) => {

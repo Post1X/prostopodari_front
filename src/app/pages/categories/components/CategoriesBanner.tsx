@@ -20,23 +20,18 @@ export const CategoriesBanner = () => {
   const { banner } = useAppSelector(selectBannerValues)
 
   let lastBannerImage = banner[banner.length - 1]?.url
-
   let bannerId = banner[banner.length - 1]?._id
 
   const dispatch = useAppDispatch()
 
   const [selectedImage, setSelectedImage] = useState(null)
-
-  const triggerEffect = () => {
-    dispatch(getBanner())
-  }
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0])
   }
 
   const handleDelete = async (banner_id: string) => {
     dispatch(deleteBanner(banner_id))
-    triggerEffect()
+    dispatch(getBanner())
   }
 
   const handleUpload = async () => {
@@ -62,6 +57,7 @@ export const CategoriesBanner = () => {
         },
       )
       dispatch(postBanner(response.data))
+      dispatch(getBanner())
     } catch (error) {
       console.error("Error uploading image:", error)
     }
@@ -81,6 +77,7 @@ export const CategoriesBanner = () => {
             backgroundImage: lastBannerImage ? `url(${lastBannerImage})` : null,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
+            cursor: "pointer",
             backgroundColor: lastBannerImage ? null : ColorsUI.text2,
           }}
         >

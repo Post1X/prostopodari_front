@@ -23,17 +23,11 @@ import io from "socket.io-client"
 import { selectSellersValues } from "../../../modules/sellers/SellersSlice"
 
 export const ChatMessages = () => {
-  const { chatId } = useAppSelector(selectMessagesValues)
-
   const { currentSeller } = useAppSelector(selectSellersValues)
   const sellerId = currentSeller?.sellerData?._id
-  const dispatch = useAppDispatch()
-  const load = useRef(true)
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
   let myRoom = useParams()
-
-  console.log(sellerId, myRoom.chatId)
 
   const [list, setList] = useState<FormattedMessagesModel[]>([])
 

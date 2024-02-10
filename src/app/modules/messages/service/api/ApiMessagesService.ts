@@ -7,6 +7,12 @@ export class ApiMessagesService extends AbstractApiRepository {
       url: "/chat/im/admin",
     })
   }
+
+  getNotifications = async () => {
+    return this.apiClient.get({
+      url: "/users/admin/notifications",
+    })
+  }
   getChatId = async (id: string) => {
     return this.apiClient.get({
       url: `/chat/is-created/admin?seller_id=${id}`,

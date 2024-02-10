@@ -17,13 +17,6 @@ import { MainContainer } from "../../../template/containers/MainContainer"
 export const MessagesPage = () => {
   const { currentSeller } = useAppSelector(selectSellersValues)
 
-  console.log("messagePage", currentSeller)
-  const dispatch = useAppDispatch()
-
-  // useEffect(() => {
-  //   dispatch(getCurrentSeller("65b26c023a11b3af0a87bdda"))
-  // }, [])
-
   return (
     <ColumnContainerFlex style={styles.container}>
       <HeaderUI>

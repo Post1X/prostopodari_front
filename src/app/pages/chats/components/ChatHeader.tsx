@@ -1,9 +1,5 @@
 import { MainContainer } from "../../../template/containers/MainContainer"
-import {
-  RowContainer,
-  RowContainerEnd,
-  RowContainerStart,
-} from "../../../template/containers/RowContainer"
+import { RowContainer } from "../../../template/containers/RowContainer"
 import { Ag, TextUI } from "../../../template/ui/TextUI"
 import { LineTextVertical } from "../../finances/ui/LineTextVertical"
 import { MaskHelper } from "../../../helpers/MaskHelper"

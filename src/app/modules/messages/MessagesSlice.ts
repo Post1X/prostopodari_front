@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { MessagesStateModel, PostMessageType } from "./types/MessagesTypes"
 import { MessagesService } from "./service/MessagesService"
 import { RootState } from "../../settings/redux/store"
+import { act } from "react-dom/test-utils"
 
 const messagesService = new MessagesService()
 
@@ -11,6 +12,7 @@ const initialState: MessagesStateModel = {
   isChatsLoad: "completed",
   isMessagesLoad: "completed",
   chatListPending: [],
+  notificationList: [],
   messagesList: [],
   chatId: "",
 }
@@ -81,9 +83,24 @@ const messagesSlice = createSlice({
         state.chatId = action.payload
         state.isMessagesLoad = "failed"
       })
+
+      .addCase(getNotifications.fulfilled, (state, action) => {
+        state.notificationList = action.payload
+      })
+      .addCase(getNotifications.rejected, (state) => {
+        state.isMessagesLoad = "failed"
+      })
   },
 })
 
+export const getNotifications = createAsyncThunk(
+  "messages/notifications",
+  async () => {
+    const notifications = await messagesService.getNotifications()
+
+    return notifications
+  },
+)
 export const getChats = createAsyncThunk("messages/chats", async () => {
   const chats = await messagesService.getChats()
 
@@ -126,5 +143,7 @@ export const postMessageBuyers = createAsyncThunk(
 )
 
 export const selectMessagesValues = (state: RootState) => state.messagesSlice
+export const selectNotificationValues = (state: RootState) =>
+  state.messagesSlice
 
 export default messagesSlice.reducer
