@@ -10,7 +10,7 @@ import { getChatId } from "../../../modules/messages/MessagesSlice"
 
 type OwnerButtonsProps = {
   id: string
-  is_baned: boolean
+  is_banned: boolean
   onBaned: () => void
 }
 
@@ -35,18 +35,18 @@ export const OwnerButtons = (props: OwnerButtonsProps) => {
   return (
     <>
       <TextUI
-        color={props.is_baned ? ColorsUI.red : ColorsUI.tifany1}
+        color={props.is_banned ? ColorsUI.red : ColorsUI.tifany1}
         ag={Ag["400_16"]}
-        text={props.is_baned ? "Заблокирован" : "Активен"}
+        text={props.is_banned ? "Заблокирован" : "Активен"}
       />
 
       <RowContainer>
         <MainContainer onClick={() => props.onBaned()} $width={200} $mr={10}>
-          <ButtonUI $backColor={props.is_baned ? "green" : "red"}>
+          <ButtonUI $backColor={props.is_banned ? "green" : "red"}>
             <TextUI
               color={ColorsUI.white}
               ag={Ag["600_16"]}
-              text={props.is_baned ? "Разблокировать" : "Блокировать"}
+              text={props.is_banned ? "Разблокировать" : "Блокировать"}
             />
           </ButtonUI>
         </MainContainer>

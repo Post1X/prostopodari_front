@@ -7,9 +7,21 @@ export class DateHelper {
   }
 
   static getFormatDateOfBack = (date: string) => {
-    const dateObj = this.parseDateString(date)
+    if (date) {
+      const dateObj = this.parseDateString(date)
 
-    return format(new Date(dateObj), "dd.MM.yyyy")
+      return format(new Date(dateObj), "dd.MM.yyyy")
+    }
+  }
+  static getFormatDateOfPoints = (date: string) => {
+    if (date) {
+      const parts = date.split("-")
+      const year = parseInt(parts[0]) + 2000
+      const month = parseInt(parts[1]) - 1
+      const day = parseInt(parts[2])
+
+      return format(new Date(year, month, day), "dd.MM.yyyy")
+    }
   }
 
   static getFormatDateDTO = (date: Date) => {

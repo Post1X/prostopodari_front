@@ -54,7 +54,7 @@ export const OwnerListItem = (props: OwnerListItemProps) => {
       </div>
 
       <RowContainer>
-        {props.seller.is_baned ? (
+        {props.seller.is_banned ? (
           <MainContainer $mr={25}>
             <TextUI
               color={ColorsUI.red}

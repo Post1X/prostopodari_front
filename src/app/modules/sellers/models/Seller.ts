@@ -19,7 +19,7 @@ export class Seller extends AbstractModel {
   ogrn: string = ""
   city: string = ""
   address: string = ""
-  is_baned: boolean = false
+  is_banned: boolean = false
   chatID: string = ""
   __v: number = 0
 

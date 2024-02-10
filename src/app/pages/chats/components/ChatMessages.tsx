@@ -113,14 +113,9 @@ export const ChatMessages = () => {
           {list.map((groupMessages, idx) => (
             <MainContainer
               $mb={list.length - 1 === idx ? 10 : 60}
-              key={groupMessages.date}
+              key={DateHelper.getFormatDateOfBack(groupMessages.date)}
             >
-              <TextUI
-                ag={Ag["400_12"]}
-                align={"center"}
-                mb={20}
-                text={DateHelper.getFormatDateChat(groupMessages.date)}
-              />
+              <TextUI ag={Ag["400_12"]} align={"center"} mb={20} text={date} />
               {groupMessages.messages.map((message) => (
                 <ChatMessageContainer key={message._id} message={message} />
               ))}

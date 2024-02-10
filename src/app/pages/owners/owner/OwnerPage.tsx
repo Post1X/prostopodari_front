@@ -37,11 +37,11 @@ export const OwnerPage = () => {
     await dispatch(
       putBanedSeller({
         seller_id: currentSeller?.sellerData?._id!,
-        ban: !currentSeller?.sellerData?.is_baned,
+        ban: !currentSeller?.sellerData?.is_banned,
       }),
     )
 
-    // await dispatch(getCurrentSeller(params.ownerId!))
+    await dispatch(getCurrentSeller(params.ownerId!))
   }
 
   if (isSellersLoad === "load") {
@@ -69,7 +69,7 @@ export const OwnerPage = () => {
         <OwnerButtonsGroup $pl={50} $pt={15}>
           <OwnerButtons
             id={currentSeller.sellerData._id}
-            is_baned={currentSeller.sellerData.is_baned}
+            is_banned={currentSeller.sellerData.is_banned}
             onBaned={handleBanSeller}
           />
         </OwnerButtonsGroup>

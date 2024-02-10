@@ -57,7 +57,7 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
               <LineTextVertical />
               <TextUI
                 ag={Ag["400_16"]}
-                text={`${DateHelper.getFormatDateOfBack(info.dateTime!)}`}
+                text={DateHelper.getFormatDateOfPoints(info.dateTime)}
               />
               <LineTextVertical />
               <TextUI
