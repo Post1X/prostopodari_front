@@ -38,6 +38,7 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
     toast.success("Скопировано!")
   }
 
+
   const handleGoOrders = () => {
     navigate(`${PathApp.finances.path}/${info._id}`)
   }

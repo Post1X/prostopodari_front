@@ -13,16 +13,28 @@ import { RowContainerStart } from "../../../template/containers/RowContainer"
 import { BackSVG } from "../../../template/svg/BackSVG"
 import { ChatHeader } from "../components/ChatHeader"
 import { MainContainer } from "../../../template/containers/MainContainer"
+import { useNavigate } from "react-router-dom"
 
 export const MessagesPage = () => {
   const { currentSeller } = useAppSelector(selectSellersValues)
+
+  const navigate = useNavigate()
+
+  const handlePop = () => {
+    navigate(-1)
+  }
 
   return (
     <ColumnContainerFlex style={styles.container}>
       <HeaderUI>
         <HeaderWrapperUI>
           <RowContainerStart $pl={15} $pb={10}>
-            <MainContainer style={styles.btn} $mt={5} $mr={20}>
+            <MainContainer
+              style={styles.btn}
+              onClick={() => handlePop()}
+              $mt={5}
+              $mr={20}
+            >
               <BackSVG />
             </MainContainer>
             {currentSeller?.sellerData ? (

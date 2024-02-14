@@ -10,6 +10,7 @@ export interface MessagesStateModel {
   messagesList: Message[]
   notificationList: Notification[]
   chatId?: string | null
+  sellerId?: string
 }
 
 export type PostMessageType = {

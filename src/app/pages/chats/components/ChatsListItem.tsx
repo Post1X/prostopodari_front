@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom"
 import { PathApp } from "../../../routes/path/PathApp"
 import { useAppDispatch } from "../../../settings/redux/hooks"
 import { getCurrentSeller } from "../../../modules/sellers/SellersSlice"
+import { getChatId, setLocaleSellerId } from "../../../modules/messages/MessagesSlice"
 
 type ChatsListItemProps = {
   chat: Chats
@@ -24,9 +25,14 @@ export const ChatsListItem = (props: ChatsListItemProps) => {
 
   const handleGoToChat = () => {
     dispatch(getCurrentSeller(sellerId))
-
-    navigate(`${PathApp.chats.path}/${props.chat.chatID.toString()}`)
+    dispatch(getChatId(sellerId)).then((res) => {
+      let chatID = res.payload.chatID
+      if (chatID) {
+        navigate(`${PathApp.chats.path}/${chatID}`)
+      }
+    })
   }
+
 
   return (
     <ListItemUI $isCursor onClick={() => handleGoToChat()}>

@@ -11,6 +11,7 @@ import {
   getChatId,
   getMessages,
   selectMessagesValues,
+  setLocaleSellerId,
 } from "../../../modules/messages/MessagesSlice"
 import { useParams } from "react-router-dom"
 import { MessageHelper } from "../../../helpers/MessageHelper"
@@ -24,6 +25,7 @@ import { selectSellersValues } from "../../../modules/sellers/SellersSlice"
 
 export const ChatMessages = () => {
   const { currentSeller } = useAppSelector(selectSellersValues)
+
   const sellerId = currentSeller?.sellerData?._id
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
@@ -49,7 +51,7 @@ export const ChatMessages = () => {
     let socketInstance
 
     if (sellerId && myRoom.chatId) {
-      socketInstance = io("http://194.58.121.218:3001/chat/user", {
+      socketInstance = io("http://194.58.121.218:3001/chat/messages", {
         query: {
           roomId: myRoom.chatId,
           seller_id: sellerId,
@@ -115,7 +117,12 @@ export const ChatMessages = () => {
               $mb={list.length - 1 === idx ? 10 : 60}
               key={DateHelper.getFormatDateOfBack(groupMessages.date)}
             >
-              <TextUI ag={Ag["400_12"]} align={"center"} mb={20} text={date} />
+              <TextUI
+                ag={Ag["400_12"]}
+                align={"center"}
+                mb={20}
+                text={DateHelper.getFormatLongDate(groupMessages.date)}
+              />
               {groupMessages.messages.map((message) => (
                 <ChatMessageContainer key={message._id} message={message} />
               ))}

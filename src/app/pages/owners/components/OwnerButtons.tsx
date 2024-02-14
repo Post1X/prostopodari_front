@@ -19,6 +19,7 @@ export const OwnerButtons = (props: OwnerButtonsProps) => {
 
   let dispatch = useAppDispatch()
 
+
   const handleGoFinances = () => {
     navigate(`${PathApp.finances.path}/${props.id}`)
   }

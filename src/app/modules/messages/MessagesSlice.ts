@@ -7,6 +7,7 @@ import { act } from "react-dom/test-utils"
 
 const messagesService = new MessagesService()
 
+
 const initialState: MessagesStateModel = {
   chatList: [],
   isChatsLoad: "completed",
@@ -15,12 +16,14 @@ const initialState: MessagesStateModel = {
   notificationList: [],
   messagesList: [],
   chatId: "",
+  sellerId: "",
 }
 
 const messagesSlice = createSlice({
   name: "messages",
   initialState,
-  reducers: {},
+  reducers: {
+  },
   extraReducers: (bulder) => {
     bulder
       // GET Chats
@@ -143,6 +146,7 @@ export const postMessageBuyers = createAsyncThunk(
 )
 
 export const selectMessagesValues = (state: RootState) => state.messagesSlice
+
 export const selectNotificationValues = (state: RootState) =>
   state.messagesSlice
 

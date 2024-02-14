@@ -32,14 +32,13 @@ export const FinancesPage = () => {
   const load = useRef(false)
 
   useEffect(() => {
-    if (load.current) {
       dispatch(
         getFinances({
           startDate: DateHelper.getFormatDateDTO(startDate),
           endDate: DateHelper.getFormatDateDTO(endDate),
         }),
       )
-    }
+    
 
     load.current = true
   }, [endDate])
