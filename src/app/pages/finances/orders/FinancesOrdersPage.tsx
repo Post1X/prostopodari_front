@@ -28,9 +28,15 @@ export const FinancesOrdersPage = () => {
 
   const dispatch = useAppDispatch()
 
+
   const [list, setList] = useState<FinancesOrdersSeller[]>([])
 
   const [startDate, setStartDate] = useState(new Date())
+  console.log(DateHelper.getFormatDateDTO(startDate))
+
+  console.log(financesOrdersList)
+
+
   const [endDate, setEndDate] = useState(new Date())
 
   const [search, setSearch] = useState("")
@@ -38,6 +44,47 @@ export const FinancesOrdersPage = () => {
   const load = useRef(false)
 
   const params = useParams()
+
+  function getSmallestDateFromOrders(orders: any[]): Date | null {
+    let smallestDate: Date | null = null
+
+    orders.forEach((item) => {
+      const dateTimeString = item.info.dateTime
+
+      const formattedDateTimeString = `20${dateTimeString.substring(
+        6,
+        8,
+      )}-${dateTimeString.substring(3, 5)}-${dateTimeString.substring(0, 2)}`
+
+      const currentDate = new Date(formattedDateTimeString)
+
+      if (smallestDate === null || currentDate < smallestDate) {
+        smallestDate = currentDate
+      }
+    })
+
+    return smallestDate
+  }
+
+
+
+  useEffect(() => {
+    if (financesOrdersList.length > 0) {
+      const smallestDate = getSmallestDateFromOrders(financesOrdersList)
+      setStartDate(smallestDate)
+      console.log(smallestDate)
+    }
+  }, [financesOrdersList])
+
+  useEffect(() => {
+    dispatch(
+      getOrders({
+        startDate: DateHelper.getFormatDateDTO(startDate),
+        endDate: DateHelper.getFormatDateDTO(endDate),
+        sellerId: params.sellerId,
+      }),
+    )
+  }, [])
 
   useEffect(() => {
     if (load.current) {

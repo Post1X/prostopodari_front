@@ -71,13 +71,13 @@ export const OwnersPage = () => {
                 onChangeText={(value: string) => handleChangeSearch(value)}
               />
             </MainContainer>
-
+{/* 
             <SelectCity
               currentCity={""}
               cities={MockCities}
               isDefault={true}
-              setIsDefault={(value: boolean) => {}}
-            />
+              setIsDefault={() => {}}
+            />  */}
           </RowContainer>
         </HeaderWrapperUI>
       </HeaderUI>

@@ -50,6 +50,15 @@ export const createPromocode = createAsyncThunk(
   },
 )
 
+export const deletePromocode = createAsyncThunk(
+  "promocodes/delete",
+  async (id: string) => {
+    const promocode = await promocodeService.deletePromocode(id)
+
+    return promocode
+  },
+)
+
 export const selectPromocodesValues = (state: RootState) =>
   state.promocodesSlice
 

@@ -14,7 +14,7 @@ export const CategoriesPage = () => {
         <DoubleSection
           firstContent={
             <CenterContainerFlex>
-              <TextUI ag={Ag["600_22"]} text={"Включить категории"} />
+              <TextUI ag={Ag["600_22"]} text={"Создать/удалить категории"} />
             </CenterContainerFlex>
           }
           secondContent={

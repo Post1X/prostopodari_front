@@ -4,6 +4,7 @@ import { MaskHelper } from "../../../helpers/MaskHelper"
 import {
   FinanceSellerUnit,
   FinanceStatistics,
+  FinanceStore,
   FinancesSellers,
 } from "../../../modules/sellers/types/FinancesTypes"
 import { StyleProp } from "../../../settings/types/BaseTypes"
@@ -21,17 +22,21 @@ import { useNavigate } from "react-router-dom"
 import { PathApp } from "../../../routes/path/PathApp"
 import { DateHelper } from "../../../helpers/DateHelper"
 import { useAppDispatch } from "../../../settings/redux/hooks"
+import { getCurrentSeller } from "../../../modules/sellers/SellersSlice"
 
 type FinanceListItemProps = {
   info: FinanceSellerUnit
   finances: FinanceStatistics
   isOrder?: boolean
+  store?: FinanceStore
 }
 
 export const FinanceListItem = (props: FinanceListItemProps) => {
-  const { info, finances, isOrder } = props
+  const { info, finances, isOrder,store } = props
+
 
   const navigate = useNavigate()
+  let dispatch = useAppDispatch();
 
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(finances.paymentCard)
@@ -40,6 +45,7 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
 
 
   const handleGoOrders = () => {
+    dispatch(getCurrentSeller(info._id))
     navigate(`${PathApp.finances.path}/${info._id}`)
   }
 
@@ -71,7 +77,7 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
               <TextUI ag={Ag["400_16"]} text={`${info.storeName}`} />
             </>
           ) : (
-            <TextUI ag={Ag["400_16"]} text={`${info.ip}: ${info.storeName}`} />
+            <TextUI ag={Ag["400_16"]} text={`${info.ip}: ${store.storeName}`} />
           )}
           <LineTextVertical />
           <TextUI ag={Ag["400_16"]} text={`ID: ${info._id || info.orderID}`} />
@@ -79,9 +85,13 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
           {info.phone_number && (
             <TextUI
               ag={Ag["400_16"]}
-              text={`${MaskHelper.formatPhoneNumber(info.phone_number)}`}
+              text={store?.city}
             />
           )}
+             <TextUI
+              ag={Ag["400_16"]}
+              text={`${MaskHelper.formatPhoneNumber(info.phone_number)}`}
+            />
         </RowContainer>
 
         <RowContainerEnd>

@@ -17,6 +17,10 @@ import { Nullable, StyleProp } from "../../../settings/types/BaseTypes"
 import { BackSVG } from "../../../template/svg/BackSVG"
 import { useNavigate } from "react-router-dom"
 import { CenterContainerFlex } from "../../../template/containers/CenterContainer"
+import { useAppSelector } from "../../../settings/redux/hooks"
+import { selectSellersValues } from "../../../modules/sellers/SellersSlice"
+import { useState } from "react"
+import { SellerData } from "../../../modules/sellers/models/SellerData"
 
 type FinanceHeaderContentProps = {
   searchValue: string
@@ -29,15 +33,23 @@ type FinanceHeaderContentProps = {
   isOrder?: boolean
   orderTitle?: string
   sellerInfo?: boolean
+  selectCity?: string
+  onCitySelect: (city: string) => void
 }
 
 export const FinanceHeaderContent = (props: FinanceHeaderContentProps) => {
   const navigate = useNavigate()
+  const [isDefault, setIsDefault] = useState(true)
+  const { financesList } = useAppSelector(selectSellersValues)
+  const { currentSeller } = useAppSelector(selectSellersValues)
+
+  console.log("cur seller ip", currentSeller?.sellerData.ip)
+
+  let cities = financesList.map((finance) => finance.store?.city)
 
   const handlePop = () => {
     navigate(-1)
   }
-
   return (
     <RowContainerBeetwenEnd
       className={"finances-header"}
@@ -56,6 +68,12 @@ export const FinanceHeaderContent = (props: FinanceHeaderContentProps) => {
               >
                 <BackSVG />
               </MainContainer>
+              {currentSeller?.sellerData?.ip && (
+                <TextUI
+                  ag={Ag["500_20"]}
+                  text={`ИП: ${currentSeller?.sellerData.ip}`}
+                />
+              )}
 
               <TextUI ag={Ag["500_20"]} text={props.orderTitle || ""} />
             </RowContainer>
@@ -72,10 +90,11 @@ export const FinanceHeaderContent = (props: FinanceHeaderContentProps) => {
             </MainContainer>
 
             <SelectCity
-              currentCity={""}
-              cities={MockCities}
-              isDefault={true}
-              setIsDefault={(value: boolean) => {}}
+              currentCity={props.selectCity}
+              cities={[...new Set(cities)]}
+              isDefault={isDefault}
+              setIsDefault={setIsDefault}
+              onCitySelect={props.onCitySelect}
             />
           </RowContainerEnd>
         </MainContainer>

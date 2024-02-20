@@ -8,9 +8,19 @@ import { CloseSVG } from "../../../template/svg/CloseSVG"
 import { MainContainer } from "../../../template/containers/MainContainer"
 import { ButtonUI } from "../../../template/ui/ButtonUI"
 import { DateHelper } from "../../../helpers/DateHelper"
+import { useAppDispatch } from "../../../settings/redux/hooks"
+import { deleteNotification, getNotifications } from "../../../modules/messages/MessagesSlice"
 
 export const ChatNotifCard = ({ data }) => {
-  let { body, date, role, title } = data
+  let { body, date, role, title, _id } = data
+
+  let dispatch = useAppDispatch()
+
+  let handleDeleteNotif = function(id:string) {
+
+    dispatch(deleteNotification(id))
+    dispatch(getNotifications())
+  }
 
   return (
     <>
@@ -26,7 +36,7 @@ export const ChatNotifCard = ({ data }) => {
             text={DateHelper.getFormatLongDate(date)}
           />
           <ButtonUI $isCustom $backColor={"transparent"}>
-            <MainContainer $isPointer $mr={-12}>
+            <MainContainer onClick={()=> handleDeleteNotif(_id)} $isPointer $mr={-12}>
               <CloseSVG />
             </MainContainer>
           </ButtonUI>

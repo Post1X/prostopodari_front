@@ -8,6 +8,12 @@ export class ApiPromocodesService extends AbstractApiRepository {
     })
   }
 
+  deletePromocode = (id: string) => {
+    return this.apiClient.delete({
+      url: `/promocodes/?id=${id}`,
+    })
+  }
+
   createPromocode = (dto: CreatePromocodeDTO) => {
     return this.apiClient.post({
       url: "/promocodes/admin",

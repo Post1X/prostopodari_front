@@ -31,6 +31,16 @@ export interface FinanceSellerUnit {
   dateTime?: string
 }
 
+export interface FinanceStore {
+  _id?: string
+  city: string
+  order_number?: string
+  ip?: string
+  phone_number: string
+  storeName: string
+  sellerName: string
+}
+
 export type TFinanceDTO = {
   startDate: string
   endDate: string

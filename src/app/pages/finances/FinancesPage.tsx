@@ -22,6 +22,15 @@ export const FinancesPage = () => {
     useAppSelector(selectSellersValues)
   const dispatch = useAppDispatch()
 
+  const [selectedCity, setSelectedCity] = useState("")
+
+  const handleCitySelect = (city: string) => {
+    setSelectedCity(city)
+     setList(
+       financesList.filter((finance) => finance.store?.city === city),
+    )
+  }
+
   const [list, setList] = useState<FinancesSellers[]>([])
 
   const [startDate, setStartDate] = useState(new Date())
@@ -32,13 +41,12 @@ export const FinancesPage = () => {
   const load = useRef(false)
 
   useEffect(() => {
-      dispatch(
-        getFinances({
-          startDate: DateHelper.getFormatDateDTO(startDate),
-          endDate: DateHelper.getFormatDateDTO(endDate),
-        }),
-      )
-    
+    dispatch(
+      getFinances({
+        startDate: DateHelper.getFormatDateDTO(startDate),
+        endDate: DateHelper.getFormatDateDTO(endDate),
+      }),
+    )
 
     load.current = true
   }, [endDate])
@@ -51,29 +59,38 @@ export const FinancesPage = () => {
     setSearch(value)
 
     if (!value.length) {
-      setList(financesList)
+      setList(
+        financesList.filter((finance) => finance.store?.city === selectedCity),
+      )
       return
     }
 
     setList(
-      financesList.filter((finance) =>
-        (
-          finance.seller.ip +
-          finance.seller.storeName +
-          finance.seller.phone_number +
-          finance.finance.paymentCard
-        )
-          .toLowerCase()
-          .includes(value.replace(/ /g, "").toLowerCase()),
+      financesList.filter(
+        (finance) =>
+          (
+            finance.seller.ip +
+            finance.seller.storeName +
+            finance.seller.phone_number +
+            finance.finance.paymentCard
+          )
+            .toLowerCase()
+            .includes(value.replace(/ /g, "").toLowerCase()) &&
+          finance.store?.city === selectedCity,
       ),
     )
   }
+
+  console.log(selectedCity)
+  console.log(list)
 
   return (
     <ColumnContainerFlex style={styles.container}>
       <HeaderUI $isNoHeight>
         <HeaderWrapperUI $maxWidth={1600}>
           <FinanceHeaderContent
+            selectCity={selectedCity}
+            onCitySelect={handleCitySelect}
             searchValue={search}
             searchChange={handleSearchChange}
             startDate={startDate}
@@ -97,6 +114,7 @@ export const FinancesPage = () => {
           {list.map((finances, idx) => (
             <FinanceListItem
               key={`finance-${idx}`}
+              store={finances.store}
               info={finances.seller}
               finances={finances.finance}
             />

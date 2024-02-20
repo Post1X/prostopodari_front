@@ -14,6 +14,8 @@ export const PromocodeCards = () => {
     selectPromocodesValues,
   )
 
+  
+
   const dispatch = useAppDispatch()
 
   const load = useRef(false)
@@ -43,6 +45,7 @@ export const PromocodeCards = () => {
           headerColor={"tiffany"}
           content={
             <PromocodeCardContent
+              id={promocode._id}
               text={promocode.text}
               promocodeName={promocode.event_name}
             />

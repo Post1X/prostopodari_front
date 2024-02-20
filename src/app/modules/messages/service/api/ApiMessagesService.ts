@@ -13,6 +13,11 @@ export class ApiMessagesService extends AbstractApiRepository {
       url: "/users/admin/notifications",
     })
   }
+  deleteNotification = async (id: string) => {
+    return this.apiClient.delete({
+      url: `/users/admin/notifications?notif_id=${id}`,
+    })
+  }
   getChatId = async (id: string) => {
     return this.apiClient.get({
       url: `/chat/is-created/admin?seller_id=${id}`,
