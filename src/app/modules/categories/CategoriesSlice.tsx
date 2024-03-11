@@ -39,6 +39,14 @@ export const getCategories = createAsyncThunk("categories/list", async () => {
 
   return catsList
 })
+export const deleteCategory = createAsyncThunk(
+  "categories/delete",
+  async (id: string) => {
+    const data = await categoriesService.deleteCategory(id)
+
+    return data
+  },
+)
 
 export const selectCatsValues = (state: RootState) => state.categoriesSlice
 

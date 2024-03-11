@@ -16,4 +16,9 @@ export class CategoriesService extends AbstractServiceRepository {
 
     return this.createList<Category>(Category, data)
   }
+  deleteCategory = async (id: string) => {
+    const { data } = await this.api.deleteCategory(id)
+    return data
+
+  }
 }

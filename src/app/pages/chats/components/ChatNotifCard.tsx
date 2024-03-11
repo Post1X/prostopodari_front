@@ -9,15 +9,17 @@ import { MainContainer } from "../../../template/containers/MainContainer"
 import { ButtonUI } from "../../../template/ui/ButtonUI"
 import { DateHelper } from "../../../helpers/DateHelper"
 import { useAppDispatch } from "../../../settings/redux/hooks"
-import { deleteNotification, getNotifications } from "../../../modules/messages/MessagesSlice"
+import {
+  deleteNotification,
+  getNotifications,
+} from "../../../modules/messages/MessagesSlice"
 
 export const ChatNotifCard = ({ data }) => {
   let { body, date, role, title, _id } = data
 
   let dispatch = useAppDispatch()
 
-  let handleDeleteNotif = function(id:string) {
-
+  let handleDeleteNotif = function (id: string) {
     dispatch(deleteNotification(id))
     dispatch(getNotifications())
   }
@@ -27,7 +29,7 @@ export const ChatNotifCard = ({ data }) => {
       <RowContainerBeetwen $mb={12}>
         <TextUI
           ag={Ag["400_16"]}
-          text={role == "buyer" ? "Покупатели" : "Продавцы"}
+          text={role === "buyer" ? "Покупатели" : "Продавцы"}
         />
         <RowContainer>
           <TextUI
@@ -36,7 +38,11 @@ export const ChatNotifCard = ({ data }) => {
             text={DateHelper.getFormatLongDate(date)}
           />
           <ButtonUI $isCustom $backColor={"transparent"}>
-            <MainContainer onClick={()=> handleDeleteNotif(_id)} $isPointer $mr={-12}>
+            <MainContainer
+              onClick={() => handleDeleteNotif(_id)}
+              $isPointer
+              $mr={-12}
+            >
               <CloseSVG />
             </MainContainer>
           </ButtonUI>

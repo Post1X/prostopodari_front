@@ -22,7 +22,11 @@ import { useNavigate } from "react-router-dom"
 import { PathApp } from "../../../routes/path/PathApp"
 import { DateHelper } from "../../../helpers/DateHelper"
 import { useAppDispatch } from "../../../settings/redux/hooks"
-import { getCurrentSeller } from "../../../modules/sellers/SellersSlice"
+import {
+  getCurrentSeller,
+  postPayment,
+  postValue,
+} from "../../../modules/sellers/SellersSlice"
 
 type FinanceListItemProps = {
   info: FinanceSellerUnit
@@ -32,21 +36,23 @@ type FinanceListItemProps = {
 }
 
 export const FinanceListItem = (props: FinanceListItemProps) => {
-  const { info, finances, isOrder,store } = props
-
+  const { info, finances, isOrder, store } = props
 
   const navigate = useNavigate()
-  let dispatch = useAppDispatch();
+  let dispatch = useAppDispatch()
 
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(finances.paymentCard)
     toast.success("Скопировано!")
   }
 
-
   const handleGoOrders = () => {
     dispatch(getCurrentSeller(info._id))
     navigate(`${PathApp.finances.path}/${info._id}`)
+  }
+
+  const handlePaymentClick = () => {
+    dispatch(postPayment(finances.payAmount))
   }
 
   return (
@@ -82,16 +88,11 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
           <LineTextVertical />
           <TextUI ag={Ag["400_16"]} text={`ID: ${info._id || info.orderID}`} />
           <LineTextVertical />
-          {info.phone_number && (
-            <TextUI
-              ag={Ag["400_16"]}
-              text={store?.city}
-            />
-          )}
-             <TextUI
-              ag={Ag["400_16"]}
-              text={`${MaskHelper.formatPhoneNumber(info.phone_number)}`}
-            />
+          {info.phone_number && <TextUI ag={Ag["400_16"]} text={store?.city} />}
+          <TextUI
+            ag={Ag["400_16"]}
+            text={`${MaskHelper.formatPhoneNumber(info.phone_number)}`}
+          />
         </RowContainer>
 
         <RowContainerEnd>
@@ -157,7 +158,10 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
               </ButtonUI>
             </MainContainer>
             <MainContainer $width={170}>
-              <ButtonUI $backColor={"green"}>
+              <ButtonUI
+                onClick={() => handlePaymentClick(finances.payAmount)}
+                $backColor={"green"}
+              >
                 <TextUI
                   color={ColorsUI.white}
                   ag={Ag["400_16"]}

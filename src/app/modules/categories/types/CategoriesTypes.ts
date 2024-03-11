@@ -17,3 +17,11 @@ export interface UpdateCategoryDTO {
   id: string
   isActive: boolean
 }
+export interface CreateCategoryDTO {
+  title: string
+  sort_numbers?: any
+  parameters?: []
+  comission_percentage?: number
+
+}
+

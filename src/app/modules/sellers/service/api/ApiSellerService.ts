@@ -68,4 +68,10 @@ export class ApiSellerService extends AbstractApiRepository {
       }&endDate=${dto.endDate}`,
     })
   }
+  postPayment = async (value: number) => {
+    return this.apiClient.post({
+      url: `/orders/payment`,
+      data: value,
+    })
+  }
 }

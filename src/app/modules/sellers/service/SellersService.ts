@@ -85,4 +85,10 @@ export class SellersService extends AbstractServiceRepository {
 
     return this.create<FinancesOrders>(FinancesOrders, data)
   }
+
+  postPayment = async (value: number) => {
+    const { data } = await this.apiService.postPayment(value)
+
+    return data
+  }
 }

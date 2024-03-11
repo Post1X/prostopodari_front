@@ -276,6 +276,15 @@ export const getOrders = createAsyncThunk(
   },
 )
 
+export const postPayment = createAsyncThunk(
+  "sellers/orders/payment",
+  async (value: number) => {
+    const data = await sellersService.postPayment(value)
+
+    return data
+  },
+)
+
 // ACTIONS
 
 export const { setCurrentSeller, selleryChangeForm, resetCurrentFinance } =

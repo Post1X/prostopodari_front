@@ -3,24 +3,27 @@ import styled from "styled-components"
 import { MainContainer } from "../containers/MainContainer"
 import { CheckedSVG } from "../svg/CheckedSVG"
 import { Ag, TextUI } from "./TextUI"
+import { useAppDispatch } from "../../settings/redux/hooks"
+import { deleteCategory } from "../../modules/categories/CategoriesSlice"
 
 type CheckboxUIProps = {
   text: string
+  id: string
   checked: boolean
   onChange: () => void
 }
 
 export const CheckboxUI = (props: CheckboxUIProps) => {
+  let dispatch = useAppDispatch()
+
+  const handleDeleteCat = (id: string) => {
+    dispatch(deleteCategory(id))
+  }
   return (
     <Label>
-      <InputCheckbox
-        type={"checkbox"}
-        checked={props.checked}
-        onChange={props.onChange}
-      />
       <RowContainer>
-        <MainContainer $mr={15}>
-          <CheckedSVG checked={props.checked} />
+        <MainContainer onClick={() => handleDeleteCat(props.id)} $mr={15}>
+          <TextUI ag={Ag["400_16"]} text={"X"} />
         </MainContainer>
         <TextUI isNoSelect ag={Ag["400_16"]} text={props.text} />
       </RowContainer>
