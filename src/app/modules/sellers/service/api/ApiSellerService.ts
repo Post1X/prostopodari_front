@@ -49,6 +49,12 @@ export class ApiSellerService extends AbstractApiRepository {
     })
   }
 
+  ordersChangeStatus = async (id: string) => {
+    return this.apiClient.post({
+      url: `/orders/change-status?order_id=${id}`,
+    })
+  }
+
   putBanedSeller = async (dto: TBanSellerDTO) => {
     return this.apiClient.put({
       url: `/users/sellers/ban?seller_id=${dto.seller_id}&ban=${dto.ban}`,

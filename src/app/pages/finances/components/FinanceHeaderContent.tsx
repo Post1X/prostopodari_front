@@ -43,7 +43,6 @@ export const FinanceHeaderContent = (props: FinanceHeaderContentProps) => {
   const { financesList } = useAppSelector(selectSellersValues)
   const { currentSeller } = useAppSelector(selectSellersValues)
 
-  console.log("cur seller ip", currentSeller?.sellerData.ip)
 
   let cities = financesList.map((finance) => finance.store?.city)
 

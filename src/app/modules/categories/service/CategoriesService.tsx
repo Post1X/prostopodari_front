@@ -1,6 +1,7 @@
 import { MockCategoriesList } from "../../../pages/categories/mocks/MockCategoriesList"
 import AbstractServiceRepository from "../../../settings/abstrcations/repositories/AbstractServiceRepository"
 import { Category } from "../models/Category"
+import { CreateCategoryDTO } from "../types/CategoriesTypes"
 import { ApiCategoriesService } from "./api/ApiCategoriesService"
 
 export class CategoriesService extends AbstractServiceRepository {
@@ -21,4 +22,10 @@ export class CategoriesService extends AbstractServiceRepository {
     return data
 
   }
+  postCategory = async (dto: CreateCategoryDTO) => {
+    const { data } = await this.api.postCategory(dto)
+    return data
+
+  }
+  
 }

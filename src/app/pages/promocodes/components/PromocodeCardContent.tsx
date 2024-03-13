@@ -27,7 +27,6 @@ export const PromocodeCardContent = (props: PromocodeCardContentProps) => {
     dispatch(deletePromocode(id))
     dispatch(getPromocodes())
 
-    console.log(id)
   }
   return (
     <>

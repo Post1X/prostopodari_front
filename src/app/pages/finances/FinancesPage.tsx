@@ -81,8 +81,6 @@ export const FinancesPage = () => {
     )
   }
 
-  console.log(selectedCity)
-  console.log(list)
 
   return (
     <ColumnContainerFlex style={styles.container}>

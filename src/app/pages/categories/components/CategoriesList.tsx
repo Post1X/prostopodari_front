@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../settings/redux/hooks"
 import {
   getCategories,
+  postCategory,
   selectCatsValues,
 } from "../../../modules/categories/CategoriesSlice"
 import { Category } from "../../../modules/categories/models/Category"
@@ -21,18 +22,19 @@ import toast from "react-hot-toast"
 import { BannerUI } from "../ui/BannerUI"
 import { selectBannerValues } from "../../../modules/banner/BannerSlice"
 import axios from "axios"
+import { CreateCategoryDTO } from "../../../modules/categories/types/CategoriesTypes"
 
 export const CategoriesList = () => {
   const { categoriesList } = useAppSelector(selectCatsValues)
-  const [title, setTitle] = useState("")
-  const [image, setImage] = useState(null)
+  const [myTitle, setmyTitle] = useState("")
+  const [myImage, setMyImage] = useState(null)
 
   const handleTitleChange = (e) => {
-    setTitle(e.target.value)
+    setmyTitle(e.target.value)
   }
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0])
+    setMyImage(e.target.files[0])
   }
   const dispatch = useAppDispatch()
 
@@ -58,31 +60,49 @@ export const CategoriesList = () => {
     setList(CategoriesHelper.getCats(list, catId, subCatId))
   }
 
-  const handleCreateCategory = () => {
-    const token = localStorage.getItem("token")
+  // const handleCreateCategory = () => {
+  //   if (myTitle && myImage) {
+  //     const formData = new FormData()
+  //     formData.append("title", myTitle)
+  //     formData.append("photo_url", myImage)
 
-    const formData = new FormData()
-    formData.append("title", title)
-    formData.append("image", image)
+  //     const dto: CreateCategoryDTO = {
+  //       title: myTitle,
+  //       photo_url: myImage,
+  //     }
+  //     console.log(dto);
+  //     console.log(typeof dto.title)
+  //     console.log(typeof dto.photo_url)
+  //     dispatch(postCategory(dto))
+  //     setmyTitle("")
+  //     setMyImage(null)
+  //   }
+  // }
+  const handleCreateCategory = async () => {
+    try {
+      const formData = new FormData()
+      formData.append("title", myTitle)
+      formData.append("photo_url", myImage)
 
-    axios
-      .post("http://194.58.121.218:3001/categories/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
+
+      const token = localStorage.getItem("token")
+
+      const response = await axios.post(
+        "http://194.58.121.218:3001/categories/",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
-      .then((response) => {
-        console.log("data", response.data)
-      })
-      .catch((error) => {
-        console.log("error", error)
-      })
-
-    setTitle("")
-    setImage(null)
+      )
+      dispatch(getCategories())
+      
+    } catch (error) {
+      console.error("Error uploading image:", error)
+    }
   }
-
   if (!categoriesList.length) {
     return <EmptyList listName={"категорий"} />
   }
@@ -95,15 +115,15 @@ export const CategoriesList = () => {
           $mb={40}
           $pl={0}
           placeholder={"Напишите название категории"}
-          value={title}
+          value={myTitle}
           onChange={handleTitleChange}
         />
         <BannerUI $mb={20}>
           <div
             className="img"
             style={{
-              backgroundImage: image
-                ? `url(${URL.createObjectURL(image)})`
+              backgroundImage: myImage
+                ? `url(${URL.createObjectURL(myImage)})`
                 : null,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
@@ -126,7 +146,7 @@ export const CategoriesList = () => {
             />
           </div>
         </BannerUI>
-        <ButtonUI onClick={handleCreateCategory} disabled={!title || !image}>
+        <ButtonUI onClick={handleCreateCategory} disabled={!myTitle || !myImage}>
           <TextUI color={ColorsUI.white} ag={Ag["600_16"]} text={"Создать"} />
         </ButtonUI>
       </MainContainer>

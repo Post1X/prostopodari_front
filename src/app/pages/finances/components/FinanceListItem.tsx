@@ -24,9 +24,11 @@ import { DateHelper } from "../../../helpers/DateHelper"
 import { useAppDispatch } from "../../../settings/redux/hooks"
 import {
   getCurrentSeller,
+  ordersChangeStatus,
   postPayment,
   postValue,
 } from "../../../modules/sellers/SellersSlice"
+import { useState } from "react"
 
 type FinanceListItemProps = {
   info: FinanceSellerUnit
@@ -41,6 +43,8 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
   const navigate = useNavigate()
   let dispatch = useAppDispatch()
 
+  let [paymentTitle, setPaymentTitle] = useState("")
+
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(finances.paymentCard)
     toast.success("Скопировано!")
@@ -51,8 +55,10 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
     navigate(`${PathApp.finances.path}/${info._id}`)
   }
 
-  const handlePaymentClick = () => {
-    dispatch(postPayment(finances.payAmount))
+  const handlePaymentClick = (orderID: string) => {
+    dispatch(ordersChangeStatus(orderID)).then(() => {
+      setPaymentTitle("Оплачено")
+    })
   }
 
   return (
@@ -159,24 +165,27 @@ export const FinanceListItem = (props: FinanceListItemProps) => {
             </MainContainer>
             <MainContainer $width={170}>
               <ButtonUI
-                onClick={() => handlePaymentClick(finances.payAmount)}
-                $backColor={"green"}
+                onClick={() => handlePaymentClick(info.orderID)}
+                $backColor={paymentTitle ? "transparent" : "green"}
               >
                 <TextUI
-                  color={ColorsUI.white}
+                  color={paymentTitle ? ColorsUI.green : ColorsUI.white}
                   ag={Ag["400_16"]}
-                  text={"Оплатить"}
+                  text={paymentTitle ? paymentTitle : "Оплатить"}
                 />
               </ButtonUI>
             </MainContainer>
           </>
         ) : (
           <MainContainer $width={170}>
-            <ButtonUI $backColor={"green"}>
+            <ButtonUI
+              onClick={() => handlePaymentClick(info.orderID)}
+              $backColor={paymentTitle ? "transparent" : "green"}
+            >
               <TextUI
-                color={ColorsUI.white}
+                color={paymentTitle ? ColorsUI.green : ColorsUI.white}
                 ag={Ag["400_16"]}
-                text={"Оплатить"}
+                text={paymentTitle ? paymentTitle : "Оплатить"}
               />
             </ButtonUI>
           </MainContainer>

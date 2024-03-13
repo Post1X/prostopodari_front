@@ -32,9 +32,7 @@ export const FinancesOrdersPage = () => {
   const [list, setList] = useState<FinancesOrdersSeller[]>([])
 
   const [startDate, setStartDate] = useState(new Date())
-  console.log(DateHelper.getFormatDateDTO(startDate))
 
-  console.log(financesOrdersList)
 
 
   const [endDate, setEndDate] = useState(new Date())
@@ -72,7 +70,6 @@ export const FinancesOrdersPage = () => {
     if (financesOrdersList.length > 0) {
       const smallestDate = getSmallestDateFromOrders(financesOrdersList)
       setStartDate(smallestDate)
-      console.log(smallestDate)
     }
   }, [financesOrdersList])
 

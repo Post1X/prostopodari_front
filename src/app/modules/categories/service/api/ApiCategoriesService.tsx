@@ -8,14 +8,32 @@ export class ApiCategoriesService extends AbstractApiRepository {
     })
   }
   deleteCategory = (id: string) => {
+    let token = localStorage.getItem("token")
+
     return this.apiClient.post({
       url: `/categories/delete?id=${id}`,
+      config: {
+        headers: {
+          "Content-Type": `application/json`,
+          Authorization: `Bearer ${token}`,
+        },
+      },
     })
   }
-  postCategory = (dto: CreateCategoryDTO) => {
+  postCategory = async (dto: CreateCategoryDTO) => {
+    const formData = new FormData()
+    let token = localStorage.getItem("token")
+    formData.append("title", dto.title)
+    formData.append("photo_url", dto.photo_url)
     return this.apiClient.post({
-      url: "/categories/",
-      data: dto,
+      url: `/categories/`,
+      data: formData,
+      config: {
+        headers: {
+          "Content-Type": `multipart/form-data;`,
+          Authorization: `Bearer ${token}`,
+        },
+      },
     })
   }
 }

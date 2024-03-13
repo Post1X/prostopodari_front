@@ -56,6 +56,7 @@ export const CategoriesBanner = () => {
           },
         },
       )
+      console.log('response data', response.data)
       dispatch(postBanner(response.data))
       dispatch(getBanner())
     } catch (error) {

@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { CategoriesService } from "./service/CategoriesService"
-import { CategoriesStateModel } from "./types/CategoriesTypes"
+import { CategoriesStateModel, CreateCategoryDTO } from "./types/CategoriesTypes"
 import { RootState } from "../../settings/redux/store"
+import toast from "react-hot-toast"
 
 const categoriesService = new CategoriesService()
 
@@ -31,6 +32,16 @@ export const categoriesSlice = createSlice({
       .addCase(getCategories.rejected, (state) => {
         state.isLoadCats = "failed"
       })
+      .addCase(postCategory.pending, (state) => {
+        state.isLoadCats = "load"
+      })
+      .addCase(postCategory.fulfilled, (state, action) => {
+        state.isUpdateCars = "completed"
+        toast.success("Успешно")
+      })
+      .addCase(postCategory.rejected, (state) => {
+        state.isUpdateCars = "failed"
+      })
   },
 })
 
@@ -45,6 +56,14 @@ export const deleteCategory = createAsyncThunk(
     const data = await categoriesService.deleteCategory(id)
 
     return data
+  },
+)
+export const postCategory = createAsyncThunk(
+  "categories/post",
+  async (dto: CreateCategoryDTO, _) => {
+    const category = await categoriesService.postCategory(dto)
+
+    return category
   },
 )
 

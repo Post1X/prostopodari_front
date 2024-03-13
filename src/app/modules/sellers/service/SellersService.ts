@@ -58,6 +58,11 @@ export class SellersService extends AbstractServiceRepository {
 
     return this.create<ResponseMessage>(ResponseMessage, data)
   }
+  ordersChangeStatus = async (id: string) => {
+    const { data } = await this.apiService.ordersChangeStatus(id)
+
+    return data
+  }
 
   getTypeList = (sellerList: Seller[], type: SellersTabMenuType) => {
     switch (type) {

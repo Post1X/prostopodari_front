@@ -17,6 +17,7 @@ const initialState: TSellersState = {
   isClaimsLoad: "completed",
   isSellersLoad: "completed",
   isFinancesLoad: "completed",
+  isOrdersStatusChanged: "load",
 
   isUpdateLoad: "completed",
 
@@ -195,6 +196,13 @@ const sellersSlice = createSlice({
       .addCase(getOrders.rejected, (state) => {
         state.isFinancesLoad = "completed"
       })
+
+      .addCase(ordersChangeStatus.fulfilled, (state) => {
+        state.isOrdersStatusChanged = "completed"
+      })
+      .addCase(ordersChangeStatus.rejected, (state) => {
+        state.isOrdersStatusChanged = "failed"
+      })
   },
 })
 
@@ -273,6 +281,14 @@ export const getOrders = createAsyncThunk(
     const orders = await sellersService.getOrders(dto)
 
     return orders
+  },
+)
+export const ordersChangeStatus = createAsyncThunk(
+  "sellers/orders/ordersChangeStatus",
+  async (id: string) => {
+    const ordersChange = await sellersService.ordersChangeStatus(id)
+
+    return ordersChange
   },
 )
 

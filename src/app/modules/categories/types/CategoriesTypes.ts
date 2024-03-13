@@ -19,9 +19,6 @@ export interface UpdateCategoryDTO {
 }
 export interface CreateCategoryDTO {
   title: string
-  sort_numbers?: any
-  parameters?: []
-  comission_percentage?: number
-
+  photo_url: File
 }
 

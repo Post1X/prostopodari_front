@@ -14,7 +14,7 @@ export type TSellersState = {
   isSellersLoad: "completed" | "load" | "failed"
   isUpdateLoad: "completed" | "load" | "failed"
   isFinancesLoad: "completed" | "load" | "failed"
-
+  isOrdersStatusChanged: "completed" | "load" | "failed"
   claimsList: Seller[]
   claimsListPending: Seller[]
   claimsListDeny: Seller[]

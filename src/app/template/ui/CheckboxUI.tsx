@@ -4,7 +4,8 @@ import { MainContainer } from "../containers/MainContainer"
 import { CheckedSVG } from "../svg/CheckedSVG"
 import { Ag, TextUI } from "./TextUI"
 import { useAppDispatch } from "../../settings/redux/hooks"
-import { deleteCategory } from "../../modules/categories/CategoriesSlice"
+import { deleteCategory, getCategories } from "../../modules/categories/CategoriesSlice"
+import { useEffect } from "react"
 
 type CheckboxUIProps = {
   text: string
@@ -18,7 +19,10 @@ export const CheckboxUI = (props: CheckboxUIProps) => {
 
   const handleDeleteCat = (id: string) => {
     dispatch(deleteCategory(id))
+    dispatch(getCategories())
+
   }
+
   return (
     <Label>
       <RowContainer>
