@@ -51,7 +51,7 @@ export const ChatMessages = () => {
     let socketInstance
 
     if (sellerId && myRoom.chatId) {
-      socketInstance = io("http://194.58.121.218:3001/chat/messages", {
+      socketInstance = io("http://194.58.121.218:3001/api/chat/messages", {
         query: {
           roomId: myRoom.chatId,
           seller_id: sellerId,
