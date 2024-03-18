@@ -59,25 +59,6 @@ export const CategoriesList = () => {
   const handleChangeCat = (catId: string, subCatId?: string) => {
     setList(CategoriesHelper.getCats(list, catId, subCatId))
   }
-
-  // const handleCreateCategory = () => {
-  //   if (myTitle && myImage) {
-  //     const formData = new FormData()
-  //     formData.append("title", myTitle)
-  //     formData.append("photo_url", myImage)
-
-  //     const dto: CreateCategoryDTO = {
-  //       title: myTitle,
-  //       photo_url: myImage,
-  //     }
-  //     console.log(dto);
-  //     console.log(typeof dto.title)
-  //     console.log(typeof dto.photo_url)
-  //     dispatch(postCategory(dto))
-  //     setmyTitle("")
-  //     setMyImage(null)
-  //   }
-  // }
   const handleCreateCategory = async () => {
     try {
       const formData = new FormData()
@@ -146,7 +127,7 @@ export const CategoriesList = () => {
             />
           </div>
         </BannerUI>
-        <ButtonUI onClick={handleCreateCategory} disabled={!myTitle || !myImage}>
+        <ButtonUI onClick={ () => handleCreateCategory()} disabled={!myTitle || !myImage}>
           <TextUI color={ColorsUI.white} ag={Ag["600_16"]} text={"Создать"} />
         </ButtonUI>
       </MainContainer>
