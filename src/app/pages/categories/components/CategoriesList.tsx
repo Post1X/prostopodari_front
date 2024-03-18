@@ -69,7 +69,7 @@ export const CategoriesList = () => {
       const token = localStorage.getItem("token")
 
       const response = await axios.post(
-        "categories/",
+        "api/categories/",
         formData,
         {
           headers: {
