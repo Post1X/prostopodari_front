@@ -88,7 +88,7 @@ export const CategoriesList = () => {
       const token = localStorage.getItem("token")
 
       const response = await axios.post(
-        "http://194.58.121.218:3001/api/categories/",
+        "podariadminkavsem.online/api/categories/",
         formData,
         {
           headers: {
