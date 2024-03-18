@@ -5,12 +5,12 @@ import { BannerDTO } from "../../types/ bannerTypes"
 export class ApiBannerService extends AbstractApiRepository {
   getBanner = async () => {
     return this.apiClient.get({
-      url: `/users/admin/banner`,
+      url: `api/users/admin/banner`,
     })
   }
   deleteBanner = async (banner_id: string) => {
     return this.apiClient.delete({
-      url: `/users/admin/banner?banner_id=${banner_id}`,
+      url: `api/users/admin/banner?banner_id=${banner_id}`,
       data: banner_id,
       config: {
         headers: {
@@ -21,7 +21,7 @@ export class ApiBannerService extends AbstractApiRepository {
   }
   postBanner = (image: string) => {
     return this.apiClient.post({
-      url: `/users/admin/banner`,
+      url: `api/users/admin/banner`,
       data: { image },
       config: {
         headers: {
