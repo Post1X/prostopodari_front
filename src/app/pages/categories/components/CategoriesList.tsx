@@ -69,7 +69,7 @@ export const CategoriesList = () => {
       const token = localStorage.getItem("token")
 
       const response = await axios.post(
-        "podariadminkavsem.online/api/categories/",
+        "categories/",
         formData,
         {
           headers: {

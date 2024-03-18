@@ -47,7 +47,7 @@ export const CategoriesBanner = () => {
       const token = localStorage.getItem("token")
 
       const response = await axios.post(
-        "podariadminkavsem.online/api/users/admin/upload-image",
+        "users/admin/upload-image",
         formData,
         {
           headers: {
