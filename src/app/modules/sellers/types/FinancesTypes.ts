@@ -13,6 +13,7 @@ export interface FinanceStatistics {
 export interface FinancesSellers {
   seller: FinanceSellerUnit
   finance: FinanceStatistics
+  store: FinanceStore
 }
 
 export interface FinancesOrdersSeller {

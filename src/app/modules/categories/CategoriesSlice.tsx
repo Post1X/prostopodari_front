@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { CategoriesService } from "./service/CategoriesService"
-import { CategoriesStateModel, CreateCategoryDTO } from "./types/CategoriesTypes"
+import {
+  CategoriesStateModel,
+  CreateCategoryDTO,
+} from "./types/CategoriesTypes"
 import { RootState } from "../../settings/redux/store"
 import toast from "react-hot-toast"
 

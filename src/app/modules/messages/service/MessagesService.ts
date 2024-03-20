@@ -23,11 +23,10 @@ export class MessagesService extends AbstractServiceRepository {
     const { data } = await this.apiService.getNotifications()
     return this.createList<Notification>(Notification, data)
   }
-  deleteNotification = async (id:string) => {
+  deleteNotification = async (id: string) => {
     const { data } = await this.apiService.deleteNotification(id)
     return data
   }
-  
 
   getChatId = async (id: string) => {
     const { data } = await this.apiService.getChatId(id)

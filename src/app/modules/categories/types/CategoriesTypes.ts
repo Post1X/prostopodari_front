@@ -21,4 +21,3 @@ export interface CreateCategoryDTO {
   title: string
   photo_url: File
 }
-

@@ -21,7 +21,10 @@ import { ScrollContent } from "../../../components/ScrollContent"
 import { ChatMessageContainer } from "./ChatMessageContainer"
 import { ColumnContainerFlex } from "../../../template/containers/ColumnContainer"
 import io from "socket.io-client"
-import { selectSellersValues } from "../../../modules/sellers/SellersSlice"
+import {
+  getCurrentSeller,
+  selectSellersValues,
+} from "../../../modules/sellers/SellersSlice"
 
 export const ChatMessages = () => {
   const { currentSeller } = useAppSelector(selectSellersValues)
@@ -30,11 +33,28 @@ export const ChatMessages = () => {
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
   let myRoom = useParams()
+  let dispatch = useAppDispatch()
 
   const [list, setList] = useState<FormattedMessagesModel[]>([])
 
   const [socket, setSocket] = useState(null)
   const [messages, setMessages] = useState([])
+
+  const sellerIdFromLocale = localStorage.getItem("sellerId")
+  const ChatIdFromLocale = localStorage.getItem("chatId")
+
+  useEffect(() => {
+    if (currentSeller) {
+      localStorage.setItem("sellerId", sellerId)
+      localStorage.setItem("chatId", myRoom.chatId)
+    }
+  }, [currentSeller])
+
+  useEffect(() => {
+    if (!currentSeller) {
+      dispatch(getCurrentSeller(sellerIdFromLocale))
+    }
+  }, [])
 
   const [messageInput, setMessageInput] = useState("")
   useEffect(() => {
@@ -49,14 +69,19 @@ export const ChatMessages = () => {
 
   useEffect(() => {
     let socketInstance
-    if (sellerId && myRoom.chatId) {
-      socketInstance = io("https://podariadminkavsem.online/api/chat/messages", {
-        query: {
-          roomId: myRoom.chatId,
-          seller_id: sellerId,
-          token: localStorage.getItem("token"),
+    if (
+      currentSeller ? myRoom.chatId : sellerIdFromLocale && ChatIdFromLocale
+    ) {
+      socketInstance = io(
+        "https://podariadminkavsem.online/api/chat/messages",
+        {
+          query: {
+            roomId: myRoom.chatId ? myRoom.chatId : sellerIdFromLocale,
+            seller_id:   sellerId ? sellerId : ChatIdFromLocale,
+            token: localStorage.getItem("token"),
+          },
         },
-      })
+      )
 
       setSocket(socketInstance)
     }

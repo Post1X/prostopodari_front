@@ -14,18 +14,12 @@ export const PromocodeCards = () => {
     selectPromocodesValues,
   )
 
-  
-
   const dispatch = useAppDispatch()
 
   const load = useRef(false)
 
   useEffect(() => {
-    if (load.current) {
-      dispatch(getPromocodes())
-    }
-
-    load.current = true
+    dispatch(getPromocodes())
   }, [])
 
   return (

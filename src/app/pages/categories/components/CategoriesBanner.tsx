@@ -56,7 +56,7 @@ export const CategoriesBanner = () => {
           },
         },
       )
-      console.log('response data', response.data)
+      console.log("response data", response.data)
       dispatch(postBanner(response.data))
       dispatch(getBanner())
     } catch (error) {
@@ -105,7 +105,7 @@ export const CategoriesBanner = () => {
         >
           <TextUI color={ColorsUI.white} ag={Ag["600_16"]} text={"Удалить"} />
         </ButtonUI>
-        <ButtonUI onClick={ () => handleUpload()}>
+        <ButtonUI onClick={() => handleUpload()}>
           <TextUI color={ColorsUI.white} ag={Ag["600_16"]} text={"Загрузить"} />
         </ButtonUI>
       </RowContainerBeetwen>

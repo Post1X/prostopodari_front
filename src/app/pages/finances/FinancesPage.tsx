@@ -26,9 +26,7 @@ export const FinancesPage = () => {
 
   const handleCitySelect = (city: string) => {
     setSelectedCity(city)
-     setList(
-       financesList.filter((finance) => finance.store?.city === city),
-    )
+    setList(financesList.filter((finance) => finance.store?.city === city))
   }
 
   const [list, setList] = useState<FinancesSellers[]>([])
@@ -64,22 +62,16 @@ export const FinancesPage = () => {
       )
       return
     }
-
     setList(
-      financesList.filter(
-        (finance) =>
-          (
-            finance.seller.ip +
-            finance.seller.storeName +
-            finance.seller.phone_number +
-            finance.finance.paymentCard
-          )
-            .toLowerCase()
-            .includes(value.replace(/ /g, "").toLowerCase()) &&
-          finance.store?.city === selectedCity,
+      financesList.filter((finance) =>
+        ( finance.store.ip +  finance.store.storeName  + finance.store.phone_number) 
+          .toLowerCase()
+          .includes(value.toLowerCase())
       ),
     )
+
   }
+      console.log('list', list)
 
 
   return (

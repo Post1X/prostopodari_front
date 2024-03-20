@@ -60,6 +60,13 @@ export const OwnersPage = () => {
     )
   }
 
+  const [selectedCity, setSelectedCity] = useState("")
+
+  const handleCitySelect = (city: string) => {
+    setSelectedCity(city)
+    setList(financesList.filter((finance) => finance.store?.city === city))
+  }
+
   return (
     <ColumnContainerFlex style={styles.container}>
       <HeaderUI>
@@ -71,7 +78,7 @@ export const OwnersPage = () => {
                 onChangeText={(value: string) => handleChangeSearch(value)}
               />
             </MainContainer>
-{/* 
+            {/* 
             <SelectCity
               currentCity={""}
               cities={MockCities}

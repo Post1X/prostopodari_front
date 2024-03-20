@@ -28,12 +28,9 @@ export const FinancesOrdersPage = () => {
 
   const dispatch = useAppDispatch()
 
-
   const [list, setList] = useState<FinancesOrdersSeller[]>([])
 
   const [startDate, setStartDate] = useState(new Date())
-
-
 
   const [endDate, setEndDate] = useState(new Date())
 
@@ -65,6 +62,12 @@ export const FinancesOrdersPage = () => {
   }
 
 
+  const [selectedCity, setSelectedCity] = useState("")
+
+  const handleCitySelect = (city: string) => {
+    setSelectedCity(city)
+    setList(financesList.filter((finance) => finance.store?.city === city))
+  }
 
   useEffect(() => {
     if (financesOrdersList.length > 0) {

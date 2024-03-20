@@ -26,15 +26,18 @@ export const PromocodeCardContent = (props: PromocodeCardContentProps) => {
   let handleDeletePromocode = function (id: string) {
     dispatch(deletePromocode(id))
     dispatch(getPromocodes())
-
   }
   return (
     <>
       <RowContainerBeetwen $mb={10}>
         <TextUI ag={Ag["400_16"]} text={props.text} />
         <ButtonUI $isCustom $backColor={"transparent"}>
-          <MainContainer onClick={() => handleDeletePromocode(props.id)} $isPointer $mr={-12}>
-            <CloseSVG  />
+          <MainContainer
+            onClick={() => handleDeletePromocode(props.id)}
+            $isPointer
+            $mr={-12}
+          >
+            <CloseSVG />
           </MainContainer>
         </ButtonUI>
       </RowContainerBeetwen>

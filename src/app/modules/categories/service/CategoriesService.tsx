@@ -20,12 +20,9 @@ export class CategoriesService extends AbstractServiceRepository {
   deleteCategory = async (id: string) => {
     const { data } = await this.api.deleteCategory(id)
     return data
-
   }
   postCategory = async (dto: CreateCategoryDTO) => {
     const { data } = await this.api.postCategory(dto)
     return data
-
   }
-  
 }

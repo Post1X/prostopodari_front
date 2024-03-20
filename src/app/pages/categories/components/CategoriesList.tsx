@@ -65,21 +65,15 @@ export const CategoriesList = () => {
       formData.append("title", myTitle)
       formData.append("photo_url", myImage)
 
-
       const token = localStorage.getItem("token")
 
-      const response = await axios.post(
-        "api/categories/",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await axios.post("api/categories/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       dispatch(getCategories())
-      
     } catch (error) {
       console.error("Error uploading image:", error)
     }
@@ -127,7 +121,10 @@ export const CategoriesList = () => {
             />
           </div>
         </BannerUI>
-        <ButtonUI onClick={ () => handleCreateCategory()} disabled={!myTitle || !myImage}>
+        <ButtonUI
+          onClick={() => handleCreateCategory()}
+          disabled={!myTitle || !myImage}
+        >
           <TextUI color={ColorsUI.white} ag={Ag["600_16"]} text={"Создать"} />
         </ButtonUI>
       </MainContainer>

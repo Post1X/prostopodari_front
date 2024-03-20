@@ -17,7 +17,7 @@ export class PromocodesService extends AbstractServiceRepository {
     return this.createList<Promocode>(Promocode, data)
   }
 
-  deletePromocode = async (id:string) => {
+  deletePromocode = async (id: string) => {
     const { data } = await this.api.deletePromocode(id)
 
     return data

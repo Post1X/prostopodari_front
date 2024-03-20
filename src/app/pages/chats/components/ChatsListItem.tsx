@@ -11,7 +11,10 @@ import { useNavigate } from "react-router-dom"
 import { PathApp } from "../../../routes/path/PathApp"
 import { useAppDispatch } from "../../../settings/redux/hooks"
 import { getCurrentSeller } from "../../../modules/sellers/SellersSlice"
-import { getChatId, setLocaleSellerId } from "../../../modules/messages/MessagesSlice"
+import {
+  getChatId,
+  setLocaleSellerId,
+} from "../../../modules/messages/MessagesSlice"
 
 type ChatsListItemProps = {
   chat: Chats
@@ -32,7 +35,6 @@ export const ChatsListItem = (props: ChatsListItemProps) => {
       }
     })
   }
-
 
   return (
     <ListItemUI $isCursor onClick={() => handleGoToChat()}>

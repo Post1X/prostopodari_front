@@ -13,7 +13,9 @@ type ChatTabMenuProps = {
 export const ChatsTabMenu = (props: ChatTabMenuProps) => {
   const { chatList } = useAppSelector(selectMessagesValues)
 
-  let chatListArr = chatList.filter((messageCount) => messageCount.newMessCount > 0)
+  let chatListArr = chatList.filter(
+    (messageCount) => messageCount.newMessCount > 0,
+  )
 
   return (
     <TabMenu
