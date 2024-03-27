@@ -48,20 +48,23 @@ export const PromocodeCreateContent = () => {
       <TextUI mb={15} ag={Ag["500_14"]} text={"Событие"} />
       <InputUnderline
         $mb={40}
-        value={titlePromo}
-        $pl={0}
-        placeholder={"Напишите название события"}
-        onChange={(e) => setTitlePromo(e.target.value)}
-      />
+        value={namePromo}
+        placeholder={"Напишите  Событие"}
 
+        $pl={0}
+        onChange={(e) => setNamePromo(e.target.value)}
+      />
+      
       <TextUI mb={15} ag={Ag["500_14"]} text={"Промокод"} />
       <InputUnderline
         $mb={40}
-        value={namePromo}
+        value={titlePromo}
         $pl={0}
         placeholder={"Придумайте промокод"}
-        onChange={(e) => setNamePromo(e.target.value)}
+        onChange={(e) => setTitlePromo(e.target.value)}
       />
+
+    
 
       {/* <TextUI mb={15} ag={Ag["500_14"]} text={"Скидка %"} />
       <InputUnderline

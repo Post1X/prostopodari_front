@@ -64,15 +64,17 @@ export const FinancesPage = () => {
     }
     setList(
       financesList.filter((finance) =>
-        ( finance.store.ip +  finance.store.storeName  + finance.store.phone_number) 
+        (
+          finance.store.ip +
+          finance.store.storeName +
+          finance.store.phone_number
+        )
           .toLowerCase()
-          .includes(value.toLowerCase())
+          .includes(value.toLowerCase()),
       ),
     )
-
   }
-      console.log('list', list)
-
+  console.log("list", list)
 
   return (
     <ColumnContainerFlex style={styles.container}>

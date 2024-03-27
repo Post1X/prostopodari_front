@@ -61,7 +61,6 @@ export const FinancesOrdersPage = () => {
     return smallestDate
   }
 
-
   const [selectedCity, setSelectedCity] = useState("")
 
   const handleCitySelect = (city: string) => {

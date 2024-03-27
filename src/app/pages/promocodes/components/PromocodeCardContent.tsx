@@ -30,7 +30,7 @@ export const PromocodeCardContent = (props: PromocodeCardContentProps) => {
   return (
     <>
       <RowContainerBeetwen $mb={10}>
-        <TextUI ag={Ag["400_16"]} text={props.text} />
+        <TextUI ag={Ag["400_16"]} text={props.promocodeName} />
         <ButtonUI $isCustom $backColor={"transparent"}>
           <MainContainer
             onClick={() => handleDeletePromocode(props.id)}
@@ -42,7 +42,7 @@ export const PromocodeCardContent = (props: PromocodeCardContentProps) => {
         </ButtonUI>
       </RowContainerBeetwen>
 
-      <TextUI ag={Ag["600_16"]} text={`Промокод: ${props.promocodeName}`} />
+      <TextUI ag={Ag["600_16"]} text={`Промокод: ${props.text}`} />
     </>
   )
 }

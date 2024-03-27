@@ -78,9 +78,7 @@ export const CategoriesList = () => {
       console.error("Error uploading image:", error)
     }
   }
-  if (!categoriesList.length) {
-    return <EmptyList listName={"категорий"} />
-  }
+
 
   return (
     <ColumnContainerFlex $isRelative>
@@ -128,6 +126,7 @@ export const CategoriesList = () => {
           <TextUI color={ColorsUI.white} ag={Ag["600_16"]} text={"Создать"} />
         </ButtonUI>
       </MainContainer>
+
       <ScrollContent>
         <MainContainer $pt={30} $mb={45}>
           {list.map((cat) => (

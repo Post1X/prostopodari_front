@@ -77,7 +77,7 @@ export const ChatMessages = () => {
         {
           query: {
             roomId: myRoom.chatId ? myRoom.chatId : sellerIdFromLocale,
-            seller_id:   sellerId ? sellerId : ChatIdFromLocale,
+            seller_id: sellerId ? sellerId : ChatIdFromLocale,
             token: localStorage.getItem("token"),
           },
         },
